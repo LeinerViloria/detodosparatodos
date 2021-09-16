@@ -1,0 +1,29 @@
+h1{
+    text-align: center;    
+}
+
+.contenidoCompras{
+    margin-left: 50px; 
+    font-family: 'Poppins', sans-serif;   
+}
+
+select{
+    margin-top: 20px;
+}
+
+select, label, input{
+    box-sizing: border-box;
+    padding: 20px 5px;
+    margin-top: 10px;
+}
+
+label{
+    font-size: 20px;
+}
+
+textarea{
+    margin-top: 20px;
+    resize: none;
+    width: 35%;
+    height: 100px;
+}
