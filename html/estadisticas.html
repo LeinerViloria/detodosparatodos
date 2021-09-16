@@ -11,6 +11,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 	<script src="../js/jquery-3.2.1.js"></script>
 	<script src="../js/script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 </head>
 <body>
@@ -35,7 +36,28 @@
 		
 	  
 	  </nav>
-      <h1>Aqui se deben hacer el analisis de las ventas</h1>
+      <div class="chart-container" style="position: relative; height: 20vh; width: 40vw;">		
+			<canvas id="myChart"></canvas>
+			<script src="chart.js"></script>
+			
+			<script>
+
+				var ctx = document.getElementById('myChart').getContext('2d');
+				var chart = new Chart(ctx, {
+				    type: 'doughnut',
+				    data:{
+					datasets: [{
+						data: [60,18,10, 8],
+						backgroundColor: ['#42a5f5', 'red', 'green','blue'],
+						label: 'Resumen de Ventas'}],
+						labels: ['Semana1','Semana2','Semana3','Semana4']},
+				    options: {responsive: true}
+				});
+			</script>
+	</div>
+	</div>
+		
+	<script src="../js/GraficaBarra,js"></script>	
 
 
 
