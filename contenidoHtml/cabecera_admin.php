@@ -29,8 +29,8 @@
 					<a href="ventas.php">Detalle de ventas</a>
 					<a href="registrarVenta.php">Registrar ventas</a>
 					<a href="compras.php">Comprar productos</a>
-					<a href="#">Manejar empleados</a>
+					<a href="manejar_empleados.php">Empleados</a>
 					<a href="#">Registrar clientes</a>											
 				</ul>			
 		</div>			  
-	  </nav>
+	</nav>
