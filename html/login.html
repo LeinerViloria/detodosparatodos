@@ -12,18 +12,6 @@
     <!--Queda a preferencia usar o no usar el main, es para estructura semántica-->
     <main>
         <div class="contenedor__todo">
-            <div class="caja__trasera">
-                <div class="caja__trasera-login">
-                    <h3>¿Ya es empleado?</h3>
-                    <p>Inicia sesión para entrar al sistema</p>
-                    <button id="btn__iniciar-sesion">Iniciar Sesión</button>
-                </div>
-                <div class="caja__trasera-register">
-                    <h3>¿Eres cliente nuevo?</h3>
-                    <p>Regístrese para que el administrador principal lo reconozca</p>
-                    <button id="btn__registrarse">Regístrarse</button>
-                </div>
-            </div>
 
             <!--Formulario de Login y registro-->
             <div class="contenedor__login-register">
@@ -35,10 +23,11 @@
                     <!--La etiqueta a se podrá quitar cuando se
                     trabaje en el backend, ya que con php se
                     podrá redireccionar hacia donde deba-->
-                    <button><a href="home.html">Entrar</a></button>
+                    <button><a href="home.php">Entrar</a></button>
                 </form>
 
                 <!--Register-->
+                <!--
                 <form action="" class="formulario__register">
                     <h2>Regístrarse</h2>
                     <input type="text" placeholder="Ingrese sus nombres">
@@ -48,9 +37,10 @@
                     <input type="password" placeholder="Contraseña">                        
                     <button>Regístrarse</button>
                 </form>
+                -->
             </div>
         </div>
     </main>
-    <script src="../js/efectoLogin.js"></script>
+    <!--<script src="../js/efectoLogin.js"></script>-->
 </body>
 </html>

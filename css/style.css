@@ -2,18 +2,6 @@ h1{
     color: blue;
 }
 
-/* menu e navegacion*/
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body{
-	background: white;
-	font-family: 'Open Sans', sans-serif;
-}
-
 
 #enlaces{
 	width: 100%;
