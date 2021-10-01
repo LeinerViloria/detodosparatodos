@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/estilos.css">
 	<link rel="stylesheet" href="../css/registroVentas.css">
+	<link rel="shortcut icon" href="../images/logo.PNG" type="image/x-icon">
 	<script src="../js/jquery-3.2.1.js"></script>
 	<script src="../js/script.js"></script>
 
@@ -18,16 +19,16 @@
 	<nav id="menu">
 		<!--Poner aqui un logo para la tienda-->
 		<div id="logo">
-			<a href="home.php"><img src="../images/logo.PNG" alt="aqui va  el logo" > </a>
+			<a href="./home.php"><img src="../images/logo.PNG" alt="aqui va  el logo" > </a>
 			
 			<i class="fa fa-user-o" id="inicio"> Nombre Usuario</i>			
 		</div>		
 		<!-- Enlaces -->
 		<div class="justify-content-center" id="enlaces">
 			<ul>
-				<a href="ventas.php">Detalle de ventas</a>
-				<a href="registrarVenta.php">Registrar ventas</a>
-				<a href="#">Registrar clientes</a>
+				<a href="./ventas.php">Detalle de ventas</a>
+				<a href="./registrarVenta.php">Registrar ventas</a>
+				<a href="./manejar_clientes.php">Registrar clientes</a>
 			</ul>
 		</div>			  
 	  </nav>

@@ -1,12 +1,11 @@
 <?php 
-	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador	
-
+	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador	    
 ?>
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
-            <button id="btnNuevo" type="button" class="btn btn-success">Nuevo</button>
+        <div class="col-lg-12">            
+            <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-success">Nuevo</button>
         </div>
     </div>
 </div>
@@ -25,45 +24,71 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Anonimo</td>
-                            <td>Anonimo</td>
-                            <td>
-                                <div class="text-center">
-                                    <div class="btn-group">
-                                        <button class="btn btn-primary btnEditar">Actualizar</button>
-                                        <button class="btn btn-danger btnBorrar">Eliminar</button>
+                        <!--
+                        <form action="#" method="post">
+                            <tr>
+                                <td><input type="hidden" name="id" id="id1" value="1"readonly>1</td>
+                                <td>Anonimo</td>
+                                <td>Anonimo</td>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id1').value" class="btn btn-primary btnEditar">Actualizar</button>
+                                            <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Fulano de tal</td>
-                            <td>No tiene</td>
-                            <td>
-                                <div class="text-center">
-                                    <div class="btn-group">
-                                        <button class="btn btn-primary btnEditar">Actualizar</button>
-                                        <button class="btn btn-danger btnBorrar">Eliminar</button>
+                                </td>
+                            </tr>
+                        </form>
+                        <form action="#" method="post">
+                            <tr>
+                                <td><input type="hidden" name="id" id="id2" value="2" readonly>2</td>
+                                <td>Fulano de tal</td>
+                                <td>No tiene</td>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id2').value" class="btn btn-primary btnEditar">Actualizar</button>
+                                            <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Jero Roblez</td>
-                            <td>3402293299</td>
-                            <td>
-                                <div class="text-center">
-                                    <div class="btn-group">
-                                        <button class="btn btn-primary btnEditar">Actualizar</button>
-                                        <button class="btn btn-danger btnBorrar">Eliminar</button>
+                                </td>
+                            </tr>
+                        </form>
+                        <form action="#" method="post">
+                            <tr>
+                                <td><input type="hidden" name="id" id="id3" value="3" readonly>3</td>
+                                <td>Jero Roblez</td>
+                                <td>3402293299</td>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id3').value" class="btn btn-primary btnEditar">Actualizar</button>
+                                            <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        </form>
+                        -->
+
+                        <?php for($i=1; $i<=15; $i++):?>
+                            <form action="#" method="post">
+                                <tr>
+                                    <td><input type="hidden" name="id" id="id<?=$i?>" value="<?=$i?>"readonly><?=$i?></td>
+                                    <td>Empleado <?=$i?></td>
+                                    <td>Telefono <?=$i?></td>
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="btn-group">
+                                                <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id<?=$i?>').value" class="btn btn-primary btnEditar">Actualizar</button>
+                                                <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </form>
+                        <?php endfor?>
                     </tbody>
                 </table>
             </div>
@@ -71,6 +96,13 @@
     </div>
 </div>
 
+<!--Modal para el CRUD-->
+<!--Modal de prueba-->
+
+<?php
+    require '../contenidoHtml/modal.php';
+    modal_empleado();
+?>
 
 <?php
 	require_once '../contenidoHtml/pie_pagina.php'

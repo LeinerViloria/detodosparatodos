@@ -9,7 +9,8 @@ h1{
 }
 
 body{
-	background: #e3edf9;
+	/*background: #e3edf9;*/
+	background-color: white;
 	font-family: 'Open Sans', sans-serif;
 }
 
