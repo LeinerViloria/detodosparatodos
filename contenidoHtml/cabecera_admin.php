@@ -32,7 +32,8 @@
 					<a href="./registrarVenta.php">Registrar ventas</a>
 					<a href="./compras.php">Comprar productos</a>
 					<a href="./manejar_empleados.php">Empleados</a>
-					<a href="./manejar_clientes.php">Registrar clientes</a>											
+					<a href="./manejar_clientes.php">Registrar clientes</a>
+					<a href="./porcentaje.php">Porcentaje anual</a>
 				</ul>			
 		</div>			  
 	</nav>
