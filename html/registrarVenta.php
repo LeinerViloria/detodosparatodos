@@ -5,74 +5,75 @@
 <!--======== INICIO DE FORMULARIO ==========-->
 <div class="container justify-content-center">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col col-md-12">
 			<div class="well well-sm">
 				<form class="form-horizontal justify-content-center" method="post">
 					<fieldset>
 						<legend class="text-center header">Registrar Ventas</legend>
-						
-
+												
 						<div class="form-group">								
 							<div class="col-md-8">
-								<input id="codigo" name="name" type="text" placeholder="codigo" class="form-control">
+								<input id="codigo" name="name" type="text" placeholder="Codigo del producto" class="form-control">
 							</div>
 						</div>
-
 						<div class="form-group">								
 							<div class="col-md-8">
-								<input id="nombre" name="name" type="text" placeholder="Nombre" class="form-control">
+								<input id="cant" name="precioventa" type="text" placeholder="Cantidad de Productos" class="form-control">
 							</div>
 						</div>
-
-						<div class="form-group">								
-							<div class="col-md-8">
-								<input id="preciocompra" name="name" type="text" placeholder="Precio de Venta" class="form-control">
-							</div>
-						</div>
-						
-						<div class="form-group">								
-							<div class="col-md-8">
-								<input id="precioventa" name="precioventa" type="text" placeholder="Cantidad de Productos" class="form-control">
-							</div>
-						</div>
-						
-						<div class="form-group">								
-							<div class="col-md-8">
-								<input id="vendedor" name="vendedor" type="text" placeholder="Vendedor" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group">								
-							<div class="col-md-8">
-								<input id="comision" name="comision" type="text" placeholder="Comision por venta" class="form-control">
-							</div>
-						</div>								
-
-						<div class="form-group">								
-							<div class="col-md-8">
-								<input id="fecha" name="fecha" type="date" placeholder="Fecha de venta" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group">								
-							<div class="col-md-8">
-								<input id="total" name="total" type="text" placeholder="Total de Venta" class="form-control">
-							</div>
-						</div>
-
+						<br>
 						<div class="form-group" id="btnregistro">
 							<div class="col-md-12 text-center">
-								<button type="submit" class="btn btn-primary btn-lg">GUARDAR</button>
-							</div>
-							
+								<button type="button" class="btn btn-primary btn-lg" onclick="agregar()">Agregar</button>
+							</div>							
 						</div>
 						
 					</fieldset>
 				</form>
 			</div>
 		</div>
+		
+		<!--Esta columna puede generalizar en un archivo php-->
+		<div class="col col-md-12">
+			<div class="well well-sm">
+				<table class="table table-borderless factura">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Cantidad</th>
+						<th>Total</th>
+						<th>Comision</th>
+						<th>Accion</th>
+					</tr>
+				</thead>
+				<tbody id="contenedor_factura">						
+				</tbody>
+
+				</table>
+
+				<form action="../controladores/controlador_factura.php" method="post">
+					<div id="input_adicionales"></div>	
+
+					<div class="input-group mb-3">						
+						<div class="custom-prepend">
+							<input type="text" name="id" id="id" placeholder="Ingrese el id del cliente" class="form-control" required="required">
+							<span class="input-group-text">Nombre encontrado</span>
+						</div>					
+					</div>		
+						
+					<div class="form-group" id="btnregistro">
+						<div class="col text-center">
+							<button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+						</div>							
+					</div>					
+				</form>
+			</div>
+		</div>
+		<!---->
 	</div>
 </div>
 
+<script src="../js/manejar_factura.js"></script>
 
 <?php require_once '../contenidoHtml/pie_pagina.php'?>

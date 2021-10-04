@@ -251,6 +251,11 @@ button a{
     }
 }
 
+.col-md-12 {
+    flex: 0 0 auto;
+    width: 50%!important;
+}
+
 /* RESPONSIVE */
 
 @media screen and (max-width: 1100px){

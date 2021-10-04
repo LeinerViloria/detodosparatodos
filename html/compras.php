@@ -1,6 +1,5 @@
 <?php 
-	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador
-	//require_once '../contenidoHtml/cabecera_vendedor.php'; //Esto es lo que ve el vendedor
+	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador	
 ?>
 
 <h1>Productos nuevos</h1>
