@@ -128,32 +128,31 @@ function modal_cliente(){
             <div class="form-group">
                 <label for="apellidos" class="col-form-label">Apellidos: </label>
                 <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-z ]+">
-            </div>
-            <br>
+            </div>            
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" id="whatsapp" name="whatsapp">
+                    <input type="tel" class="form-control" placeholder="Numero Whatsapp" id="whatsapp" name="whatsapp">
                 </div>  
                 <div class="input-group">  
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fab fa-instagram"></i></span>
                     </div>                  
-                    <input type="text" name="instagram" id="instagram" class="form-control">                    
+                    <input type="text" name="instagram" id="instagram" placeholder="Usuario de instagram" class="form-control">                    
                 </div> 
                 <div class="input-group"> 
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fab fa-telegram"></i></span>
                     </div>                   
-                    <input type="text" name="telegram" id="telegram" class="form-control">                    
+                    <input type="tel" name="telegram" id="telegram" placeholder="Numero de telegram" class="form-control">                    
                 </div> 
                 <div class="input-group"> 
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fab fa-twitter"></i></span>
                     </div>                   
-                    <input type="text" name="twitter" id="twitter" class="form-control">
+                    <input type="text" name="twitter" id="twitter" placeholder="Usuario de twitter" class="form-control">
                 </div>                             
             </div>
         </div>

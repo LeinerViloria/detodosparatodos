@@ -26,6 +26,14 @@ h1, h2{
 	text-align: right;
 }
 
+.input-group-text{
+    margin-right: 5px;
+    height: 45px;
+    margin-top: 5px!important;
+    border: 1px solid #ced4da!important;
+    border-radius: .25rem!important;
+}
+
 body{
 	/*background: #e3edf9;*/
 	background-color: white;
