@@ -10,7 +10,7 @@
 <script>
     document.getElementById('id01').style.display='block';
 </script>
-
+ 
 <?php
 	require_once '../contenidoHtml/pie_pagina.php'
 ?>

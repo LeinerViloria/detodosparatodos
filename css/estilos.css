@@ -8,6 +8,24 @@ h1, h2{
 	text-align: center;
 }
 
+#tcomisiones, #infoComision{
+	width: 90%!important;
+	text-align: center;	
+	font-size: 16px;
+}
+
+#tcomisiones thead{
+	background-color: #195f88;
+	color: #ffff;	
+}
+
+#tcomisiones tfoot{
+	background-color: #52b8dba1;
+	color: #3e3d3d;	
+	font-size: 18px;
+	text-align: right;
+}
+
 body{
 	/*background: #e3edf9;*/
 	background-color: white;

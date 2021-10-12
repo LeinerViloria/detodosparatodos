@@ -129,6 +129,33 @@ function modal_cliente(){
                 <label for="apellidos" class="col-form-label">Apellidos: </label>
                 <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-z ]+">
             </div>
+            <br>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" id="whatsapp" name="whatsapp">
+                </div>  
+                <div class="input-group">  
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                    </div>                  
+                    <input type="text" name="instagram" id="instagram" class="form-control">                    
+                </div> 
+                <div class="input-group"> 
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-telegram"></i></span>
+                    </div>                   
+                    <input type="text" name="telegram" id="telegram" class="form-control">                    
+                </div> 
+                <div class="input-group"> 
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+                    </div>                   
+                    <input type="text" name="twitter" id="twitter" class="form-control">
+                </div>                             
+            </div>
         </div>
         <br>
         <footer class="w3-container w3-white" style="align-items:right;">            
