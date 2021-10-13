@@ -11,13 +11,13 @@ select{
     margin-top: 20px;
 }
 
-select, label, input{
+select, .label, input[type="text"], input[type="number"]{
     box-sizing: border-box;
     padding: 20px 5px;
     margin-top: 10px;
 }
 
-label{
+.label{
     font-size: 20px;
 }
 

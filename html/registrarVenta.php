@@ -57,8 +57,22 @@
 
 					<div class="input-group mb-3">						
 						<div class="custom-prepend">
+							<!--
 							<input type="text" name="id" id="id" placeholder="Ingrese el id del cliente" class="form-control" required="required">
 							<span class="input-group-text">Nombre encontrado</span>
+							-->							
+							<select class="form-select" name="cliente" id="cliente" required>
+								<option value="">Elija un cliente</option>
+								<option value="1">Anonimo</option>
+								<option value="4">Fulano de tal</option>
+								<option value="5">Jaiver Rodriguez</option>
+								<option value="89">Farid Mendoza</option>
+								<option value="90">Jose Anaya</option>
+								<option value="100">Martin Medrano</option>
+								<option value="200">Fulano 2</option>
+								<option value="210">Tentation</option>
+							</select>							
+
 						</div>					
 					</div>		
 						

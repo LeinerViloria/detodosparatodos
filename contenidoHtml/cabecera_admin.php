@@ -36,7 +36,7 @@
 					<a href="./manejar_empleados.php">Empleados</a>
 					<a href="./manejar_clientes.php">Registrar clientes</a>
 					<a href="./porcentaje.php">Porcentaje anual</a>
-					<a href="./comisiones.php">Comisiones</a>
+					<a href="./comisiones.php">Comisiones</a>					
 				</ul>			
 		</div>			  
 	</nav>

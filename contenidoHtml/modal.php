@@ -13,7 +13,7 @@ function modal_empleado(){
         </header>
 
         <!--Formulario-->
-        <form action="#" method="post" id="formEmpleados">
+        <form action="#" method="post" id="formEmpleadoNuevo">
         <div class="w3-container">
             <!--Cada input esta en un grupo-->
             <div class="form-group">
@@ -27,7 +27,7 @@ function modal_empleado(){
             <div class="form-group">
                 <label for="apellidos" class="col-form-label">Apellidos: </label>
                 <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-z ]+">
-            </div>
+            </div>            
             <div class="form-group">
                 <label for="telefono" class="col-form-label">Telefono: </label>
                 <input type="tel" name="telefono" id="telefono" class="form-control" pattern="[0-9]+" minlenght="8">
@@ -39,6 +39,16 @@ function modal_empleado(){
             <div class="form-group">
                 <label for="pass" class="col-form-label">Contraseña: </label>
                 <input type="password" name="pass" id="pass" class="form-control" required="required" minlenght="6">
+            </div>
+            <div class="form-group">
+                <div class="radio_empleado">
+                    <input type="radio" id="admin" name="perfil" value="A1">
+                    <label for="admin">Administrador</label>   
+                </div>
+                <div class="radio_empleado">
+                    <input type="radio" id="vendedor" name="perfil" value="A2">
+                    <label for="vendedor">Vendedor</label>
+                </div>                                     
             </div>
         </div>
         <br>

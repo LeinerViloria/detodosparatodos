@@ -1,5 +1,6 @@
 <?php 
 	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador	    
+    require_once '../backend/servicios/perfiles.php';
 ?>
 
 <div class="container">
@@ -23,56 +24,8 @@
                             <th>Accion</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!--
-                        <form action="#" method="post">
-                            <tr>
-                                <td><input type="hidden" name="id" id="id1" value="1"readonly>1</td>
-                                <td>Anonimo</td>
-                                <td>Anonimo</td>
-                                <td>
-                                    <div class="text-center">
-                                        <div class="btn-group">
-                                            <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id1').value" class="btn btn-primary btnEditar">Actualizar</button>
-                                            <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </form>
-                        <form action="#" method="post">
-                            <tr>
-                                <td><input type="hidden" name="id" id="id2" value="2" readonly>2</td>
-                                <td>Fulano de tal</td>
-                                <td>No tiene</td>
-                                <td>
-                                    <div class="text-center">
-                                        <div class="btn-group">
-                                            <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id2').value" class="btn btn-primary btnEditar">Actualizar</button>
-                                            <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </form>
-                        <form action="#" method="post">
-                            <tr>
-                                <td><input type="hidden" name="id" id="id3" value="3" readonly>3</td>
-                                <td>Jero Roblez</td>
-                                <td>3402293299</td>
-                                <td>
-                                    <div class="text-center">
-                                        <div class="btn-group">
-                                            <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id3').value" class="btn btn-primary btnEditar">Actualizar</button>
-                                            <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </form>
-                        -->
-
-                        <?php for($i=1; $i<=15; $i++):?>
+                    <tbody>                        
+                        <?php for($i=1; $i<=1; $i++):?>
                             <form action="#" method="post">
                                 <tr>
                                     <td><input type="hidden" name="id" id="id<?=$i?>" value="<?=$i?>"readonly><?=$i?></td>
