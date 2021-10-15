@@ -1,5 +1,10 @@
 <?php 
-	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador	
+	//require_once '../contenidoHtml/cabecera_Administrador.php'; //Esto es lo que ve el administrador	
+	require_once '../backend/controladores/destruirSesion.php';
+	
+if(!empty($_SESSION['usuario_logueado'])){	
+	if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){
+		require_once '../contenidoHtml/cabecera_Administrador.php';
 ?>
 
 <h1>Productos nuevos</h1>
@@ -37,4 +42,12 @@
 <script src="../js/accionFamilia.js"></script> 
 <script src="../js/calcularPrecioVenta.js"></script> 
 
-<?php require_once '../contenidoHtml/pie_pagina.php'?>
+<?php 
+	require_once '../contenidoHtml/pie_pagina.php';
+	}else{
+		header("location: ./home.php");
+	}
+}else{
+	destruir();
+}
+?>

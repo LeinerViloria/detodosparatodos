@@ -1,5 +1,9 @@
 <?php
     session_start();    
+    if(!empty($_SESSION['usuario_logueado'])){
+        session_destroy();
+        session_start();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

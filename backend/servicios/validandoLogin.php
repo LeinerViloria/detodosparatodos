@@ -27,7 +27,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
         if($verificacion){
             //Si entra aquí es porque "todo" fue bien
-            
+            $id=buscando_id($correo);            
+            $usuario = obtener_empleado_registrado($id[0]['id_empleado']);            
+
+            $_SESSION['usuario_logueado']=$usuario;
+
+            header("location: ../../html/home.php");
             
 
         }else{
@@ -37,7 +42,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $_SESSION['errores']=$errores;    
     }
 
-    if($_SESSION['errores']>0){        
-        header("location: ../../html/login.php");
-    }
+    if(!empty($_SESSION['errores'])){
+        if(count($_SESSION['errores'])>0){        
+            header("location: ../../html/login.php");
+        }
+    }        
 }

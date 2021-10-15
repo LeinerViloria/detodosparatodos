@@ -1,10 +1,11 @@
-<?php 
-	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador
-	//require_once '../contenidoHtml/cabecera_vendedor.php'; //Esto es lo que ve el vendedor
+<?php 	
+    require_once '../backend/controladores/destruirSesion.php';
 
-    require_once '../controladores/alertas.php';
-    //La sesion deberia iniciarse en las cabeceras pero de momento se queda acá
-    session_start();
+if(!empty($_SESSION['usuario_logueado'])){	
+    if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){
+		require_once '../contenidoHtml/cabecera_Administrador.php';
+    require_once '../backend/controladores/alertas.php';    
+    
 ?>
 <h2>Porcentaje anual para calcular el precio de venta</h2>
 <div class="container">
@@ -30,4 +31,12 @@
 </div>
 
 
-<?php require_once '../contenidoHtml/pie_pagina.php'?>
+<?php 
+    require_once '../contenidoHtml/pie_pagina.php';
+    }else{
+        header("location: ./home.php");
+    }
+}else{
+	destruir();
+}
+?>

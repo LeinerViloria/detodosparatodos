@@ -57,17 +57,7 @@ function obtenerPassword($pk, $id){
     return $pass;           
 }
 
-function obtener_info_usuario(){         
-    $conexion = conectar();
-
-    $tabla="perfiles";
-
-    $perfiles = buscar($conexion, $tabla);
-    
-    return $perfiles;
-}
-
-function verificando_identidad($id, $email){
+function buscando_id($email){
     $conexion = conectar(1);
     $tabla = "";
 
@@ -76,6 +66,11 @@ function verificando_identidad($id, $email){
         WHERE correo='$email'";
     
     $id_encontrado = buscar($conexion, $tabla, 1, $sql);
+    return $id_encontrado;
+}
+
+function verificando_identidad($id, $email){
+    $id_encontrado = buscando_id($email);
 
     if(!empty($id_encontrado)){        
         
@@ -88,4 +83,17 @@ function verificando_identidad($id, $email){
     }else{
         return true;
     }
+}
+
+function obtener_empleado_registrado($id){         
+    $conexion = conectar(1);
+    $tabla = "";
+
+    $sql ="SELECT *
+        FROM empleados
+        WHERE id='$id'";
+    
+    $empleado = buscar($conexion, $tabla, 1, $sql);
+
+    return $empleado;
 }
