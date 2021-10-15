@@ -30,9 +30,10 @@ class controlador{
         $sql.=");";
 
         $sentencia = $this->conexion->prepare($sql);
-
-        if($sentencia->execute()){
-            return true;
+        $resultado = $sentencia->execute();        
+        
+        if($resultado){
+            return true;           
         }else{
             var_dump($sentencia->errorinfo());
             return false;

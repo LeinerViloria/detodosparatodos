@@ -18,6 +18,8 @@
         if($controlador=="empleado"){
             require_once '../modelos/empleado.php';
             require_once '../modelos/usuario.php';
+            //En caso de que quiera actualizar o para verificar un detalle al ingresar un empleado nuevo
+            require_once './listando.php';
 
             //Recupero los datos que se hayan mandado por POST, 
             //y se pone la primera letra en mayuscula
@@ -53,9 +55,8 @@
                 */
                 $verificacion=true;
                 
-                if(isset($_POST['validar'])){
-                    require_once './listando.php';
-                    $password_traida=obtenerPassword($id)[0]['password'];
+                if(isset($_POST['validar'])){                    
+                    $password_traida=obtenerPassword('id_empleado',$id)[0]['password'];
                     $verificando = password_verify($password,$password_traida);
                     if($verificando==false){
                         $verificacion=false;
@@ -106,6 +107,13 @@
             if(is_null($perfil)){
                 $errores['perfil']="El perfil no puede quedar vacio";
             }
+
+            //Se necesita verificar que no haya otro usuario con el correo ingresado para un nuevo usuario            
+            $pase = verificando_identidad($id, $email);
+            
+            if($pase==false){
+                $errores['pase']="El correo ingresado es usado por otro usuario";
+            }            
                         
             //Si no hay errores
             if(count($errores)==0 && $verificacion==true){                
@@ -117,14 +125,14 @@
                 $controlador_empleado=new controlador($servidor, $nombreBd, "empleados", $userBD);
                 //Para controlar la tabla usuarios
                 $controlador_usuario=new controlador($servidor, $nombreBd, "usuarios", $userBD);            
-                                        
+                                
                 if(is_numeric($operacion) && $operacion==0){  
                     //Se manda al empleado              
                     $resultado_empleado = $controlador_empleado->guardar("gestionar_empleado",$empleado);
                     if($resultado_empleado==true){
                         //Se manda al usuario de ese empleado
-                        $resultado_usuario = $controlador_usuario->guardar("gestionar_usuario",$usuario);
-                        if($resultado_empleado){
+                        $resultado_usuario = $controlador_usuario->guardar("gestionar_usuario",$usuario);                        
+                        if($resultado_empleado==true){
                             $_SESSION['completado']="Se ha registrado exitosamente";                             
                         }else{
                             $errores['errores']['general']="No se guardó el usuario del empleado";    
