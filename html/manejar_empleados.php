@@ -1,6 +1,6 @@
 <?php 
 	require_once '../contenidoHtml/cabecera_admin.php'; //Esto es lo que ve el administrador	    
-    require_once '../backend/servicios/perfiles.php';
+    require_once '../backend/servicios/listando.php';    
 ?>
 
 <div class="container">
@@ -19,29 +19,36 @@
                     <thead class="text-center">
                         <tr>
                             <th>Id</th>
+                            <th>Perfil</th>
                             <th>Nombres</th>
+                            <th>Apellidos</th>
                             <th>Telefono</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody>                        
-                        <?php for($i=1; $i<=1; $i++):?>
-                            <form action="#" method="post">
-                                <tr>
-                                    <td><input type="hidden" name="id" id="id<?=$i?>" value="<?=$i?>"readonly><?=$i?></td>
-                                    <td>Empleado <?=$i?></td>
-                                    <td>Telefono <?=$i?></td>
-                                    <td>
-                                        <div class="text-center">
-                                            <div class="btn-group">
-                                                <button type="button" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id_existente').value=document.getElementById('id<?=$i?>').value" class="btn btn-primary btnEditar">Actualizar</button>
-                                                <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
-                                            </div>
+                        <?php 
+                            $empleados = obtener_empleados();
+                            //for($i=1; $i<=1; $i++):
+                            foreach($empleados as $empleado):
+                        ?>                            
+                            <tr>                                
+                                <input type="hidden" name="correo" id="correo<?=$empleado['id']?>" value="<?=$empleado['correo']?>">
+                                <td id="id<?=$empleado['id']?>"><?=$empleado['id']?></td>
+                                <td><?=$empleado['perfil']?></td>
+                                <td id="nombre<?=$empleado['id']?>"><?=$empleado['nombres']?></td>
+                                <td id="ape<?=$empleado['id']?>"><?=$empleado['apellidos']?></td>
+                                <td id="tel<?=$empleado['id']?>"><?=$empleado['telefono']?></td>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" onclick="agregar('id<?=$empleado['id']?>','nombre<?=$empleado['id']?>','ape<?=$empleado['id']?>','tel<?=$empleado['id']?>', 'correo<?=$empleado['id']?>')" class="btn btn-primary btnEditar">Actualizar</button>
+                                            <button type="button" class="btn btn-danger btnBorrar">Eliminar</button>
                                         </div>
-                                    </td>
-                                </tr>
-                            </form>
-                        <?php endfor?>
+                                    </div>
+                                </td>
+                            </tr>                            
+                        <?php endforeach?>
                     </tbody>
                 </table>
             </div>
@@ -53,9 +60,48 @@
 <!--Modal de prueba-->
 
 <?php
-    require '../contenidoHtml/modal.php';
-    modal_empleado();
+    require '../contenidoHtml/modal.php';    
+    modal_empleado(obtener_perfiles());
 ?>
+<!--Mostrando mensajes de error o exito-->
+<?php if(!empty($_SESSION)):        
+        require_once '../backend/controladores/alertas.php';
+?>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/sweetalert.js"></script>
+<?php
+        if(!empty($_SESSION['completado'])):
+?>            
+            <script>
+                Toast.fire({
+                    icon: 'success',
+                    title: '<?=$_SESSION['completado']?>'
+                });
+            </script>
+<?php        
+            borrar_errores();
+        endif;
+        if(!empty($_SESSION['errores'])):
+            $texto="";
+            foreach($_SESSION['errores'] as $error){
+                $texto.="<p>".$error.".</p>";
+            }
+?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Errores',
+                    html:'<?=$texto?>',
+                    footer:'<strong>Por favor, ingrese los datos correctamente</strong>'
+                });
+            </script>
+<?php   
+        borrar_errores();
+        endif;        
+    endif;
+?>
+
+<script src="../js/add_to_actualize.js"></script>
 
 <?php
 	require_once '../contenidoHtml/pie_pagina.php'

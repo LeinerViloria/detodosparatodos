@@ -9,7 +9,7 @@ function mostrarError($errores, $campo, $clase, $color){
 }
 
 function borrar_errores(){
-    session_destroy();
+    session_unset();
     //return $borrado;
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
-function modal_empleado(){
+function modal_empleado($perfiles){    
 ?>
-<div class="w3-container">
+<div class="w3-container">   
   <div id="id01" class="w3-modal" style="padding-top:16px">
       <!--Contenido del modal-->
     <div class="w3-modal-content w3-card-4 w3-animate-zoom">
@@ -13,20 +13,20 @@ function modal_empleado(){
         </header>
 
         <!--Formulario-->
-        <form action="#" method="post" id="formEmpleadoNuevo">
+        <form action="../backend/servicios/servicios.php" method="post" id="formEmpleadoNuevo">
         <div class="w3-container">
             <!--Cada input esta en un grupo-->
             <div class="form-group">
                 <label for="id" class="col-form-label">Identificacion: </label>
-                <input type="text" name="id" id="id" class="form-control" required="required">
+                <input type="text" name="id" id="id" class="form-control" required="required" autofocus="autofocus">
             </div>
             <div class="form-group">
                 <label for="nombres" class="col-form-label">Nombres: </label>
-                <input type="text" name="nombres" id="nombres" class="form-control" required="required" pattern="[a-z ]+">
+                <input type="text" name="nombres" id="nombres" class="form-control" required="required">
             </div>
             <div class="form-group">
                 <label for="apellidos" class="col-form-label">Apellidos: </label>
-                <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-z ]+">
+                <input type="text" name="apellidos" id="apellidos" class="form-control" required="required">
             </div>            
             <div class="form-group">
                 <label for="telefono" class="col-form-label">Telefono: </label>
@@ -41,18 +41,19 @@ function modal_empleado(){
                 <input type="password" name="pass" id="pass" class="form-control" required="required" minlenght="6">
             </div>
             <div class="form-group">
-                <div class="radio_empleado">
-                    <input type="radio" id="admin" name="perfil" value="A1">
-                    <label for="admin">Administrador</label>   
-                </div>
-                <div class="radio_empleado">
-                    <input type="radio" id="vendedor" name="perfil" value="A2">
-                    <label for="vendedor">Vendedor</label>
-                </div>                                     
+                <!--Se muestran los perfiles admitidos desde la BD-->
+                <?php foreach($perfiles as $perfil):?>
+                    <div class="radio_empleado">
+                        <input type="radio" id="<?=$perfil['nombre']?>" name="perfil" value="<?=$perfil['id']?>">
+                        <label for="<?=$perfil['nombre']?>"><?=$perfil['nombre']?></label>   
+                    </div>
+                <?php endforeach;?>                                    
             </div>
         </div>
         <br>
-        <footer class="w3-container w3-white" style="align-items:right;">            
+        <footer class="w3-container w3-white" style="align-items:right;">
+            <input type="hidden" name="controlador" value="empleado">
+            <input type="hidden" name="operacion" value="0">            
             <button type="submit" id="btn-guardar" class="btn btn-dark">Guardar</button>
         </footer>
         </form>
@@ -73,7 +74,7 @@ function modal_empleado(){
         </header>
 
         <!--Formulario-->
-        <form action="#" method="post" id="formEmpleados">
+        <form action="../backend/servicios/servicios.php" method="post" id="formEmpleados">
         <div class="w3-container">
             <!--Cada input esta en un grupo-->
             <div class="form-group">
@@ -82,23 +83,39 @@ function modal_empleado(){
             </div>
             <div class="form-group">
                 <label for="nombres" class="col-form-label">Nombres: </label>
-                <input type="text" name="nombres" id="nombres" class="form-control" required="required" pattern="[a-z ]+">
+                <input type="text" name="nombres" id="nombre_existente" class="form-control" pattern="[a-zA-Z ]+" autofocus="autofocus">
             </div>
             <div class="form-group">
                 <label for="apellidos" class="col-form-label">Apellidos: </label>
-                <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-z ]+">
+                <input type="text" name="apellidos" id="apellidos_existente" class="form-control" pattern="[a-zA-Z ]+">
             </div>
             <div class="form-group">
                 <label for="telefono" class="col-form-label">Telefono: </label>
-                <input type="tel" name="telefono" id="telefono" class="form-control" pattern="[0-9]+" minlenght="8">
+                <input type="tel" name="telefono" id="telefono_existente" class="form-control" pattern="[0-9]+" minlenght="8">
             </div>
             <div class="form-group">
                 <label for="email" class="col-form-label">Email: </label>
-                <input type="email" name="email" id="email" class="form-control" required="required">
+                <input type="email" name="email" id="email_existente" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="pass" class="col-form-label">Contraseña: </label>
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="Ingresala para verificar tu identidad" required="required" minlenght="6">
+            </div>
+            <div class="form-group">
+                <!--Se muestran los perfiles admitidos desde la BD-->
+                <?php foreach($perfiles as $perfil):?>
+                    <div class="radio_empleado">
+                        <input type="radio" id="<?=$perfil['nombre']?>" name="perfil" value="<?=$perfil['id']?>">
+                        <label for="<?=$perfil['nombre']?>"><?=$perfil['nombre']?></label>   
+                    </div>
+                <?php endforeach;?>                                    
             </div>
         </div>
         <br>
-        <footer class="w3-container w3-white" style="align-items:right;">            
+        <footer class="w3-container w3-white" style="align-items:right;">    
+            <input type="hidden" name="controlador" value="empleado">
+            <input type="hidden" name="validar" value="verificar">
+            <input type="hidden" name="operacion" value="0">
             <button type="submit" id="btn-guardar" class="btn btn-dark">Guardar</button>
         </footer>
         </form>
