@@ -107,3 +107,42 @@ function obtener_redes($nombre){
 
     return $codigo;
 }
+
+function obtener_clientes($empleado){
+    $conexion = conectar();
+
+    $tabla="";
+
+    $sql="SELECT id, CONCAT(nombres, ' ', apellidos) cliente
+        FROM clientes
+        WHERE id_Empleado='$empleado'
+        ORDER BY nombres, apellidos";
+
+    $clientes = buscar($conexion, $tabla, 1, $sql);
+
+    return $clientes;
+
+}
+
+function obtener_total_clientes(){
+    $conexion = conectar();
+    $tabla="";
+
+    $sql="SELECT COUNT(1) total FROM clientes";
+    $total = buscar($conexion, $tabla, 1, $sql);
+
+    return $total;
+}
+
+function obtener_numero_clientes($empleado){
+    $conexion = conectar();
+    $tabla="";
+
+    $sql="SELECT COUNT(1) numero
+        FROM clientes
+        WHERE id_Empleado='$empleado'        
+        GROUP BY id_Empleado";
+    $numero = buscar($conexion, $tabla, 1, $sql);
+
+    return $numero;
+}

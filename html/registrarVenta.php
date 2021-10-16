@@ -5,7 +5,26 @@
 require_once '../backend/controladores/destruirSesion.php';
 if(!empty($_SESSION['usuario_logueado'])){	
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
+	require_once '../backend/servicios/listando.php';
 ?>
+<!--Caja de cantidades-->
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto" id="cantidades">
+		<?php
+			$total = obtener_total_clientes();	
+			$numero_clientes = obtener_numero_clientes($_SESSION['usuario_logueado'][0]['id']);
+			if(!empty($numero_clientes)){
+				$numero_clientes=$numero_clientes[0]['numero'];				
+			}else{
+				$numero_clientes=0;
+			}
+		?>
+		<p>Manejas <span class="numero"><?=$numero_clientes?></span> de <span class="numero"><?=$total[0]['total']?></span> clientes</p>
+    </div>
+  </div>
+</div>
+<br>
 <!--======== INICIO DE FORMULARIO ==========-->
 <div class="container justify-content-center">
 	<div class="row">
@@ -64,19 +83,26 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<!--
 							<input type="text" name="id" id="id" placeholder="Ingrese el id del cliente" class="form-control" required="required">
 							<span class="input-group-text">Nombre encontrado</span>
-							-->							
-							<select class="form-select" name="cliente" id="cliente" required>
-								<option value="">Elija un cliente</option>
-								<option value="1">Anonimo</option>
-								<option value="4">Fulano de tal</option>
-								<option value="5">Jaiver Rodriguez</option>
-								<option value="89">Farid Mendoza</option>
-								<option value="90">Jose Anaya</option>
-								<option value="100">Martin Medrano</option>
-								<option value="200">Fulano 2</option>
-								<option value="210">Tentation</option>
-							</select>							
-
+							-->					
+							<?php 
+								$clientes = obtener_clientes($_SESSION['usuario_logueado'][0]['id']);								
+							?>																	
+								<?php
+									if(!empty($clientes)):										
+								?>
+									<select class="form-select" name="cliente" id="cliente" required>
+										<option value="">Elija un cliente</option>
+										<?php foreach($clientes as $cliente):?>
+											<option value="<?=$cliente['id']?>"><?=$cliente['cliente']?></option>
+										<?php endforeach;?>
+									</select>
+								<?php
+									else:
+								?>
+										<h3>No tienes clientes</h3>
+								<?php
+									endif;
+								?>														
 						</div>					
 					</div>		
 						
