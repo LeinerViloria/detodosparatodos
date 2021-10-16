@@ -97,3 +97,13 @@ function obtener_empleado_registrado($id){
 
     return $empleado;
 }
+
+function obtener_redes($nombre){
+    $conexion = conectar(1);
+    $tabla="";
+
+    $sql="SELECT codigo FROM redes_sociales WHERE nombre='$nombre' LIMIT 1";
+    $codigo = buscar($conexion, $tabla, 1, $sql);
+
+    return $codigo;
+}

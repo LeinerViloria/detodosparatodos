@@ -2,7 +2,7 @@
     
     if($_SERVER['REQUEST_METHOD']=='POST'){        
         require_once '../controladores/controlador.php';  
-        
+        require_once './listando.php';
         //Se crean las variables generales de la base de datos
         $servidor="localhost";
         $nombreBd="detodosparatodos";
@@ -18,8 +18,7 @@
         if($controlador=="empleado"){
             require_once '../modelos/empleado.php';
             require_once '../modelos/usuario.php';
-            //En caso de que quiera actualizar o para verificar un detalle al ingresar un empleado nuevo
-            require_once './listando.php';
+            //En caso de que quiera actualizar o para verificar un detalle al ingresar un empleado nuevo            
 
             //Recupero los datos que se hayan mandado por POST, 
             //y se pone la primera letra en mayuscula
@@ -160,8 +159,8 @@
 
             $id = !empty($_POST['id']) ? trim($_POST['id']) : null ;
             $id_empleado = !empty($_POST['trabajador']) ? trim($_POST['trabajador']) : null ;
-            $nombres = !empty($_POST['nombres']) ? trim($_POST['nombres']) : null ;
-            $apellidos = !empty($_POST['apellidos']) ? trim($_POST['apellidos']) : null ;
+            $nombres = !empty($_POST['nombres']) ? ucwords(trim($_POST['nombres'])) : null ;
+            $apellidos = !empty($_POST['apellidos']) ? ucwords(trim($_POST['apellidos'])) : null ;
             $numeros = array();
             $cuentas = array();
 
@@ -216,7 +215,7 @@
                             $j=1;
                             //Busco esos numeros ingresados
                             for($i=0; $i<count($_POST); $i++){
-                                if(!empty($_POST['numero'.$j.''])){                                    
+                                if(!empty($_POST['numero'.$j.''])){                                                                        
                                     $numeros['numero'.$j.'']=$_POST['numero'.$j.''];
                                     $j++;
                                 }
@@ -225,19 +224,87 @@
                             //Cada numero guardado en la variable numeros 
                             //debe ser guardado en la base de datos
                             $controlador_telefono=new controlador($servidor, $nombreBd, "telefonos", $userBD);
-                            foreach($numeros as $numero){
-                                $j=1;
+                            $_SESSION['numeros']="";
+                            $j=1;
+                            foreach($numeros as $numero){                                
                                 //Mando el numero al objeto
                                 $telefono = new telefono($id, $numero);
                                 $resultado_telefono = $controlador_telefono->guardar("gestionar_telefono", $telefono);
-                                if($resultado_telefono){
-                                    $_SESSION['completado']['numero'.$j.''] = "El numero ".$numero." se guardó con exito";
+                                if($resultado_telefono){                                    
+                                    $_SESSION['numeros'].= "<p>El numero ".$j." se registró exitosamente</p>";
+                                    $j++;                                    
                                 }else{
                                     $errores['errores']['general']="No se guardó el numero ".$numero;
-                                }
-                                $j++;
-                            }
+                                }                                
+                            }                            
+                        }
 
+                        //var_dump($_POST);
+                        $whatsapp=!empty($_POST['whatsapp']) ? trim($_POST['whatsapp']) : null ;
+                        $instagram=!empty($_POST['instagram']) ? trim($_POST['instagram']) : null ;
+                        $telegram=!empty($_POST['telegram']) ? trim($_POST['telegram']) : null ;
+                        $twitter=!empty($_POST['twitter']) ? trim($_POST['twitter']) : null ;
+                        
+                        
+                        if(!empty($whatsapp)||!empty($instagram)||!empty($telegram)||!empty($twitter)){
+                            require_once '../modelos/redes_cliente.php';
+                            $controlador_red_cliente=new controlador($servidor, $nombreBd, "redes_usuarios", $userBD);                                
+                        }                            
+                        if(!empty($whatsapp)){
+                            $codigo = obtener_redes("Whatsapp");
+                            if(!empty($codigo)){
+                                $codigo = $codigo[0]['codigo']; 
+                                $red_cliente = new redes_cliente($codigo, $id, $whatsapp);
+                                $resultado_red_cliente = $controlador_red_cliente->guardar("gestionar_redusuario",$red_cliente);
+
+                                if($resultado_red_cliente){
+                                    $_SESSION['whatsapp']= "Whatsapp se registró exitosamente";
+                                }else{
+                                    $errores['errores']['whatsapp']="No se guardó whatsapp";
+                                }
+                            }                                
+                        }
+                        if(!empty($instagram)){
+                            $codigo = obtener_redes("Instagram");
+                            if(!empty($codigo)){
+                                $codigo = $codigo[0]['codigo']; 
+                                $red_cliente = new redes_cliente($codigo, $id, $instagram);  
+                                $resultado_red_cliente = $controlador_red_cliente->guardar("gestionar_redusuario",$red_cliente);                                                                     
+
+                                if($resultado_red_cliente){
+                                    $_SESSION['instagram']= "Instagram se registró exitosamente";
+                                }else{
+                                    $errores['errores']['instagram']="No se guardó instagram";
+                                }
+                            } 
+                        }
+                        if(!empty($telegram)){
+                            $codigo = obtener_redes("Telegram");
+                            if(!empty($codigo)){
+                                $codigo = $codigo[0]['codigo']; 
+                                $red_cliente = new redes_cliente($codigo, $id, $telegram);  
+                                $resultado_red_cliente = $controlador_red_cliente->guardar("gestionar_redusuario",$red_cliente);                                                                     
+
+                                if($resultado_red_cliente){
+                                    $_SESSION['telegram']= "Telegram se registró exitosamente";
+                                }else{
+                                    $errores['errores']['telegram']="No se guardó telegram";
+                                }
+                            } 
+                        }
+                        if(!empty($twitter)){
+                            $codigo = obtener_redes("Twitter");
+                            if(!empty($codigo)){
+                                $codigo = $codigo[0]['codigo'];
+                                $red_cliente = new redes_cliente($codigo, $id, $twitter);
+                                $resultado_red_cliente = $controlador_red_cliente->guardar("gestionar_redusuario",$red_cliente);
+
+                                if($resultado_red_cliente){
+                                    $_SESSION['twitter']= "Twitter se registró exitosamente";
+                                }else{
+                                    $errores['errores']['twitter']="No se guardó twitter";
+                                }
+                            } 
                         }
 
                     }else{
@@ -245,7 +312,8 @@
                     }
                 }
             }
-
+            //Al estar en controlador clientes, sé que regreso a manejar_clientes.php
+            header('location:../../html/manejar_clientes.php');            
         }
 
     }    
