@@ -141,7 +141,7 @@ function modal_cliente(){
         </header>
 
         <!--Formulario-->
-        <form action="#" method="post" id="formClientes">
+        <form action="../backend/servicios/servicios.php" method="post" id="formClientes">
         <div class="w3-container">
             <!--Cada input esta en un grupo-->
             <div class="form-group">
@@ -155,7 +155,11 @@ function modal_cliente(){
             <div class="form-group">
                 <label for="apellidos" class="col-form-label">Apellidos: </label>
                 <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-z ]+">
-            </div>            
+            </div>                 
+            <input type="hidden" name="trabajador" id="trabajador" value="<?=$_SESSION['usuario_logueado'][0]['id'];?>">
+            <!--Este div es para los telefonos que el usuario quiera agregar-->
+            <div id="inputs_agregados"></div>
+            <!---->
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -184,7 +188,10 @@ function modal_cliente(){
             </div>
         </div>
         <br>
-        <footer class="w3-container w3-white" style="align-items:right;">            
+        <footer class="w3-container w3-white" style="align-items:right;">   
+            <input type="hidden" name="controlador" value="cliente">
+            <input type="hidden" name="operacion" value="0">           
+            <button type="button" onclick="agregar_input()" id="btn-guardar" class="btn btn-dark">Agregar numero</button>            
             <button type="submit" id="btn-guardar" class="btn btn-dark">Guardar</button>
         </footer>
         </form>
@@ -192,6 +199,7 @@ function modal_cliente(){
     </div>
   </div>
 </div>
+
 <?php
 }
 ?>

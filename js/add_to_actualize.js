@@ -15,3 +15,14 @@ function agregar(id, nombres, apellidos, telefonos, correos){
     document.getElementById('email_existente').value=correo;
 
 }
+document.getElementById("inputs_agregados").innerHTML=""; 
+var iterador=0;
+
+function agregar_input(){    
+    iterador++;
+    var input = "<div class='form-group'>"+                    
+                    "<label for='numero"+iterador+"' class='col-form-label'>Numero "+iterador+": </label>"+
+                    "<input type='tel' name='numero"+iterador+"' id='numero"+iterador+"' class='form-control'pattern=[0-9]+>"+                        
+                "</div>";
+    document.getElementById("inputs_agregados").innerHTML+=input;    
+}

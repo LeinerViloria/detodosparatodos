@@ -12,7 +12,7 @@
 <script>
     document.getElementById('id01').style.display='block';
 </script>
- 
+<script src="../js/add_to_actualize.js"></script>
 <?php
 	require_once '../contenidoHtml/pie_pagina.php';
 }else{

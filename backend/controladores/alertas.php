@@ -8,8 +8,8 @@ function mostrarError($errores, $campo, $clase, $color){
 	return $alerta;
 }
 
-function borrar_errores(){	
-    unset($_SESSION['errores']);
+function borrar_errores($indice="errores"){	
+    unset($_SESSION[''.$indice.'']);
     //return $borrado;
 }
 ?>

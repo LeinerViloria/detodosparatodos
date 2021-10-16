@@ -153,6 +153,99 @@
             */
             header('location: ../../html/manejar_empleados.php');
             
+        }else if($controlador=="cliente"){
+            //Entra aqui si la solicitud viene de manejar_cliente
+            
+            //var_dump($_POST);
+
+            $id = !empty($_POST['id']) ? trim($_POST['id']) : null ;
+            $id_empleado = !empty($_POST['trabajador']) ? trim($_POST['trabajador']) : null ;
+            $nombres = !empty($_POST['nombres']) ? trim($_POST['nombres']) : null ;
+            $apellidos = !empty($_POST['apellidos']) ? trim($_POST['apellidos']) : null ;
+            $numeros = array();
+            $cuentas = array();
+
+            //Variable de errores
+            $errores = array();            
+
+            //Capturar errores en el id
+            if(is_null($id)){
+                $errores['id']="El id no puede quedar vacio";
+            }else if(!is_numeric($id)){
+                $errores['id']="El id del empleado debe ser un numero";
+            }
+
+            //Capturar errores en el id_empleado
+            if(is_null($id)){
+                $errores['id_empleado']="El id no puede quedar vacio";
+            }else if(!is_numeric($id)){
+                $errores['id_empleado']="El id del empleado debe ser un numero";
+            }
+
+            //Capturar errores en el nombre
+            if(is_numeric($nombres) || preg_match("/[0-9]/", $nombres)){                
+                $errores['nombre']="El nombre no admite numeros";
+            }  
+            
+            if(!ctype_alpha($nombres)){                
+                $errores['nombreerror2']="El nombre solo debe contener letras";
+            } 
+
+            //Capturar errores en el apellido
+            if(is_numeric($apellidos) || preg_match("/[0-9]/", $apellidos)){                
+                $errores['apellidos']="El apellido no admite numeros";
+            } 
+            
+            if(!ctype_alpha($apellidos)){                
+                $errores['apellidoserror2']="El apellido solo debe contener letras";
+            }
+
+            if(count($errores)==0){
+                require_once '../modelos/cliente.php';
+                //Creo a mi cliente
+                $cliente = new cliente($id, $id_empleado, $nombres, $apellidos);
+                
+                $controlador_cliente=new controlador($servidor, $nombreBd, "clientes", $userBD);
+
+                if(is_numeric($operacion) && $operacion==0){
+                    $resultado_cliente = $controlador_cliente->guardar("gestionar_cliente",$cliente);
+                    if($resultado_cliente){
+                        $_SESSION['completado']="El cliente se registró exitosamente";
+                        if(!empty($_POST['numero1'])){
+                            require_once '../modelos/telefono.php';
+                            $j=1;
+                            //Busco esos numeros ingresados
+                            for($i=0; $i<count($_POST); $i++){
+                                if(!empty($_POST['numero'.$j.''])){                                    
+                                    $numeros['numero'.$j.'']=$_POST['numero'.$j.''];
+                                    $j++;
+                                }
+                            }                            
+
+                            //Cada numero guardado en la variable numeros 
+                            //debe ser guardado en la base de datos
+                            $controlador_telefono=new controlador($servidor, $nombreBd, "telefonos", $userBD);
+                            foreach($numeros as $numero){
+                                $j=1;
+                                //Mando el numero al objeto
+                                $telefono = new telefono($id, $numero);
+                                $resultado_telefono = $controlador_telefono->guardar("gestionar_telefono", $telefono);
+                                if($resultado_telefono){
+                                    $_SESSION['completado']['numero'.$j.''] = "El numero ".$numero." se guardó con exito";
+                                }else{
+                                    $errores['errores']['general']="No se guardó el numero ".$numero;
+                                }
+                                $j++;
+                            }
+
+                        }
+
+                    }else{
+                        $errores['errores']['general']="No se guardó el cliente";
+                    }
+                }
+            }
+
         }
 
     }    

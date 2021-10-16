@@ -85,7 +85,7 @@ if(!empty($_SESSION['usuario_logueado'])){
                 });
             </script>
 <?php        
-            borrar_errores();
+            borrar_errores("completado");
         endif;
         if(!empty($_SESSION['errores'])):
             $texto="";
