@@ -189,3 +189,18 @@ function obtener_ultima_hora(){
 
     return $hora;
 }
+
+function obtener_porcentaje_anual(){
+    $conexion = conectar();
+
+    $tabla="";    
+
+    $sql = "SELECT valor
+    FROM porcentaje_anual
+    WHERE año=CURRENT_DATE();";
+
+    $valor = buscar($conexion, $tabla, 1, $sql);
+
+    return $valor;
+    
+}

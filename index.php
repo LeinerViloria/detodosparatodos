@@ -21,7 +21,7 @@
 	<nav id="menu">
 		<!--Poner aqui un logo para la tienda-->
 		<div id="logo">
-			<a href="index.html"><img src="images/logo.PNG" alt="aqui va  el logo" > </a>
+			<a href="index.php"><img src="images/logo.PNG" alt="aqui va  el logo" > </a>
 			<!--para el inicio de sesion-->
 			<i class="fa fa-user-o" id="inicio"><a href="html/login.php">Iniciar</a></i>			
 		</div>				

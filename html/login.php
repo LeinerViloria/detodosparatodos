@@ -59,7 +59,7 @@
                     footer:'<strong>Por favor, ingrese los datos correctamente</strong>'
                 });
             </script>
-<?php   
+<?php           
         borrar_errores();
         endif; 
     endif;
