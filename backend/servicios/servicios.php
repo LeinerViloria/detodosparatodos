@@ -314,6 +314,187 @@
             }
             //Al estar en controlador clientes, sé que regreso a manejar_clientes.php
             header('location:../../html/manejar_clientes.php');            
+
+        }else if($controlador=="porcentaje_alerta"){
+            $year = !empty($_POST['year']) ? $_POST['year'] : false;
+            $valor = !empty($_POST['valorNuevo']) ? $_POST['valorNuevo'] : false;
+            
+            //echo $year."<br>".$valor."<br>".date("Y")."<br>";
+
+            $errores = array();
+
+            if(is_null($year)||is_null($valor)){
+                $errores['vacios']="No puede dejar valores vacios";
+            }
+
+            if($year>date("Y") && $year!="No hay registros utiles"){
+                $errores['year']="No es permitido realizar este cambio, debe esperar al ".(date("Y")+1);
+            }
+
+            if(strlen($valor)<=0 || strlen($valor)>4){
+                $errores['longitud']="Ingrese una longitud valida, como mucho dos decimales";
+            }            
+
+            if($valor<=0){
+                $errores['valor']="Ingrese un valor valido";
+            }
+
+            if(!is_numeric($valor)){
+                $errores['valor']="El valor debe ser numerico";
+            }else if($valor>100){
+                $errores['valor']="El valor parece estar fuera del rango [1-100]";
+            }
+            
+            if(count($errores)==0){
+                require_once '../modelos/porcentaje_anual.php';
+                
+                if(is_numeric($operacion) && $operacion=="0"){
+
+                    $controlador_porcentaje = new controlador($servidor, $nombreBd, "porcentaje_anual", $userBD);                      
+                    $fecha = date('Y');
+                    //$hora= "SELECT CURRENT_TIME()";
+                    $hora = date('Y-m-d H:i:s');
+
+                    $pase = false;
+                    
+                    $hora_del_ultimo_registro=obtener_ultima_hora();
+                    
+                    if(!empty($hora_del_ultimo_registro)){
+                        $hora_del_ultimo_registro=$hora_del_ultimo_registro[0]['momento_registro'];                        
+                        $momentos = explode(" ", $hora_del_ultimo_registro);
+                        $año=explode("-", $momentos[0]);
+
+                        if($_POST['year']==$año[0]){
+                            /*
+                                Se supone que es un valor que se ingresa
+                                anualmente, pero puede haberse ingresado
+                                un valor incorrecto, entonces habrá
+                                un lapso de tiempo para que lo corrija 
+                                var_dump($momentos[0]);
+                                die();
+                            */
+                            $pase=false;                            
+                            
+                            $hora_del_ultimo_registro=obtener_ultima_hora();
+                            
+                            $inicio = new DateTime($momentos[1]);
+                            $fin = new DateTime($hora);                            
+                            
+                            //En esta variable obtengo la diferencia entre la hora en la bd y la hora actual                            
+                            $diferencia = get_object_vars($inicio->diff($fin));                              
+
+                            //De momento, sólo se aceptaran cambios hasta 7 dias despues del ultimo guardado
+
+                            /*
+                                Si se cambia el limite, tener en cuenta que un minuto contiene 60 segundos,
+                                una hora contiene 60 minutos, un dia contiene 24 horas, 
+                                y un mes contiene hasta 31 dias
+                            */                            
+                            
+                            $limite_mes=0;
+                            $limite_dia=0;
+                            $limite_hora=24;
+                            $limite_min=60;
+                            $limite_seg=60;                                                     
+                            
+                            $pase_mes=false;
+
+                            if($limite_mes>0){
+                                if($diferencia['m']<$limite_mes){
+                                    $pase_mes=true;
+                                }
+                            }else if($limite_mes==0){
+                                if($diferencia['m']==$limite_mes){
+                                    $pase_mes=true;
+                                }
+                            }
+
+                            $pase_dia=false;
+
+                            if($diferencia['d']<=$limite_dia){
+                                $pase_dia=true;
+                            }
+
+                            $pase_hora=false;
+
+                            if($diferencia['h']<=$limite_hora){
+                                $pase_hora=true;
+                            }
+
+                            $pase_min=false;
+
+                            if($diferencia['i']<=$limite_min){
+                                $pase_min=true;
+                            }
+
+                            $pase_seg=false;
+
+                            if($diferencia['i']<=$limite_seg){
+                                $pase_seg=true;
+                            }
+
+                            if($limite_seg==60){
+                                $limite_min++;
+                                $limite_seg=0;
+                            }
+
+                            if($limite_min==60 || $limite_min==61){
+                                $limite_hora++;
+                                $limite_min=0;
+                            }
+
+                            if($limite_hora==24 || $limite_hora==25){
+                                $limite_dia++;
+                                $limite_hora=0;
+                            }
+
+                            if($limite_dia==30 || $limite_dia==31){
+                                $limite_mes++;
+                                $limite_dia=0;
+                            }
+                            
+                            $limite_total="";
+                            $limite_total.= ($limite_mes!=0) ? $limite_mes." meses " : "" ;
+                            $limite_total.= ($limite_dia!=0) ? $limite_dia." dias " : "" ;
+                            $limite_total.= ($limite_hora!=0) ? $limite_hora." horas " : "" ;
+                            $limite_total.= ($limite_min!=0) ? $limite_min." minutos " : "" ;
+
+                            if($pase_mes==true && $pase_dia==true && $pase_hora==true && $pase_min==true && $pase_seg==true){
+                                $pase=true;                                
+                            }                           
+                            
+                        }else{                                                
+                            $pase=true;                                               
+                        }
+                        
+                    }else{
+                        $pase=true;                                               
+                    }                    
+
+                    if($pase){
+                        $porcentaje = new porcentaje_anual($valor, $fecha, $hora);
+                        $resultado_porcentaje = $controlador_porcentaje->guardar("gestionar_porcentaje_anual", $porcentaje);
+
+                        if(!empty($limite_total)){
+                            $errores['conseguido']="Se pudo hacer el cambio dentro del limite de tiempo de $limite_total";
+                        }else{
+                            $errores['conseguido']="Se pudo hacer el cambio";
+                        }
+                    }else{
+                        if(!empty($limite_total)){
+                            
+                            $errores['guardado']="<p>No se pudo guardar el registro, ya pasó el limite de actualizacion de $limite_total</p><p>Debe esperar al ".(date('Y')+1)."</p>";
+                        }else{
+                            $errores['guardado']="No se pudo guardar el registro";
+                        }
+                    }
+
+                }
+            }
+            
+            $_SESSION['errores']=$errores;
+
+            header("location:../../html/porcentaje.php");
         }
 
     }    

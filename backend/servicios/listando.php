@@ -146,3 +146,46 @@ function obtener_numero_clientes($empleado){
 
     return $numero;
 }
+
+function obteniendo_porcentaje_actual(){
+    $conexion = conectar();
+
+    $tabla="";    
+
+    $sql="SELECT valor, año
+        FROM porcentaje_anual
+        WHERE año=YEAR(CURDATE())";
+
+    $porcentaje = buscar($conexion, $tabla, 1, $sql);        
+
+    if(empty($porcentaje)){
+        //Al entrar aqui es porque en el año actual no hay registro
+        //Entonces se busca a ver si hay registro del año pasado
+        
+        $sql="SELECT valor, año
+        FROM porcentaje_anual
+        WHERE año<YEAR(CURDATE())
+        ORDER BY 2 DESC
+        LIMIT 1";
+
+        $porcentaje = buscar($conexion, $tabla, 1, $sql);        
+    }
+
+    return $porcentaje;
+
+    
+}
+
+function obtener_ultima_hora(){
+    $conexion = conectar(1);
+
+    $tabla="";    
+
+    $sql="SELECT momento_registro
+        FROM porcentaje_anual
+        WHERE año=CURRENT_DATE()";
+
+    $hora = buscar($conexion, $tabla, 1, $sql);            
+
+    return $hora;
+}
