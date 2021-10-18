@@ -113,9 +113,9 @@ function obtener_clientes($empleado){
 
     $tabla="";
 
-    $sql="SELECT id, CONCAT(nombres, ' ', apellidos) cliente
+    $sql = "SELECT id, CONCAT(nombres, ' ', apellidos) cliente
         FROM clientes
-        WHERE id_Empleado='$empleado'
+        WHERE id_Empleado='$empleado' OR id_empleado IN (SELECT id FROM empleados WHERE perfil_id='A1')
         ORDER BY nombres, apellidos";
 
     $clientes = buscar($conexion, $tabla, 1, $sql);

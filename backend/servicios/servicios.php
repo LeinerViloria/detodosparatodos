@@ -393,9 +393,9 @@
                             
                             $limite_mes=0;
                             $limite_dia=0;
-                            $limite_hora=24;
-                            $limite_min=60;
-                            $limite_seg=60;                                                     
+                            $limite_hora=0;
+                            $limite_min=5;
+                            $limite_seg=0;                                                          
                             
                             $pase_mes=false;
 

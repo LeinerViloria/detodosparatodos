@@ -6,7 +6,7 @@
 if(!empty($_SESSION['usuario_logueado'])){	
     if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){
         require_once '../contenidoHtml/cabecera_Administrador.php';
-        require_once '../backend/servicios/listando.php'; 
+        require_once '../backend/servicios/listando.php';         
 ?>
 
 <div class="container">
@@ -61,7 +61,7 @@ if(!empty($_SESSION['usuario_logueado'])){
         </div>
     </div>
 </div>
-
+ 
 <!--Modal para el CRUD-->
 <!--Modal de prueba-->
 

@@ -3,8 +3,9 @@
 	//require_once '../contenidoHtml/cabecera_Vendedor.php'; //Esto es lo que ve el vendedor
 
     require_once '../backend/controladores/destruirSesion.php';
-	
+	 
 if(!empty($_SESSION['usuario_logueado'])){	
+    if($_SESSION['usuario_logueado']['cabecera']=="Vendedor"){
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
     function aleatorio($min=1000, $max=30000){
         return rand($min, $max);
@@ -64,6 +65,9 @@ if(!empty($_SESSION['usuario_logueado'])){
 
 <?php
 	require_once '../contenidoHtml/pie_pagina.php';
+    }else{
+        header("location: ./home.php");
+    }
 
 }else{
 	destruir();

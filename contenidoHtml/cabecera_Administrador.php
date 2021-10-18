@@ -11,13 +11,13 @@
 	<link rel="stylesheet" href="../css/normalize.css">
 	<link rel="stylesheet" href="../css/estilos.css">
 	<link rel="stylesheet" href="../css/registroVentas.css">
-	<link rel="stylesheet" href="../css/estilosCompraNueva.css">
+	<link rel="stylesheet" href="../css/estilosCompraNueva.css">	
 	<link rel="shortcut icon" href="../images/logo.PNG" type="image/x-icon">
 	<script src="../js/jquery-3.2.1.js"></script>
 	<script src="../js/script.js"></script>
 	 <!-- debajo esta el codigo que me permite poner iconos de font awesome (recuerda buscar otra api para eso) -->
 	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>	 
 <body>
 	<!--Menu de navegacion-->
 	<nav id="menu">
@@ -33,13 +33,11 @@
 		<!-- Enlaces -->
 		<div class="justify-content-center" id="enlaces">			
 				<ul>					
-					<a href="./ventas.php">Detalle de ventas</a>
-					<a href="./registrarVenta.php">Registrar ventas</a>
+					<a href="./ventas.php">Detalle de ventas</a>					
 					<a href="./compras.php">Comprar productos</a>
 					<a href="./manejar_empleados.php">Empleados</a>
-					<a href="./manejar_clientes.php">Registrar clientes</a>
-					<a href="./porcentaje.php">Porcentaje anual</a>
-					<a href="./comisiones.php">Comisiones</a>					
+					<!--<a href="./manejar_clientes.php">Registrar clientes</a>-->
+					<a href="./porcentaje.php">Porcentaje anual</a>					
 				</ul>			
 		</div>			  
 	</nav>		

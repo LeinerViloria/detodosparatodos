@@ -58,11 +58,11 @@ if(!empty($_SESSION['usuario_logueado'])){
 				<table class="table table-bordered">					
 				<thead>
 					<tr>
-					<th class="product-thumbnail">Image</th>
-					<th class="product-name">Product</th>
-					<th class="product-price">Price</th>
-					<th class="product-quantity">Quantity</th>
-					<th class="product-total">Total</th>
+					<th class="product-thumbnail">Imagen</th>
+					<th class="product-name">Producto</th>
+					<th class="product-price">Precio</th>
+					<th class="product-quantity">Cantidad</th>
+					<th class="product-total">Precio venta</th>
 					<th class="product-remove">Remove</th>
 					</tr>
 				</thead>
@@ -76,14 +76,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 					</td>
 					<td>$49.00</td>
 					<td>
-						<div class="input-group mb-3" style="max-width: 120px;">
-						<div class="input-group-prepend">
-							<button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-						</div>
-						<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-						<div class="input-group-append">
-							<button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-						</div>
+						<div class="input-group mb-3" style="max-width: 120px;">						
+						<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
 						</div>
 
 					</td>
@@ -100,14 +94,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 					</td>
 					<td>$49.00</td>
 					<td>
-						<div class="input-group mb-3" style="max-width: 120px;">
-						<div class="input-group-prepend">
-							<button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-						</div>
-						<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-						<div class="input-group-append">
-							<button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-						</div>
+						<div class="input-group mb-3" style="max-width: 120px;">						
+						<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
 						</div>
 
 					</td>
