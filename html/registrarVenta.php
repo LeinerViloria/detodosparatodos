@@ -21,7 +21,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 				$numero_clientes=0;
 			}
 		?>
-		<p>Manejas <span class="numero"><?=$numero_clientes?></span> de <span class="numero"><?=$total[0]['total']?></span> clientes</p>
+		<p>Manejas <span class="numero"><?=$numero_clientes?></span> de <span class="numero"><?=$total[0]['total']?></span> clientes, sabiendo que el anonimo es para todos</p>
     </div>
   </div>
 </div>

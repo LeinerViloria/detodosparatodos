@@ -140,7 +140,7 @@ function obtener_numero_clientes($empleado){
 
     $sql="SELECT COUNT(1) numero
         FROM clientes
-        WHERE id_Empleado='$empleado'        
+        WHERE id_Empleado='$empleado'       
         GROUP BY id_Empleado";
     $numero = buscar($conexion, $tabla, 1, $sql);
 
@@ -203,4 +203,19 @@ function obtener_porcentaje_anual(){
 
     return $valor;
     
+}
+
+function familias(){
+
+    $conexion= conectar();
+
+    $tabla = "";
+
+    $sql="SELECT id, nombre
+            FROM familias
+            ORDER BY 2";
+
+    $familias=buscar($conexion, $tabla, 1, $sql);
+
+    return $familias;
 }

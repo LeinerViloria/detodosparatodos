@@ -15,6 +15,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 		}
 		
 		require_once '../contenidoHtml/cabecera_Administrador.php';
+		$familias = !empty(familias()) ? familias() : null;		
 ?>
 
 <h1>Productos nuevos</h1>
@@ -24,14 +25,19 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<!--Contenedor del producto de la compra-->
 		<div class="col-md-12">
 			<div class="contenidoCompras">
-				<input type="radio" name="familiaOrigen" id="familiaNueva" onchange="familiaNueva()">
-				<label for="familiaNueva"><strong>Ingresar una familia nueva</strong></label>
-				<input type="radio" name="familiaOrigen" id="familiaExistente" onchange="familiaExistente()">
-				<label for="familiaExistente"><strong>Elejir una familia existente</strong></label>
+				<div class="opciones">
+					<div class="opcion">
+						<button onclick="document.getElementById('id01').style.display='block'" class="btn btn-primary">Nueva familia</button>								
+					</div>
+					<div class="opcion">					
+						<input type="radio" name="familiaOrigen" id="familiaExistente" onchange="familiaExistente()">
+						<label for="familiaExistente"><strong>Elejir una familia existente</strong></label>
+					</div>
+				</div>
 
 				<form action="#" method="POST">
 					<div id="adicionar"></div>
-					<label class="label" for="nombreProducto">Ingrese el codigo del producto: </label>
+					<label class="label" for="codigoProducto">Ingrese el codigo del producto: </label>
 					<input type="text" name="codigoProducto" id="codigoProducto" placeholder="Ingrese el codigo">
 					<br>
 					<label class="label" for="nombreProducto">Ingrese el nombre del producto: </label>
@@ -111,7 +117,6 @@ if(!empty($_SESSION['usuario_logueado'])){
 
 <script src="../js/jquery-3.2.1.js"></script>
 <script src="../js/script.js"></script>
-<script src="../js/accionFamilia.js"></script> 
 
 <!--Script para autocalcular el precio de venta de un producto-->
 <script>
@@ -144,8 +149,69 @@ if(!empty($_SESSION['usuario_logueado'])){
 	}
 </script> 
 
-<?php 
-	
+<!--Script para agregar familia al seleccionar el radio button-->
+<script>
+	function familiaExistente(){
+		formulario="<label class='label' for='familias'>Elija la familia:</label>"+
+					"<select name='familias' id='familias'>"+
+						"<option>Seleccione aqui</option>";
+						<?php if(!empty($familias)): ?>							
+							<?php foreach($familias as $id => $familia): ?>							
+								formulario+="<option value='<?=$familia['id']?>'><?=$familia['nombre']?></option>";
+							<?php endforeach;?>
+						<?php endif;?>
+		formulario+="</select>";
+		nuevo(formulario);
+	}
+
+	function nuevo(etiqueta){
+		document.getElementById("adicionar").innerHTML="";
+		document.getElementById("boton").innerHTML="";
+		document.getElementById("adicionar").innerHTML=etiqueta;       
+		document.getElementById("boton").innerHTML="<input type='submit' value='Subir compra'>";    
+	}
+</script>
+
+<!--Modal para el CRUD-->
+<!--Modal de prueba-->
+
+<?php
+    require '../contenidoHtml/modal.php';    
+    modal_familia();
+	require_once '../backend/controladores/alertas.php';
+?>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/sweetalert.js"></script>
+<?php
+        if(!empty($_SESSION['completado'])):
+?>            
+            <script>
+                Toast.fire({
+                    icon: 'success',
+                    title: '<?=$_SESSION['completado']?>'
+                });
+            </script>
+<?php        
+            borrar_errores("completado");
+        endif;
+        if(!empty($_SESSION['errores'])):
+            $texto="";
+            foreach($_SESSION['errores'] as $error){
+                $texto.="<p>".$error.".</p>";
+            }
+?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Errores',
+                    html:'<?=$texto?>',
+                    footer:'<strong>Por favor, ingrese los datos correctamente</strong>'
+                });
+            </script>
+<?php   
+			borrar_errores();
+		endif; 					
 	require_once '../contenidoHtml/pie_pagina.php';
 	}else{
 		header("location: ./home.php");

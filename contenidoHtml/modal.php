@@ -203,3 +203,47 @@ function modal_cliente(){
 <?php
 }
 ?>
+
+<?php
+function modal_familia(){
+?>
+
+<div class="w3-container">   
+  <div id="id01" class="w3-modal" style="padding-top:16px">
+      <!--Contenido del modal-->
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+        <!--Cabecera del modal-->
+        <header class="w3-container w3-teal" style="background-color:#0d6efd!important"> 
+            <span onclick="document.getElementById('id01').style.display='none'" 
+            class="w3-button w3-display-topright">&times;</span>
+            <h2 class="modal-title" id="exampleModalLabel">Nueva familia</h2>
+        </header>
+
+        <!--Formulario-->
+        <form action="../backend/servicios/servicios.php" method="post" id="formEmpleadoNuevo">
+        <div class="w3-container">
+            <!--Cada input esta en un grupo-->
+            <div class="form-group">
+                <label for="id" class="col-form-label">Identificacion: </label>
+                <input type="text" name="id" id="id" class="form-control" required="required" autofocus="autofocus">
+            </div>
+            <div class="form-group">
+                <label for="nombres" class="col-form-label">Nombres: </label>
+                <input type="text" name="nombres" id="nombres" class="form-control" required="required">
+            </div>            
+        </div>
+        <br>
+        <footer class="w3-container w3-white" style="align-items:right;">
+            <input type="hidden" name="controlador" value="familia">
+            <input type="hidden" name="operacion" value="0">            
+            <button type="submit" id="btn-guardar" class="btn btn-dark">Guardar</button>
+        </footer>
+        </form>
+        <br>
+    </div>
+  </div>
+</div>
+
+<?php
+}
+?>

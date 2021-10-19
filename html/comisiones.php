@@ -10,6 +10,10 @@ if(!empty($_SESSION['usuario_logueado'])){
     function aleatorio($min=1000, $max=30000){
         return rand($min, $max);
     }
+    require_once '../backend/servicios/listando.php';
+
+    $porcentaje = !empty(obtener_porcentaje_anual()) ? obtener_porcentaje_anual()[0]['valor']."%" : "No hay registro";    
+    
 ?>
 
 <table id="infoComision" class="table table-striped">
@@ -22,7 +26,7 @@ if(!empty($_SESSION['usuario_logueado'])){
   </thead>
   <tbody>
     <tr>
-      <td>10%</td>
+      <td><?=$porcentaje?></td>
       <td>$680000</td>
       <td>$68600</td>      
     </tr>    
@@ -32,24 +36,24 @@ if(!empty($_SESSION['usuario_logueado'])){
 <table id="tcomisiones" class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">Vendedor</th>
+            <th scope="col">Meses</th>
             <th scope="col">Importe total de ventas</th>
             <th scope="col">Comision</th>    
         </tr>
     </thead>
     <tbody>
         <tr>
-            <th scope="row">Persona 1</th>
+            <th scope="row">Mes 1</th>
             <td><?php echo "$".aleatorio(); ?></td>
             <td><?php echo "$".aleatorio(); ?></td>    
         </tr>
         <tr>
-            <th scope="row">Persona 2</th>
+            <th scope="row">Mes 2</th>
             <td><?php echo "$".aleatorio(); ?></td>
             <td><?php echo "$".aleatorio(); ?></td>    
         </tr>
         <tr>
-            <th scope="row">Persona 3</th>
+            <th scope="row">Mes 3</th>
             <td><?php echo "$".aleatorio(); ?></td>
             <td><?php echo "$".aleatorio(); ?></td>    
         </tr>

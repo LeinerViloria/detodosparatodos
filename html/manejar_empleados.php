@@ -10,7 +10,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 ?>
 
 <div class="container">
-    <div class="row">
+    <div class="row"> 
         <div class="col-lg-12">            
             <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-success">Nuevo</button>
         </div>

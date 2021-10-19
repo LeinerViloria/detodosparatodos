@@ -495,6 +495,57 @@
             $_SESSION['errores']=$errores;
 
             header("location:../../html/porcentaje.php");
+        }else if($controlador=="familia"){
+
+            $id = !empty($_POST['id']) ? trim($_POST['id']) : null;
+            $nombre = !empty($_POST['nombres']) ? ucwords(trim($_POST['nombres'])) : null;
+
+            $errores = array();
+
+            if(is_null($id)){
+                $errores['id_nulo']="El id no puede quedar nulo";
+            }
+
+            if(!ctype_alpha($id) && !is_numeric($id)){                
+                $errores['id']="El id solo debe contener letras o numeros";
+            } 
+
+            if(is_null($nombre)){
+                $errores['nombres']="El nombre no puede quedar vacio";
+            }
+
+            if(is_numeric($nombre) || preg_match("/[0-9]/", $nombre)){                
+                $errores['nombre']="El nombre no admite numeros";
+            }  
+            
+            if(!ctype_alpha($nombre)){                
+                $errores['nombreerror2']="El nombre solo debe contener letras";
+            } 
+
+            if(count($errores)==0){
+                require '../modelos/familia.php';
+
+                $familia = new familia($id, $nombre);
+
+                $controlador_familia = new controlador($servidor, $nombreBd, "familias", $userBD);                
+
+                if(is_numeric($operacion) && $operacion=="0"){
+                    $resultado_familia = $controlador_familia->guardar("gestionar_familia", $familia);
+                    if($resultado_familia){
+                        $_SESSION['completado']="La nueva familia se guardó con exito";
+                    }else{
+                        $errores['guardado']="Hubo algun error en el guardado";
+                    }
+                }
+
+            }else{
+                $errores['guardado']="No se pueden guardar los datos";
+            }
+
+            $_SESSION['errores']=$errores;
+
+            header("location: ../../html/compras.php");
+            
         }
 
     }    

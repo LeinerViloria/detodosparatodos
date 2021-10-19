@@ -2,9 +2,17 @@ h1{
     text-align: center;    
 }
 
-.contenidoCompras{
-    margin-left: 50px; 
+.contenidoCompras{    
     font-family: 'Poppins', sans-serif;   
+}
+
+.opciones{
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+}
+.opciones .opcion{
+    padding: 5px 10px;    
 }
 
 select{

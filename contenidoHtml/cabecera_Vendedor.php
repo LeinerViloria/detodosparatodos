@@ -34,7 +34,7 @@
 				<a href="./ventas.php">Detalle de ventas</a>
 				<a href="./registrarVenta.php">Registrar ventas</a>
 				<a href="./manejar_clientes.php">Registrar clientes</a>
-				<a href="./comisiones.php">Comisiones</a>	
+				<a href="./comisiones.php">Tus comisiones</a>	
 			</ul>
 		</div>			  
 	  </nav>
