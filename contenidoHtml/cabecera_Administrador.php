@@ -33,10 +33,10 @@
 		<!-- Enlaces -->
 		<div class="justify-content-center" id="enlaces">			
 				<ul>					
-					<a href="./ventas.php">Detalle de ventas</a>					
+					<a href="./ventas.php">Detalle de ventas</a>
+					<a href="./proveedores.php">Proveedores</a>					
 					<a href="./compras.php">Comprar productos</a>
-					<a href="./manejar_empleados.php">Empleados</a>
-					<!--<a href="./manejar_clientes.php">Registrar clientes</a>-->
+					<a href="./manejar_empleados.php">Empleados</a>					
 					<a href="./porcentaje.php">Porcentaje anual</a>					
 				</ul>			
 		</div>			  

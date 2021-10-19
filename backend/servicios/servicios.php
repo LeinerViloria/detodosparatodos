@@ -13,7 +13,7 @@
 
         if(!isset($_SESSION)){
             session_start();
-        }
+        }        
         
         if($controlador=="empleado"){
             require_once '../modelos/empleado.php';
@@ -546,6 +546,67 @@
 
             header("location: ../../html/compras.php");
             
+        }else if($controlador=="proveedor"){
+            
+            $codigo = !empty($_POST['codigo']) ? trim($_POST['codigo']) : null;
+            $nombre = !empty($_POST['nombre']) ? ucwords(trim($_POST['nombre'])) : null;
+            $telefono = !empty($_POST['telefono']) ? trim($_POST['telefono']) : null;
+
+            $errores = array();
+
+            if(!is_numeric($codigo)){
+                $errores['codigo']="El codigo debe ser numerico";
+            }
+
+            if(is_null($codigo)){
+                $errores['codigo']="El codigo no puede quedar vacio";
+            }
+
+            if(is_null($nombre)&&$operacion=="0"){
+                $errores['nombre']="El nombre no puede quedar vacio";
+            }
+
+            //Capturar errores en el nombre
+            if(is_numeric($nombre) || preg_match("/[0-9]/", $nombre)){                
+                $errores['nombre']="El nombre no admite numeros";
+            }
+
+            if(!is_numeric($telefono) && !is_null($telefono)){
+                $errores['telefono']="El telefono debe ser numerico";
+            }
+
+            if(count($errores)==0){
+                require_once '../modelos/proveedor.php';
+
+                $proveedor = new proveedor($codigo, $nombre, $telefono);
+
+                $controlador_proveedor = new controlador($servidor, $nombreBd, "provedores", $userBD);
+
+                if(is_numeric($operacion) && $operacion==0){
+                    $resultado_proveedor = $controlador_proveedor->guardar("gestionar_proveedor", $proveedor);
+                    if($resultado_proveedor){
+                        $_SESSION['completado']="El proveedor se guardó";
+                    }else{
+                        $errores['query']="Algo salio mal en el query";
+                    }
+                }else if(is_numeric($operacion)){
+                    $resultado_proveedor = $controlador_proveedor->eliminar("gestionar_proveedor", $proveedor);
+                    if($resultado_proveedor){
+                        $_SESSION['completado']="El proveedor $codigo se eliminó";
+                    }else{
+                        $errores['query']="Algo salio mal en el query";
+                    }
+                }else{
+                    $errores['operacion']="La operacion no es valida";
+                }
+
+            }else{
+                $errores['guardado']="No se puede guardar";
+            }
+
+            $_SESSION['errores']=$errores;
+
+            header("location: ../../html/proveedores.php");
         }
 
     }    

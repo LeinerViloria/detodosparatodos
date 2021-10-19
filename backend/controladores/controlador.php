@@ -41,6 +41,36 @@ class controlador{
         
     }
 
+    public function eliminar($procedimiento, $datos){
+        $sql="CALL $procedimiento(1";
+        //Se necesita recorrer el array de datos
+        /*
+            Se completa la sentencia para llamar al
+            procedimiento almacenado
+        */
+        foreach($datos as $dato){
+            if(is_null($dato)){
+                $sql.=", null";
+            }else if(is_string($dato)){
+                $sql.=", '$dato'";
+            }else{
+                $sql.=", $dato";
+            }
+            
+        }
+        $sql.=");";
+
+        $sentencia = $this->conexion->prepare($sql);
+        $resultado = $sentencia->execute();        
+        
+        if($resultado){
+            return true;           
+        }else{
+            var_dump($sentencia->errorinfo());
+            return false;
+        } 
+    }
+
     public function listar(){
         $sentencia = "SELECT * FROM $this->tabla";
         $sentencia = $this->conexion->prepare($sentencia);

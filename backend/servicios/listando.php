@@ -221,3 +221,13 @@ function familias($ruta=0){
 
     return $familias;
 }
+
+function proveedores(){
+    $conexion = conectar();
+    
+    $tabla = "provedores";
+
+    $proveedores = buscar($conexion, $tabla);
+
+    return $proveedores;
+}
