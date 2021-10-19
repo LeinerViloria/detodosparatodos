@@ -5,6 +5,8 @@ function conectar($ruta=0){
         require_once '../backend/componentes/conectar.php';
     }else if($ruta==1){
         require_once '../componentes/conectar.php';
+    }else if($ruta==2){
+        require_once './backend/componentes/conectar.php';
     }
     $conexionMySQL = new conectar("localhost", "detodosparatodos", "root", "");   
     return $conexionMySQL->getConexion();
@@ -205,9 +207,9 @@ function obtener_porcentaje_anual(){
     
 }
 
-function familias(){
+function familias($ruta=0){
 
-    $conexion= conectar();
+    $conexion= conectar($ruta);
 
     $tabla = "";
 

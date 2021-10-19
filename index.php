@@ -16,7 +16,7 @@
 	<script src="js/script.js"></script>
 	 <!-- debajo esta el codigo que me permite poner iconos de font awesome (recuerda buscar otra api para eso) -->
 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
-<body>
+<body> 
 	<!--Menu de navegacion-->
 	<nav id="menu">
 		<!--Poner aqui un logo para la tienda-->
@@ -27,9 +27,9 @@
 		</div>				
 	  </nav>
 	
-	<?php 
+	<?php 		
 		require_once 'contenidoHtml/contenido_productos.php';		
-		contenido();
+		contenido(2);
 	?>
 
 </body>
