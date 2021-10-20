@@ -4,6 +4,16 @@
 	box-sizing: border-box;	
 }
 
+.opciones{
+	display: flex;
+}
+
+.opciones .opcion{
+	padding: 2px 5px;	
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
 h1, h2{
 	text-align: center;
 }
