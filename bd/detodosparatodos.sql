@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2021 a las 18:23:40
+-- Tiempo de generación: 20-10-2021 a las 22:24:07
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -421,6 +421,11 @@ CREATE TABLE `clientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
+-- Truncar tablas antes de insertar `clientes`
+--
+
+TRUNCATE TABLE `clientes`;
+--
 -- Volcado de datos para la tabla `clientes`
 --
 
@@ -446,6 +451,11 @@ CREATE TABLE `comisiones` (
   `Año` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `comisiones`
+--
+
+TRUNCATE TABLE `comisiones`;
 -- --------------------------------------------------------
 
 --
@@ -463,6 +473,11 @@ CREATE TABLE `compras` (
   `total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `compras`
+--
+
+TRUNCATE TABLE `compras`;
 -- --------------------------------------------------------
 
 --
@@ -478,6 +493,11 @@ CREATE TABLE `detalles_compras` (
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `detalles_compras`
+--
+
+TRUNCATE TABLE `detalles_compras`;
 -- --------------------------------------------------------
 
 --
@@ -493,6 +513,11 @@ CREATE TABLE `detalles_ventas` (
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `detalles_ventas`
+--
+
+TRUNCATE TABLE `detalles_ventas`;
 -- --------------------------------------------------------
 
 --
@@ -510,6 +535,11 @@ CREATE TABLE `empleados` (
   `telefono` varchar(12) COLLATE latin1_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `empleados`
+--
+
+TRUNCATE TABLE `empleados`;
 --
 -- Volcado de datos para la tabla `empleados`
 --
@@ -538,6 +568,11 @@ CREATE TABLE `familias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
+-- Truncar tablas antes de insertar `familias`
+--
+
+TRUNCATE TABLE `familias`;
+--
 -- Volcado de datos para la tabla `familias`
 --
 
@@ -559,6 +594,11 @@ CREATE TABLE `perfiles` (
   `nombre` varchar(30) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `perfiles`
+--
+
+TRUNCATE TABLE `perfiles`;
 --
 -- Volcado de datos para la tabla `perfiles`
 --
@@ -582,6 +622,11 @@ CREATE TABLE `porcentaje_anual` (
   `momento_registro` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `porcentaje_anual`
+--
+
+TRUNCATE TABLE `porcentaje_anual`;
 --
 -- Volcado de datos para la tabla `porcentaje_anual`
 --
@@ -609,13 +654,17 @@ CREATE TABLE `productos` (
   `descripcion` varchar(120) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `productos`
+--
+
+TRUNCATE TABLE `productos`;
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `provedores`
 --
 -- Creación: 19-10-2021 a las 14:06:34
--- Última actualización: 19-10-2021 a las 15:31:40
 --
 
 DROP TABLE IF EXISTS `provedores`;
@@ -625,6 +674,11 @@ CREATE TABLE `provedores` (
   `telefono` varchar(12) COLLATE latin1_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `provedores`
+--
+
+TRUNCATE TABLE `provedores`;
 --
 -- Volcado de datos para la tabla `provedores`
 --
@@ -646,6 +700,11 @@ CREATE TABLE `redes_sociales` (
   `nombre` varchar(40) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `redes_sociales`
+--
+
+TRUNCATE TABLE `redes_sociales`;
 --
 -- Volcado de datos para la tabla `redes_sociales`
 --
@@ -671,6 +730,11 @@ CREATE TABLE `redes_usuarios` (
   `Nombre_Usuario` varchar(40) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `redes_usuarios`
+--
+
+TRUNCATE TABLE `redes_usuarios`;
 --
 -- Volcado de datos para la tabla `redes_usuarios`
 --
@@ -698,6 +762,11 @@ CREATE TABLE `telefonos` (
   `numero` varchar(12) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `telefonos`
+--
+
+TRUNCATE TABLE `telefonos`;
 --
 -- Volcado de datos para la tabla `telefonos`
 --
@@ -762,6 +831,11 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
+-- Truncar tablas antes de insertar `usuarios`
+--
+
+TRUNCATE TABLE `usuarios`;
+--
 -- Volcado de datos para la tabla `usuarios`
 --
 
@@ -791,6 +865,11 @@ CREATE TABLE `ventas` (
   `total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+--
+-- Truncar tablas antes de insertar `ventas`
+--
+
+TRUNCATE TABLE `ventas`;
 --
 -- Índices para tablas volcadas
 --
