@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2021 a las 18:23:40
+-- Tiempo de generación: 20-10-2021 a las 23:06:42
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -499,6 +499,7 @@ CREATE TABLE `detalles_ventas` (
 -- Estructura de tabla para la tabla `empleados`
 --
 -- Creación: 06-10-2021 a las 19:54:24
+-- Última actualización: 20-10-2021 a las 20:52:36
 --
 
 DROP TABLE IF EXISTS `empleados`;
@@ -529,6 +530,7 @@ INSERT INTO `empleados` (`id`, `perfil_id`, `nombres`, `apellidos`, `telefono`) 
 -- Estructura de tabla para la tabla `familias`
 --
 -- Creación: 06-10-2021 a las 19:54:24
+-- Última actualización: 20-10-2021 a las 20:56:56
 --
 
 DROP TABLE IF EXISTS `familias`;
@@ -543,7 +545,8 @@ CREATE TABLE `familias` (
 
 INSERT INTO `familias` (`id`, `nombre`) VALUES
 ('1', 'Ordenadores'),
-('2', 'Laptops');
+('2', 'Laptops'),
+('78', 'Smartphones');
 
 -- --------------------------------------------------------
 
@@ -615,7 +618,7 @@ CREATE TABLE `productos` (
 -- Estructura de tabla para la tabla `provedores`
 --
 -- Creación: 19-10-2021 a las 14:06:34
--- Última actualización: 19-10-2021 a las 15:31:40
+-- Última actualización: 20-10-2021 a las 20:50:56
 --
 
 DROP TABLE IF EXISTS `provedores`;
@@ -630,7 +633,8 @@ CREATE TABLE `provedores` (
 --
 
 INSERT INTO `provedores` (`codigo`, `nombre`, `telefono`) VALUES
-('12', 'Yamaha', NULL);
+('12', 'Yamaha', NULL),
+('34', 'Poderosa', '3244');
 
 -- --------------------------------------------------------
 
@@ -752,6 +756,7 @@ INSERT INTO `telefonos` (`id_Cliente`, `numero`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 -- Creación: 06-10-2021 a las 19:54:24
+-- Última actualización: 20-10-2021 a las 20:52:37
 --
 
 DROP TABLE IF EXISTS `usuarios`;
@@ -768,7 +773,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id_Empleado`, `Correo`, `password`) VALUES
 ('24', 'cr7@gmail.com', '$2y$04$u/9iQapZjTNjefSby8nnc.ElIfQY9P7IYTIB3yQwNX2pUz9r0.a/K'),
 ('12', 'f@gmail.com', '$2y$04$RriFsbUbFH8G571I0K9qhu42hZE9RVfh49z68kNxfDSXbo6iQj2Bq'),
-('6', 'j@gmail.com', '$2y$04$kjlsKymwRve4cGWpX1XuV.P.nVTObWWpx9md71jU5LX2gkP7wqSFe'),
+('6', 'j@gmail.com', '$2y$04$nUSTTYzdo4Z7aTeEpzr01.PglNw.wy3LX5JKpHJMUP7L2bUq4wi.m'),
 ('17', 'jd@gmail.com', '$2y$04$etDb2Y8PjcIXw505qZci6.r79mM3Qj6P9g/T5T8v2ojXgUGuLX5Si'),
 ('78', 'k@h.com', '$2y$04$n805/aszmR.IMjVbE/kvTeYBC1xxG0EzxQA0dPN7YaBi/zPJScr5y'),
 ('34', 'lv@gmail.com', '$2y$04$FzwuHzGeUQoUYP.IA3/cKemgw4W3XZ7TmzgATgetUPw89vantxTRG'),
