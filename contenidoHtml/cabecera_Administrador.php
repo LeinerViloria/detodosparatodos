@@ -37,7 +37,8 @@
 					<a href="./proveedores.php">Proveedores</a>					
 					<a href="./compras.php">Comprar productos</a>
 					<a href="./manejar_empleados.php">Empleados</a>					
-					<a href="./porcentaje.php">Porcentaje anual</a>					
+					<a href="./porcentaje.php">Porcentaje anual</a>	
+					<a href="./manejar_comisiones.php">Comisiones</a>				
 				</ul>			
 		</div>			  
 	</nav>		

@@ -607,6 +607,36 @@
             $_SESSION['errores']=$errores;
 
             header("location: ../../html/proveedores.php");
+        }else if($controlador="comision"){
+            
+            $volumen = !empty($_POST['importe']) ? trim($_POST['importe']) : null;
+            $porcentaje = !empty($_POST['comision']) ? trim($_POST['comision']) : null;
+
+            $errores = array();
+
+            if(is_null($volumen)){
+                $errores['volumen']="El volumen no debe quedar vacio";
+            }
+
+            if(is_null($porcentaje)){
+                $errores['porcentaje']="El porcentaje no debe quedar vacio";
+            }
+
+            if(!is_numeric($volumen) || !is_numeric($porcentaje)){
+                $errores['numerico']="Debe ingresar valores numericos";
+            }
+
+            if(count($errores)==0){
+                require_once '../modelos/comision.php';
+                $fecha = date("Y-m-d");
+                $comision = new comision(null, $volumen, $porcentaje, $fecha);
+
+                var_dump($comision);
+
+            }
+
+            $_SESSION['errores']=$errores;
+
         }
 
     }    

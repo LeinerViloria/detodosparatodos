@@ -20,10 +20,10 @@ if(!empty($_SESSION['usuario_logueado'])){
 
 <h1>Productos nuevos</h1>
 
-<div class="container" id="contenedorCompras">
-	<div class="row mb-5">
-		<!--Contenedor del producto de la compra-->
-		<div class="col-md-12">
+<div class="container p-4" id="contenedorCompras">
+	<div class="row">
+		<!--Contenedor del formulario-->
+		<div class="col-md-4">
 			<div class="contenidoCompras">
 				<div class="opciones">
 					<div class="opcion">
@@ -31,87 +31,104 @@ if(!empty($_SESSION['usuario_logueado'])){
 					</div>
 					<div class="opcion">					
 						<input type="radio" name="familiaOrigen" id="familiaExistente" onchange="familiaExistente()">
-						<label for="familiaExistente"><strong>Elejir una familia existente</strong></label>
+						<label for="familiaExistente"><strong>Elejir una familia</strong></label>
 					</div>
 				</div>
 
 				<form action="#" method="POST">
-					<div id="adicionar"></div>
-					<label class="label" for="codigoProducto">Ingrese el codigo del producto: </label>
-					<input type="text" name="codigoProducto" id="codigoProducto" placeholder="Ingrese el codigo">
-					<br>
-					<label class="label" for="nombreProducto">Ingrese el nombre del producto: </label>
-					<input type="text" name="nombreProducto" id="nombreProducto" placeholder="Ingrese el nombre">				
-					<br>
-					<label class="label" for="cantProducto">Ingrese las cantidades compradas: </label>
-					<input type="number" name="cantProducto" id="cantProducto" placeholder="Cantidad comprada" min="1">
-					<br>
-					<label class="label" for="precioProducto">Ingrese el precio del producto: </label>
-					<input type="number" name="precioProducto" id="precioProducto" placeholder="Ingrese el precio" min="1">
-					<br>
-					<label class="label" for="precio_ventaProducto">Precio de venta del producto: </label>
-					<input type="number" name="precio_ventaProducto" id="precio_ventaProducto" placeholder="Esto se autocalculará" readonly>
-					<br>
-					<textarea name="descripcionProducto" id="descripcionProducto" cols="30" rows="10" placeholder="Escriba la descricion del producto"></textarea>
-					<div id="boton"></div>
+					<div class="form-group">
+						<div class="form-group" id="adicionar"></div>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" name="codigoProducto" id="codigoProducto" placeholder="Ingrese el codigo">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" name="nombreProducto" id="nombreProducto" placeholder="Ingrese el nombre">				
+					</div>
+
+					<div class="form-group">
+						<input type="number" class="form-control" name="cantProducto" id="cantProducto" placeholder="Cantidad comprada" min="1">
+					</div>
+
+					<div class="form-group">
+						<input type="number" class="form-control" name="precioProducto" id="precioProducto" placeholder="Ingrese el precio" min="1">
+					</div>
+
+					<div class="form-group">
+						<input type="number" class="form-control" name="precio_ventaProducto" id="precio_ventaProducto" placeholder="Esto se autocalculará" readonly>
+					</div>
+
+					<div class="form-group">
+						<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
+					</div>
+
+                    <input type="submit" class="btn btn-success btn-block" name="guardar" value="Guardar" id="boton">
+
 				</form>
 			</div>
 		</div>
+		<!--Fin Contenedor del formulario-->
+
 		<!--Contenedor de los detalles de la compra-->
-		<form class="col-md-12" method="post">
-			<h1>Nombre del proveedor</h1>
-			<div class="site-blocks-table">
-				<table class="table table-bordered">					
-				<thead>
-					<tr>
-					<th class="product-thumbnail">Imagen</th>
-					<th class="product-name">Producto</th>
-					<th class="product-price">Precio</th>
-					<th class="product-quantity">Cantidad</th>
-					<th class="product-total">Precio venta</th>
-					<th class="product-remove">Remove</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-					<td class="product-thumbnail">
-						<img src="../images/iphone.jpg" alt="Image" class="img-fluid">
-					</td>
-					<td class="product-name">
-						<h2 class="h5 text-black">Top Up T-Shirt</h2>
-					</td>
-					<td>$49.00</td>
-					<td>
-						<div class="input-group mb-3" style="max-width: 120px;">						
-						<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
-						</div>
+		<div class="col-md-8">
+			<form  method="post">
+				<h1>Datos de compra</h1>
+				<div class="site-blocks-table">
+					<table class="table table-bordered">					
+					<thead>
+						<tr>
+							<th class="product-thumbnail">Codigo</th>
+							<th class="product-name">Producto</th>
+							<th class="product-price">Precio</th>
+							<th class="product-quantity">Cantidad</th>
+							<th class="product-total">Precio venta</th>
+							<th class="product-remove">Familia</th>							
+							<th class="product-remove">Remove</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="product-thumbnail">
+								<p>aqui va el codigo</p>
+							</td>
+							<td class="product-name">
+								<h2 class="h5 text-black">Top Up T-Shirt</h2>
+							</td>
+							<td>$49.00</td>
+							<td>
+								<div class="input-group mb-3" style="max-width: 120px;">						
+									<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
+								</div>
+							</td>
+							<td>$49.00</td>
+							<td>familia</td>
+							<td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eraser"></i></a></td>
+						</tr>
 
-					</td>
-					<td>$49.00</td>
-					<td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eraser"></i></a></td>
-					</tr>
+						<tr>
+						<td class="product-thumbnail">
+<p>codigo</p>						</td>
+						<td class="product-name">
+							<h2 class="h5 text-black">Polo Shirt</h2>
+						</td>
+						<td>$49.00</td>
+						<td>
+							<div class="input-group mb-3" style="max-width: 120px;">						
+							<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
+							</div>
 
-					<tr>
-					<td class="product-thumbnail">
-						<img src="../images/laptop_hp.jpg" alt="Image" class="img-fluid">
-					</td>
-					<td class="product-name">
-						<h2 class="h5 text-black">Polo Shirt</h2>
-					</td>
-					<td>$49.00</td>
-					<td>
-						<div class="input-group mb-3" style="max-width: 120px;">						
-						<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
-						</div>
-
-					</td>
-					<td>$49.00</td>
-					<td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eraser"></i></a></td>
-					</tr>
-				</tbody>
-				</table>
-			</div>
-		</form>
+						</td>
+						<td>$49.00</td>
+						<td>Familia</td>
+						<td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eraser"></i></a></td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 
@@ -152,9 +169,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 <!--Script para agregar familia al seleccionar el radio button-->
 <script>
 	function familiaExistente(){
-		formulario="<label class='label' for='familias'>Elija la familia:</label>"+
-					"<select name='familias' id='familias'>"+
-						"<option>Seleccione aqui</option>";
+		formulario="<select class='form-control' name='familias' id='familias'>"+
+						"<option selected>Seleccione una Familia</option>";
 						<?php if(!empty($familias)): ?>							
 							<?php foreach($familias as $id => $familia): ?>							
 								formulario+="<option value='<?=$familia['id']?>'><?=$familia['nombre']?></option>";
