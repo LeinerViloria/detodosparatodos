@@ -13,8 +13,8 @@
 
         if(!isset($_SESSION)){
             session_start();
-        }        
-        
+        }                   
+
         if($controlador=="empleado"){
             require_once '../modelos/empleado.php';
             require_once '../modelos/usuario.php';
@@ -607,7 +607,7 @@
             $_SESSION['errores']=$errores;
 
             header("location: ../../html/proveedores.php");
-        }else if($controlador="comision"){
+        }else if($controlador=="comision"){
             
             $volumen = !empty($_POST['importe']) ? trim($_POST['importe']) : null;
             $porcentaje = !empty($_POST['comision']) ? trim($_POST['comision']) : null;
@@ -649,7 +649,9 @@
 
             header("location: ../../html/manejar_comisiones.php");
 
-        }
+        }else if($controlador=="detalles_compra"){
+            var_dump($_POST);
+        }        
 
     }    
 ?>

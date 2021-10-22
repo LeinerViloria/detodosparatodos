@@ -79,7 +79,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<!--Fin Contenedor del formulario-->		
 		<!--Contenedor de los detalles de la compra-->
 		<div class="col-md-8">
-			<form action="#" method="post">
+			<form action="../backend/servicios/servicios.php" method="post">
 				<div class="container p-2">	
 					<?php
 						$proveedores = proveedores();								
@@ -96,7 +96,9 @@ if(!empty($_SESSION['usuario_logueado'])){
 									</select>							
 							</div>
 							<div class="col-md-4">
-								<button type="button" class="btn btn-primary btn-block">Generar compra</button>
+								<input type="hidden" name="controlador" value="detalles_compra">
+								<input type="hidden" name="operacion" value="0">
+								<button type="submit" class="btn btn-primary btn-block">Generar compra</button>
 							</div>
 							<div class="col-md-2"></div>
 						</div>

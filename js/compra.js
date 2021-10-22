@@ -16,7 +16,8 @@ function agregar(){
         var descripcion = document.getElementById("descripcionProducto").value;
         
         if(codigo!="" && nombre!="" && cantidad!="" && precioCompra!="" && precioVenta!="" && imagen.value!="" && descripcion!="" && familia!=""){            
-            manejandoFila.push(manejandoFila.length);            
+            manejandoFila.push(manejandoFila.length);       
+            
             //Se crea la fila
             const fila = document.createElement("tr");
             fila.id="fila"+manejandoFila.length+"";
@@ -58,7 +59,7 @@ function agregar(){
             const boton = document.createElement("button");
             boton.className="btn btn-primary btn-sm";
             boton.type="button";
-            boton.onclick= function (){                
+            boton.onclick= function (){                                                
                 eliminando_fila = document.getElementById("fila"+manejandoFila.length);
                 if(!eliminando_fila){
                     alert("Esta fila no existe");
@@ -66,6 +67,7 @@ function agregar(){
                     padre = eliminando_fila.parentNode;
                     padre.removeChild(eliminando_fila);
                 }
+                manejandoFila.pop();                
             };
 
             const icono = document.createElement("i");
