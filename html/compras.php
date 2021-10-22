@@ -63,7 +63,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 						<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
 					</div>
 
-                    <input type="submit" class="btn btn-primary btn-block" name="guardar" value="Guardar" id="boton">
+                    <button class="btn btn-primary btn-block">Añadir</button>
 
 				</form>
 			</div>
@@ -74,6 +74,20 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<div class="col-md-8">
 			<form  method="post">
 				<h1>Datos de compra</h1>
+				<div class="container p-4">					
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<select name="proveedor" class='form-control' id="proveedor">
+								<option value="">Seleccione un proveedor</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<button type="button" class="btn btn-primary btn-block">Generar compra</button>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+				</div>
 				<div class="site-blocks-table">
 					<table class="table table-bordered">					
 					<thead>
