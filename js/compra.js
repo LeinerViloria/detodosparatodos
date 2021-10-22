@@ -18,18 +18,22 @@ function agregar(){
         //Se crea cada columna
         const col_codigo = document.createElement("td");
         col_codigo.className="product-code";
+        col_codigo.textContent=codigo;
 
         const col_imagen = document.createElement("td");
         col_imagen.className="product-image";
 
         const col_nombre = document.createElement("td");
         col_nombre.className="product-name";
+        col_nombre.textContent=nombre;
 
         const col_precioC = document.createElement("td");
         col_precioC.className="product-priceC";
+        col_precioC.textContent=precioCompra;
 
         const col_cant = document.createElement("td");
         col_cant.className="product-stock";   
+        col_cant.textContent=cantidad;
         
         //En el siguiente td se contendrá los input hidden del formulario
         const col_apartado = document.createElement("td");
@@ -41,7 +45,7 @@ function agregar(){
         fila.appendChild(col_precioC);
         fila.appendChild(col_cant);
         fila.appendChild(col_apartado);
-        
+
         tbody.appendChild(fila);
 
     }else{

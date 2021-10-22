@@ -75,7 +75,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<!--Contenedor de los detalles de la compra-->
 		<div class="col-md-8">
 			<form  method="post">
-				<div class="container p-4">	
+				<div class="container p-2">	
 					<?php
 						$proveedores = proveedores();								
 						if(!empty($proveedores)):									
