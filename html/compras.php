@@ -17,9 +17,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 		require_once '../contenidoHtml/cabecera_Administrador.php';
 		$familias = !empty(familias()) ? familias() : null;		
 ?>
-
-<h1>Productos nuevos</h1>
-
+<h1>Comprar productos</h1>
 <div class="container p-4" id="contenedorCompras">
 	<div class="row">
 		<!--Contenedor del formulario-->
@@ -35,7 +33,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 					</div>
 				</div>
 
-				<form action="#" method="POST">
+				<form method="POST">
 					<div class="form-group">
 						<div class="form-group" id="adicionar"></div>
 					</div>
@@ -60,10 +58,14 @@ if(!empty($_SESSION['usuario_logueado'])){
 					</div>
 
 					<div class="form-group">
+						<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen">
+					</div>
+
+					<div class="form-group">
 						<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
 					</div>
 
-                    <button class="btn btn-primary btn-block">Añadir</button>
+                    <button type="button" class="btn btn-primary btn-block" onclick="agregar()">Añadir</button>
 
 				</form>
 			</div>
@@ -73,7 +75,6 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<!--Contenedor de los detalles de la compra-->
 		<div class="col-md-8">
 			<form  method="post">
-				<h1>Datos de compra</h1>
 				<div class="container p-4">	
 					<?php
 						$proveedores = proveedores();								
@@ -94,7 +95,9 @@ if(!empty($_SESSION['usuario_logueado'])){
 							</div>
 							<div class="col-md-2"></div>
 						</div>
-						<?php 									
+						<?php 
+							else:
+								echo "No hay proveedores";
 							endif; 
 						?>					
 				</div>
@@ -102,17 +105,17 @@ if(!empty($_SESSION['usuario_logueado'])){
 					<table class="table table-bordered">					
 					<thead>
 						<tr>
-							<th class="product-thumbnail">Codigo</th>
+							<th class="product-code">Codigo</th>
+							<th class="product-image">Imagen</th>
 							<th class="product-name">Producto</th>
-							<th class="product-price">Precio</th>
-							<th class="product-quantity">Cantidad</th>
-							<th class="product-total">Precio venta</th>
-							<th class="product-remove">Familia</th>							
-							<th class="product-remove">Remove</th>
+							<th class="product-priceC">Precio</th>
+							<th class="product-stock">Cantidad</th>																				
+							<th class="product-remove">Remover</th>
 							
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="contenido">
+						<!--
 						<tr>
 							<td class="product-thumbnail">
 								<p>aqui va el codigo</p>
@@ -129,25 +132,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<td>$49.00</td>
 							<td>familia</td>
 							<td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eraser"></i></a></td>
-						</tr>
-
-						<tr>
-						<td class="product-thumbnail">
-<p>codigo</p>						</td>
-						<td class="product-name">
-							<h2 class="h5 text-black">Polo Shirt</h2>
-						</td>
-						<td>$49.00</td>
-						<td>
-							<div class="input-group mb-3" style="max-width: 120px;">						
-							<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
-							</div>
-
-						</td>
-						<td>$49.00</td>
-						<td>Familia</td>
-						<td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eraser"></i></a></td>
-						</tr>
+						</tr>	
+						-->					
 					</tbody>
 					</table>
 				</div>
@@ -160,6 +146,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 
 <script src="../js/jquery-3.2.1.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/compra.js"></script>
 
 <!--Script para autocalcular el precio de venta de un producto-->
 <script>
@@ -196,7 +183,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 <script>
 	function familiaExistente(){
 		formulario="<select class='form-control' name='familias' id='familias'>"+
-						"<option selected>Seleccione una Familia</option>";
+						"<option selected>Seleccione una familia</option>";
 						<?php if(!empty($familias)): ?>							
 							<?php foreach($familias as $id => $familia): ?>							
 								formulario+="<option value='<?=$familia['id']?>'><?=$familia['nombre']?></option>";
@@ -207,10 +194,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 	}
 
 	function nuevo(etiqueta){
-		document.getElementById("adicionar").innerHTML="";
-		document.getElementById("boton").innerHTML="";
-		document.getElementById("adicionar").innerHTML=etiqueta;       
-		document.getElementById("boton").innerHTML="<input type='submit' value='Subir compra'>";    
+		document.getElementById("adicionar").innerHTML="";		
+		document.getElementById("adicionar").innerHTML=etiqueta;       		   
 	}
 </script>
 
