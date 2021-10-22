@@ -79,7 +79,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<!--Fin Contenedor del formulario-->		
 		<!--Contenedor de los detalles de la compra-->
 		<div class="col-md-8">
-			<form  method="post">
+			<form action="#" method="post">
 				<div class="container p-2">	
 					<?php
 						$proveedores = proveedores();								
@@ -89,7 +89,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<div class="col-md-2"></div>
 							<div class="col-md-4">							
 									<select name="proveedor" class='custom-select' id="proveedor">
-										<option value="">Seleccione un proveedor</option>
+										<option>Seleccione un proveedor</option>
 										<?php foreach($proveedores as $proveedor): ?>
 											<option value="<?=$proveedor['codigo']?>"><?=$proveedor['nombre']?></option>
 										<?php endforeach; ?>
@@ -114,8 +114,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<th class="product-name">Producto</th>
 							<th class="product-priceC">Precio</th>
 							<th class="product-stock">Cantidad</th>																				
-							<th class="product-remove">Remover</th>
-							
+							<th class="product-remove">Remover</th>							
 						</tr>
 					</thead>
 					<tbody id="contenido">										
@@ -167,7 +166,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 <!--Script para agregar familia al seleccionar el radio button-->
 <script>
 	function familiaExistente(){
-		formulario="<select class='custom-select' name='familias' id='familias'>"+
+		formulario="<select class='custom-select' name='familias' id='familias' required>"+
 						"<option selected>Seleccione una familia</option>";
 						<?php if(!empty($familias)): ?>							
 							<?php foreach($familias as $id => $familia): ?>							

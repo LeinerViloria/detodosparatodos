@@ -1,6 +1,8 @@
 var tbody = document.getElementById("contenido");
 tbody.innerHTML="";
 
+var manejandoFila = new Array();
+
 function agregar(){
     var familia = document.getElementById("familias").value;           
 
@@ -13,9 +15,11 @@ function agregar(){
         var imagen = document.getElementById("imagen");
         var descripcion = document.getElementById("descripcionProducto").value;
         
-        if(codigo!="" && nombre!="" && cantidad!="" && precioCompra!="" && precioVenta!="" && imagen.value!="" && descripcion!="" && familia!=""){
+        if(codigo!="" && nombre!="" && cantidad!="" && precioCompra!="" && precioVenta!="" && imagen.value!="" && descripcion!="" && familia!=""){            
+            manejandoFila.push(manejandoFila.length);            
             //Se crea la fila
             const fila = document.createElement("tr");
+            fila.id="fila"+manejandoFila.length+"";
 
             //Se crea cada columna
             const col_codigo = document.createElement("td");
@@ -45,7 +49,7 @@ function agregar(){
             for(var indice in variables){
                 const input = document.createElement("input");
                 input.type="hidden";
-                input.name="fila[]";
+                input.name="registro"+manejandoFila.length+"[]";
                 input.value=variables[indice];
 
                 col_apartado.appendChild(input);
@@ -53,6 +57,16 @@ function agregar(){
 
             const boton = document.createElement("button");
             boton.className="btn btn-primary btn-sm";
+            boton.type="button";
+            boton.onclick= function (){                
+                eliminando_fila = document.getElementById("fila"+manejandoFila.length);
+                if(!eliminando_fila){
+                    alert("Esta fila no existe");
+                }else{
+                    padre = eliminando_fila.parentNode;
+                    padre.removeChild(eliminando_fila);
+                }
+            };
 
             const icono = document.createElement("i");
             icono.className="fas fa-eraser";
@@ -66,7 +80,7 @@ function agregar(){
             fila.appendChild(col_cant);
             fila.appendChild(col_apartado);
 
-            tbody.appendChild(fila);                         
+            tbody.appendChild(fila);            
 
             document.getElementById("familias").value="Seleccione una familia";
             document.getElementById("codigoProducto").value="";
@@ -76,6 +90,7 @@ function agregar(){
             document.getElementById("precio_ventaProducto").value="";
             document.getElementById("imagen").value="";
             document.getElementById("descripcionProducto").value="";
+            document.getElementById("img-foto").src="";
 
         }else{
             alert("No deje elementos vacio");
