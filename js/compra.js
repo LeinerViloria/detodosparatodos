@@ -53,6 +53,15 @@ function agregar(){
                 col_apartado.appendChild(input);
             }
 
+            const boton = document.createElement("button");
+            boton.className="btn btn-primary btn-sm";
+
+            const icono = document.createElement("i");
+            icono.className="fas fa-eraser";
+
+            boton.appendChild(icono);
+            col_apartado.appendChild(boton);
+
             fila.appendChild(col_codigo);
             fila.appendChild(col_imagen);
             fila.appendChild(col_nombre);

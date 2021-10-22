@@ -22,53 +22,55 @@ if(!empty($_SESSION['usuario_logueado'])){
 	<div class="row">
 		<!--Contenedor del formulario-->
 		<div class="col-md-4">
-			<div class="contenidoCompras">
-				<div class="opciones">
-					<div class="opcion">
-						<button onclick="document.getElementById('id01').style.display='block'" class="btn btn-primary">Nueva familia</button>								
+			<fieldset>
+				<div class="contenidoCompras">
+					<div class="opciones">
+						<div class="opcion">
+							<button onclick="document.getElementById('id01').style.display='block'" class="btn btn-primary">Nueva familia</button>								
+						</div>
+						<div class="opcion">					
+							<input type="radio" name="familiaOrigen" id="familiaExistente" onchange="familiaExistente()">
+							<label for="familiaExistente"><strong>Elejir una familia</strong></label>
+						</div>
 					</div>
-					<div class="opcion">					
-						<input type="radio" name="familiaOrigen" id="familiaExistente" onchange="familiaExistente()">
-						<label for="familiaExistente"><strong>Elejir una familia</strong></label>
-					</div>
+
+					<form method="POST">
+						<div class="form-group">
+							<div class="form-group" id="adicionar"></div>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="codigoProducto" id="codigoProducto" placeholder="Ingrese el codigo">
+						</div>
+
+						<div class="form-group">
+							<input type="text" class="form-control" name="nombreProducto" id="nombreProducto" placeholder="Ingrese el nombre">				
+						</div>
+
+						<div class="form-group">
+							<input type="number" class="form-control" name="cantProducto" id="cantProducto" placeholder="Cantidad comprada" min="1">
+						</div>
+
+						<div class="form-group">
+							<input type="number" class="form-control" name="precioProducto" id="precioProducto" placeholder="Ingrese el precio" min="1">
+						</div>
+
+						<div class="form-group">
+							<input type="number" class="form-control" name="precio_ventaProducto" id="precio_ventaProducto" placeholder="Esto se autocalculará" readonly>
+						</div>
+
+						<div class="form-group">
+							<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen">
+						</div>
+
+						<div class="form-group">
+							<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
+						</div>
+
+						<button type="button" class="btn btn-primary btn-block" onclick="agregar()">Añadir</button>
+
+					</form>
 				</div>
-
-				<form method="POST">
-					<div class="form-group">
-						<div class="form-group" id="adicionar"></div>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" name="codigoProducto" id="codigoProducto" placeholder="Ingrese el codigo">
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control" name="nombreProducto" id="nombreProducto" placeholder="Ingrese el nombre">				
-					</div>
-
-					<div class="form-group">
-						<input type="number" class="form-control" name="cantProducto" id="cantProducto" placeholder="Cantidad comprada" min="1">
-					</div>
-
-					<div class="form-group">
-						<input type="number" class="form-control" name="precioProducto" id="precioProducto" placeholder="Ingrese el precio" min="1">
-					</div>
-
-					<div class="form-group">
-						<input type="number" class="form-control" name="precio_ventaProducto" id="precio_ventaProducto" placeholder="Esto se autocalculará" readonly>
-					</div>
-
-					<div class="form-group">
-						<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen">
-					</div>
-
-					<div class="form-group">
-						<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
-					</div>
-
-                    <button type="button" class="btn btn-primary btn-block" onclick="agregar()">Añadir</button>
-
-				</form>
-			</div>
+			</fieldset>
 		</div>
 		<!--Fin Contenedor del formulario-->
 
@@ -83,7 +85,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 						<div class="row">
 							<div class="col-md-2"></div>
 							<div class="col-md-4">							
-									<select name="proveedor" class='form-control' id="proveedor">
+									<select name="proveedor" class='custom-select' id="proveedor">
 										<option value="">Seleccione un proveedor</option>
 										<?php foreach($proveedores as $proveedor): ?>
 											<option value="<?=$proveedor['codigo']?>"><?=$proveedor['nombre']?></option>
@@ -114,26 +116,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 							
 						</tr>
 					</thead>
-					<tbody id="contenido">
-						<!--
-						<tr>
-							<td class="product-thumbnail">
-								<p>aqui va el codigo</p>
-							</td>
-							<td class="product-name">
-								<h2 class="h5 text-black">Top Up T-Shirt</h2>
-							</td>
-							<td>$49.00</td>
-							<td>
-								<div class="input-group mb-3" style="max-width: 120px;">						
-									<input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>						
-								</div>
-							</td>
-							<td>$49.00</td>
-							<td>familia</td>
-							<td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eraser"></i></a></td>
-						</tr>	
-						-->					
+					<tbody id="contenido">										
 					</tbody>
 					</table>
 				</div>
@@ -182,7 +165,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 <!--Script para agregar familia al seleccionar el radio button-->
 <script>
 	function familiaExistente(){
-		formulario="<select class='form-control' name='familias' id='familias'>"+
+		formulario="<select class='custom-select' name='familias' id='familias'>"+
 						"<option selected>Seleccione una familia</option>";
 						<?php if(!empty($familias)): ?>							
 							<?php foreach($familias as $id => $familia): ?>							
