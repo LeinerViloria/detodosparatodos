@@ -59,7 +59,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 						</div>
 
 						<div class="form-group">
-							<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen">
+							<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen" onchange="vista_preliminar(event)">
 						</div>
 
 						<div class="form-group">
@@ -122,6 +122,9 @@ if(!empty($_SESSION['usuario_logueado'])){
 				</div>
 			</form>
 		</div>
+	</div>
+	<div class="row">
+		<img src="" alt="" id="img-foto">
 	</div>
 </div>
 

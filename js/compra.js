@@ -1,5 +1,6 @@
 var tbody = document.getElementById("contenido");
 tbody.innerHTML="";
+
 function agregar(){
     var familia = document.getElementById("familias").value;           
 
@@ -23,6 +24,16 @@ function agregar(){
 
             const col_imagen = document.createElement("td");
             col_imagen.className="product-image";
+
+            const div_imagen = document.createElement("div");
+            div_imagen.id="imagen";
+
+            const img = document.createElement("img");
+            img.id="img-foto1";
+
+            div_imagen.appendChild(img);
+
+            col_imagen.appendChild(div_imagen);
 
             const col_nombre = document.createElement("td");
             col_nombre.className="product-name";
@@ -69,8 +80,8 @@ function agregar(){
             fila.appendChild(col_cant);
             fila.appendChild(col_apartado);
 
-            tbody.appendChild(fila);
-            
+            tbody.appendChild(fila);                         
+
             document.getElementById("familias").value="Seleccione una familia";
             document.getElementById("codigoProducto").value="";
             document.getElementById("nombreProducto").value="";
@@ -88,3 +99,18 @@ function agregar(){
         alert("Seleccione una familia");
     }
 }
+
+let vista_preliminar = (event) =>{    
+    let leer_img  = new FileReader();
+    let id_img = document.getElementById("img-foto");
+
+    leer_img.onload = ()=>{
+        if(leer_img.readyState==2){
+            id_img.src = leer_img.result
+        }
+    }
+
+    leer_img.readAsDataURL(event.target.files[0])
+}
+
+
