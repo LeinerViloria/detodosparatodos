@@ -649,8 +649,50 @@
 
             header("location: ../../html/manejar_comisiones.php");
 
-        }else if($controlador=="detalles_compra"){
-            var_dump($_POST);
+        }else if($controlador=="detalles_compra"){            
+
+            $proveedor = !empty($_POST['proveedor']) ? trim($_POST['proveedor']) : null;
+
+            $i=1;
+            $terminado=false;
+
+            $errores = array();
+            $registro = array();
+
+            do{
+                if(!empty($_POST["registro$i"])){
+                    $registro[$i]=$_POST["registro$i"];
+                    $i++;
+                }else{
+                    $terminado=true;
+                }
+
+            }while($terminado==false);            
+
+            if(is_null($proveedor)){
+                $errores['proveedor']="El proveedor no puede quedar vacio";
+            }
+            
+            if(count($errores)==0){
+                for($i=1; $i<=count($registro); $i++){
+                    $codigo = !empty($registro[0]) ? trim($registro[0]) : null;
+                    $familia = !empty($registro[1]) ? trim($registro[1]) : null;
+                    $imagen = !empty($registro[2]) ? trim($registro[1]) : null;
+                    $nombre = !empty($registro[3]) ? trim($registro[3]) : null;
+                    $cantidad = !empty($registro[4]) ? trim($registro[4]) : null;
+                    $precioCompra = !empty($registro[5]) ? trim($registro[5]) : null;
+                    $precioVenta = !empty($registro[6]) ? trim($registro[6]) : null;
+                    $descripcion = !empty($registro[7]) ? trim($registro[7]) : null;
+
+                    if(is_null($codigo) || is_null($familia) || is_null($imagen) || is_null($nombre) || is_null($cantidad) || is_null($precioCompra) || is_null($precioVenta) || is_null($descripcion)){
+                        $errores['vacios']="No pueden haber datos vacios, no se puede guardar el registro $i";
+                    }
+
+                    
+                }
+            }
+            
+
         }        
 
     }    
