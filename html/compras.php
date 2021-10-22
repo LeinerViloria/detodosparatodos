@@ -63,7 +63,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 						<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
 					</div>
 
-                    <input type="submit" class="btn btn-success btn-block" name="guardar" value="Guardar" id="boton">
+                    <input type="submit" class="btn btn-primary btn-block" name="guardar" value="Guardar" id="boton">
 
 				</form>
 			</div>
@@ -132,6 +132,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 	</div>
 </div>
 
+<button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i></button>
+
 <script src="../js/jquery-3.2.1.js"></script>
 <script src="../js/script.js"></script>
 
@@ -199,6 +201,16 @@ if(!empty($_SESSION['usuario_logueado'])){
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/sweetalert.js"></script>
+
+
+<script>
+	function productos(){
+		Swal.fire({
+			icon:"success"
+		})
+	}
+</script>
+
 <?php
         if(!empty($_SESSION['completado'])):
 ?>            

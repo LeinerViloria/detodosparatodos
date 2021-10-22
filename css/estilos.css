@@ -8,6 +8,14 @@ h1, h2{
 	text-align: center;
 }
 
+.opciones{
+	display: flex;
+}
+
+.opciones .opcion{
+	padding: 5px 10px;	
+}
+
 #cantidades{
 	padding: 10px;
 	height: 40px;
