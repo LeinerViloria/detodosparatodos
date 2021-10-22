@@ -74,7 +74,7 @@ if(!empty($_SESSION['usuario_logueado'])){
             <h1>Lista de Proveedores</h1>
             <table class="table table-bordered">
                 <thead>
-                    <!--Cabecera de la tabla-->
+                    <!--Cabecera de la tabla--> 
                     <tr>
                         <th>Codigo</th>
                         <th>Nombre</th>
