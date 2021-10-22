@@ -127,7 +127,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 	</div>	
 </div>
 
-<button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i></button>
+<button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i> - Ver productos</button>
 
 <script src="../js/jquery-3.2.1.js"></script>
 <script src="../js/script.js"></script>
