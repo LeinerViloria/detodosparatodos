@@ -58,10 +58,14 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<input type="number" class="form-control" name="precio_ventaProducto" id="precio_ventaProducto" placeholder="Esto se autocalculará" readonly>
 						</div>
 
-						<div class="form-group">
-							<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen" onchange="vista_preliminar(event)">
+						<div class="form-group">																					
+							<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen" onchange="vista_preliminar(event)">							
 						</div>
 
+						<div class="imagen_formulario">
+							<img id="img-foto">							
+						</div>
+						<br>						
 						<div class="form-group">
 							<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
 						</div>
@@ -72,8 +76,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 				</div>
 			</fieldset>
 		</div>
-		<!--Fin Contenedor del formulario-->
-
+		<!--Fin Contenedor del formulario-->		
 		<!--Contenedor de los detalles de la compra-->
 		<div class="col-md-8">
 			<form  method="post">
@@ -107,8 +110,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 					<table class="table table-bordered">					
 					<thead>
 						<tr>
-							<th class="product-code">Codigo</th>
-							<th class="product-image">Imagen</th>
+							<th class="product-code">Codigo</th>							
 							<th class="product-name">Producto</th>
 							<th class="product-priceC">Precio</th>
 							<th class="product-stock">Cantidad</th>																				
@@ -122,10 +124,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 				</div>
 			</form>
 		</div>
-	</div>
-	<div class="row">
-		<img src="" alt="" id="img-foto">
-	</div>
+	</div>	
 </div>
 
 <button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i></button>

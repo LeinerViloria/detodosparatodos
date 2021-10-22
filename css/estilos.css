@@ -39,6 +39,16 @@ h1, h2{
 	color: #00a790;
 }
 
+.imagen_formulario{
+	width: 100%;
+	overflow: hidden;	
+}
+
+.imagen_formulario img{
+	margin: 0 auto;
+	width: 100%;
+	box-sizing: border-box;
+}
 
 .radio_empleado{
 	width: 45%;

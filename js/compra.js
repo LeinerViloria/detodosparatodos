@@ -20,20 +20,7 @@ function agregar(){
             //Se crea cada columna
             const col_codigo = document.createElement("td");
             col_codigo.className="product-code";
-            col_codigo.textContent=codigo;
-
-            const col_imagen = document.createElement("td");
-            col_imagen.className="product-image";
-
-            const div_imagen = document.createElement("div");
-            div_imagen.id="imagen";
-
-            const img = document.createElement("img");
-            img.id="img-foto1";
-
-            div_imagen.appendChild(img);
-
-            col_imagen.appendChild(div_imagen);
+            col_codigo.textContent=codigo;            
 
             const col_nombre = document.createElement("td");
             col_nombre.className="product-name";
@@ -73,8 +60,7 @@ function agregar(){
             boton.appendChild(icono);
             col_apartado.appendChild(boton);
 
-            fila.appendChild(col_codigo);
-            fila.appendChild(col_imagen);
+            fila.appendChild(col_codigo);            
             fila.appendChild(col_nombre);
             fila.appendChild(col_precioC);
             fila.appendChild(col_cant);
