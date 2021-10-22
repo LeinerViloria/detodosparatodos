@@ -16,8 +16,7 @@ if(!empty($_SESSION['usuario_logueado'])){
         <!--primera columna de 4 (Parte del formulario)-->
         <div class="col-md-4">
 
-            <?php                    
-                 if(!empty($_SESSION['completado'])):   ?>
+            <?php if(!empty($_SESSION['completado'])):   ?>
             
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?=$_SESSION['completado'] ?>
@@ -30,8 +29,7 @@ if(!empty($_SESSION['usuario_logueado'])){
                 borrar_errores("completado");
                 endif;                
             ?>
-            <?php                    
-                 if(!empty($_SESSION['errores'])):   ?>
+            <?php if(!empty($_SESSION['errores'])):   ?>
                     <?php foreach($_SESSION['errores'] as $error):?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <?=$error?>

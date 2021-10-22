@@ -630,12 +630,24 @@
                 require_once '../modelos/comision.php';
                 $fecha = date("Y-m-d");
                 $comision = new comision(null, $volumen, $porcentaje, $fecha);
+                $controlador_comision = new controlador($servidor, $nombreBd, "comisiones", $userBD);
 
-                var_dump($comision);
+                if(is_numeric($operacion) && $operacion=="0"){
+                    $resultado_comision = $controlador_comision->guardar("gestionar_comision", $comision);
+
+                    if($resultado_comision){
+                        $_SESSION['completado']="Se guardó con exito";
+                    }else{
+                        $errores['guardado']="No se pudo guardar";
+                    }
+
+                }                
 
             }
 
             $_SESSION['errores']=$errores;
+
+            header("location: ../../html/manejar_comisiones.php");
 
         }
 
