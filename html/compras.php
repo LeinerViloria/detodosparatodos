@@ -15,7 +15,30 @@ if(!empty($_SESSION['usuario_logueado'])){
 		}
 		
 		require_once '../contenidoHtml/cabecera_Administrador.php';
-		$familias = !empty(familias()) ? familias() : null;		
+		$familias = !empty(familias()) ? familias() : null;
+		
+		function generandoCodigo($devolver){
+			$DesdeLetra = "a";
+			$HastaLetra = "z";
+			$DesdeNumero = 0;
+			$HastaNumero = 9;
+
+			$letraAleatoria = chr(rand(ord($DesdeLetra), ord($HastaLetra)));
+			$numeroAleatorio = rand($DesdeNumero, $HastaNumero);
+			if($devolver==1){
+				return $letraAleatoria;
+			}else if($devolver==2){
+				return $numeroAleatorio;
+			}
+		}
+
+		function creandoCodigo(){
+			$codigo="";
+			for($i=0; $i<12; $i++){
+				$codigo.=generandoCodigo(rand(1,2));
+			}
+			return strtoupper($codigo);
+		}
 ?>
 <h1>Comprar productos</h1>
 <div class="container p-4" id="contenedorCompras">
@@ -58,14 +81,6 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<input type="number" class="form-control" name="precio_ventaProducto" id="precio_ventaProducto" placeholder="Esto se autocalculará" readonly>
 						</div>
 
-						<div class="form-group">																					
-							<input type="file" accept="image/*" class="form-control" name="imagen" id="imagen" onchange="vista_preliminar(event)">							
-						</div>
-
-						<div class="imagen_formulario">
-							<img id="img-foto">							
-						</div>
-						<br>						
 						<div class="form-group">
 							<textarea name="descripcionProducto" class="form-control" id="descripcionProducto"  rows="3" placeholder="Escriba la descricion del producto"></textarea>
 						</div>
@@ -79,14 +94,16 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<!--Fin Contenedor del formulario-->		
 		<!--Contenedor de los detalles de la compra-->
 		<div class="col-md-8">
-			<form action="../backend/servicios/servicios.php" method="post">
+			<form action="../backend/servicios/servicios.php" method="post" enctype="multipart/form-data">
 				<div class="container p-2">	
 					<?php
 						$proveedores = proveedores();								
 						if(!empty($proveedores)):									
 					?>				
 						<div class="row">
-							<div class="col-md-2"></div>
+							<div class="col-md-4">
+								<input type="text" name="codigoCompra" value="<?=creandoCodigo()?>" class="form-control" readonly>
+							</div>
 							<div class="col-md-4">							
 									<select name="proveedor" class='custom-select' id="proveedor">
 										<option>Seleccione un proveedor</option>
@@ -94,13 +111,12 @@ if(!empty($_SESSION['usuario_logueado'])){
 											<option value="<?=$proveedor['codigo']?>"><?=$proveedor['nombre']?></option>
 										<?php endforeach; ?>
 									</select>							
-							</div>
+							</div>							
 							<div class="col-md-4">
 								<input type="hidden" name="controlador" value="detalles_compra">
-								<input type="hidden" name="operacion" value="0">
+								<input type="hidden" name="operacion" value="0">								
 								<button type="submit" class="btn btn-primary btn-block">Generar compra</button>
-							</div>
-							<div class="col-md-2"></div>
+							</div>							
 						</div>
 						<?php 
 							else:
@@ -116,7 +132,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<th class="product-name">Producto</th>
 							<th class="product-priceC">Precio</th>
 							<th class="product-stock">Cantidad</th>																				
-							<th class="product-remove">Remover</th>							
+							<th class="product-image">Imagen</th>							
+							<th class="product-remove">Remover</th>	
 						</tr>
 					</thead>
 					<tbody id="contenido">										

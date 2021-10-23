@@ -657,7 +657,8 @@
             $terminado=false;
 
             $errores = array();
-            $registro = array();
+            $registro = array();   
+            $imagenes = array();
 
             do{
                 if(!empty($_POST["registro$i"])){
@@ -667,48 +668,74 @@
                     $terminado=true;
                 }
 
-            }while($terminado==false);            
+            }while($terminado==false);
+            
+            $i=1;
+            $terminado=false;
+            do{
+                if(!empty($_FILES["imagen$i"])){
+                    $imagenes[$i]=$_FILES["imagen$i"];
+                    $i++;
+                }else{
+                    $terminado=true;
+                }
+
+            }while($terminado==false);                    
 
             if(is_null($proveedor)){
                 $errores['proveedor']="El proveedor no puede quedar vacio";
-            }
+            }         
             
             if(count($errores)==0){
+                $id_empleado = $_SESSION['usuario_logueado'][0]['id'];
+                $fecha = date("Y-m-d H:m:s");                
+                $total=0;                
                 for($i=1; $i<=count($registro); $i++){
                     
-                    $codigo = !empty($registro[$i][0]) ? trim($registro[$i][0]) : null;
-                    $familia = !empty($registro[$i][1]) ? trim($registro[$i][1]) : null;
-                    $imagen = !empty($registro[$i][2]) ? trim($registro[$i][2]) : null;
-                    $nombre = !empty($registro[$i][3]) ? trim($registro[$i][3]) : null;
-                    $cantidad = !empty($registro[$i][4]) ? trim($registro[$i][4]) : null;
-                    $precioCompra = !empty($registro[$i][5]) ? trim($registro[$i][5]) : null;
-                    $precioVenta = !empty($registro[$i][6]) ? trim($registro[$i][6]) : null;
-                    $descripcion = !empty($registro[$i][7]) ? trim($registro[$i][7]) : null;
+                    $cantidad = !empty($registro[$i][3]) ? trim($registro[$i][3]) : null;
+                    $precioCompra = !empty($registro[$i][4]) ? trim($registro[$i][4]) : null;
 
-                    if(is_null($codigo) || is_null($familia) || is_null($imagen) || is_null($nombre) || is_null($cantidad) || is_null($precioCompra) || is_null($precioVenta) || is_null($descripcion)){
-                        $errores['vacios']="No pueden haber datos vacios, no se puede guardar el registro $i";
-                    }
-
-                    if(!is_int($cantidad)){
-                        $errores['cantidad']="La cantidad debe ser entero";
+                    if(!is_numeric($cantidad)){
+                        $errores['cantidad']="La cantidad debe ser numerico";
                     }
 
                     if(!is_numeric($precioCompra)){
                         $errores['compra']="El valor de la compra $i debe ser numerico";
+                    }                    
+
+                    if(count($errores)==0){                        
+                        $total+=($cantidad*$precioCompra);
                     }
+                }                
+
+                die();
+
+                for($i=1; $i<=count($registro); $i++){
+
+                    $codigo = !empty($registro[$i][0]) ? trim($registro[$i][0]) : null;
+                    $familia = !empty($registro[$i][1]) ? trim($registro[$i][1]) : null;
+                    $nombre = !empty($registro[$i][2]) ? trim($registro[$i][2]) : null;
+                    $cantidad = !empty($registro[$i][3]) ? trim($registro[$i][3]) : null;
+                    $precioCompra = !empty($registro[$i][4]) ? trim($registro[$i][4]) : null;
+                    $precioVenta = !empty($registro[$i][5]) ? trim($registro[$i][5]) : null;
+                    $descripcion = !empty($registro[$i][6]) ? trim($registro[$i][6]) : null;
+                    $imagen = !empty($imagenes[$i]) ? $imagenes[$i] : null;
+
+                    
+                    if(is_null($imagen) || is_null($codigo) || is_null($familia) || is_null($nombre) || is_null($cantidad) || is_null($precioCompra) || is_null($precioVenta) || is_null($descripcion)){
+                        $errores['vacios']="No pueden haber datos vacios, no se puede guardar el registro $i";
+                    }                    
 
                     if(!is_numeric($precioVenta)){
                         $errores['venta']="El valor de la venta $i debe ser numerico";
                     }
-
+                    
                     if(count($errores)==0){
                         
 
                     }else{
                         $errores["guardado$i"]="El registro $i no se pudo guardar";
-                    }
-
-                    die();
+                    }                    
 
 
                 }

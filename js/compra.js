@@ -11,11 +11,10 @@ function agregar(){
         var nombre = document.getElementById("nombreProducto").value;
         var cantidad = document.getElementById("cantProducto").value;
         var precioCompra = document.getElementById("precioProducto").value;
-        var precioVenta = document.getElementById("precio_ventaProducto").value;
-        var imagen = document.getElementById("imagen");
+        var precioVenta = document.getElementById("precio_ventaProducto").value;        
         var descripcion = document.getElementById("descripcionProducto").value;
         
-        if(codigo!="" && nombre!="" && cantidad!="" && precioCompra!="" && precioVenta!="" && imagen.value!="" && descripcion!="" && familia!=""){            
+        if(codigo!="" && nombre!="" && cantidad!="" && precioCompra!="" && precioVenta!="" && descripcion!="" && familia!=""){            
             manejandoFila.push(manejandoFila.length);       
             
             //Se crea la fila
@@ -41,7 +40,7 @@ function agregar(){
 
             //Se va a crear un solo input con todos las variables en un array
             var variables =
-            {'codigo':codigo, 'familia':familia, 'imagen':imagen.value, 'nombre':nombre, 'cantidad':cantidad, 'precioCompra':precioCompra, 'precioVenta':precioVenta, 'precioVenta':precioVenta, 'descripcion':descripcion};                                
+            {'codigo':codigo, 'familia':familia, 'nombre':nombre, 'cantidad':cantidad, 'precioCompra':precioCompra, 'precioVenta':precioVenta, 'precioVenta':precioVenta, 'descripcion':descripcion};                                
             
             //En el siguiente td se contendrá los input hidden del formulario
             const col_apartado = document.createElement("td");
@@ -54,7 +53,29 @@ function agregar(){
                 input.value=variables[indice];
 
                 col_apartado.appendChild(input);
+            }                        
+
+            const fileImage = document.createElement("div");
+            fileImage.className="form-group";
+
+            const inputFile = document.createElement("input");
+            inputFile.type="file";
+            inputFile.accept="image/*";
+            inputFile.className="form-control";
+            inputFile.id="imagen"+manejandoFila.length;
+            inputFile.name="imagen"+manejandoFila.length;
+            inputFile.onchange = function(){
+                //vista_preliminar(Event);
+                alert("funciono");
             }
+
+            fileImage.appendChild(inputFile);
+
+            /*
+                <div class="imagen_formulario">
+                    <img id="img-foto">							
+                </div> 
+            */
 
             const boton = document.createElement("button");
             boton.className="btn btn-primary btn-sm";
@@ -80,6 +101,7 @@ function agregar(){
             fila.appendChild(col_nombre);
             fila.appendChild(col_precioC);
             fila.appendChild(col_cant);
+            fila.appendChild(fileImage);
             fila.appendChild(col_apartado);
 
             tbody.appendChild(fila);            
@@ -89,10 +111,10 @@ function agregar(){
             document.getElementById("nombreProducto").value="";
             document.getElementById("cantProducto").value="";
             document.getElementById("precioProducto").value="";
-            document.getElementById("precio_ventaProducto").value="";
-            document.getElementById("imagen").value="";
+            document.getElementById("precio_ventaProducto").value="";        
             document.getElementById("descripcionProducto").value="";
-            document.getElementById("img-foto").src="";
+            //document.getElementById("img-foto").src="";
+            
 
         }else{
             alert("No deje elementos vacio");
@@ -114,6 +136,7 @@ let vista_preliminar = (event) =>{
     }
 
     leer_img.readAsDataURL(event.target.files[0])
+    
 }
 
 
