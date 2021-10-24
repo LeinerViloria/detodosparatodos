@@ -39,8 +39,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 			}
 			return strtoupper($codigo);
 		}
-		
-		var_dump($_SESSION);
+			
 ?>
 <h1>Comprar productos</h1>
 <div class="container p-4" id="contenedorCompras">
@@ -225,17 +224,26 @@ if(!empty($_SESSION['usuario_logueado'])){
 	}
 </script>
 
-<?php
-        if(!empty($_SESSION['completado'])):
+<?php 
+        if(!empty($_SESSION['compra'])):
+			$texto="";
+			if(!empty($_SESSION['producto'])){
+				foreach($_SESSION['producto'] as $producto){
+					$texto.="<p>".$producto."</p>";
+				}
+			}
 ?>            
             <script>
-                Toast.fire({
+                Swal.fire({
                     icon: 'success',
-                    title: '<?=$_SESSION['completado']?>'
+                    title: '<?=$_SESSION['compra']?>',
+					html: '<?=$texto?>'
                 });
             </script>
 <?php        
-            borrar_errores("completado");
+            borrar_errores("compra");
+			borrar_errores("producto");	
+			borrar_errores();
         endif;
         if(!empty($_SESSION['errores'])):
             $texto="";

@@ -763,7 +763,7 @@
                                 $resultado_producto = insertandoProducto($producto);
                                 
                                 if($resultado_producto){
-                                    $_SESSION["producto$i"]="El producto $i se guardó";
+                                    $_SESSION["producto"]["producto$i"]="El producto $i se guardó";
 
                                     //Si se guardó, se va a guardar el detalle de la compra
 
