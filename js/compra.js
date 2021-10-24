@@ -36,7 +36,7 @@ function agregar(){
 
             const col_cant = document.createElement("td");
             col_cant.className="product-stock";   
-            col_cant.textContent=cantidad;
+            col_cant.textContent=cantidad;            
 
             //Se va a crear un solo input con todos las variables en un array
             var variables =
@@ -63,17 +63,13 @@ function agregar(){
             inputFile.accept="image/*";
             inputFile.className="form-control";
             inputFile.id="imagen"+manejandoFila.length;
-            inputFile.name="imagen"+manejandoFila.length;
-            inputFile.onchange = function(){
-                //vista_preliminar(Event);
-                alert("funciono");
-            }
+            inputFile.name="imagen"+manejandoFila.length;            
 
             fileImage.appendChild(inputFile);
 
             /*
                 <div class="imagen_formulario">
-                    <img id="img-foto">							
+                    <img id="img1-foto">							
                 </div> 
             */
 
@@ -124,10 +120,10 @@ function agregar(){
         alert("Seleccione una familia");
     }
 }
-
+/*
 let vista_preliminar = (event) =>{    
     let leer_img  = new FileReader();
-    let id_img = document.getElementById("img-foto");
+    let id_img = document.getElementById("img1-foto");
 
     leer_img.onload = ()=>{
         if(leer_img.readyState==2){
@@ -139,4 +135,9 @@ let vista_preliminar = (event) =>{
     
 }
 
+<div class="imagen_formulario">
+	<img id="img1-foto">							
+</div>
 
+
+*/

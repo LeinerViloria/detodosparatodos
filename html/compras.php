@@ -129,7 +129,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 					<table class="table table-bordered">					
 					<thead>
 						<tr>
-							<th class="product-code">Codigo</th>							
+							<th class="product-code">Codigo</th>														
 							<th class="product-name">Producto</th>
 							<th class="product-priceC">Precio</th>
 							<th class="product-stock">Cantidad</th>																				
@@ -146,7 +146,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 	</div>	
 </div>
 
-<button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i> - Ver productos</button>
+<button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i> - Ver productos</button> 
 
 <script src="../js/jquery-3.2.1.js"></script>
 <script src="../js/script.js"></script>

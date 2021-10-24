@@ -3,8 +3,7 @@ document.getElementById("input_adicionales").innerHTML="";
 $lista=0;
 
 function agregar(){
-    $precio_no_definitivo=3000;//Supongamos que el valor de cada producto es de 3000
-    $comision_no_definitiva=8;//Supongamos que la comision es del 8%
+    $precio_no_definitivo=3000;//Supongamos que el valor de cada producto es de 3000    
 
     $codigo=document.getElementById("codigo").value;
     $cantidad=document.getElementById("cant").value;
@@ -18,8 +17,7 @@ function agregar(){
             $html_TBody+="<td>"+$codigo+"</td>";
             $html_TBody+="<td>"+$producto+"</td>";
             $html_TBody+="<td>"+$cantidad+"</td>";
-            $html_TBody+="<td>"+$total+"</td>";
-            $html_TBody+="<td>"+$comision+"</td>";
+            $html_TBody+="<td>"+$total+"</td>";            
             $html_TBody+="<td><button type='button' class='btn btn-warning'>Quitar</button></td>";
         $html_TBody+="</tr>";
 

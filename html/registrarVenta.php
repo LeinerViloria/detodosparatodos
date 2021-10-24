@@ -66,8 +66,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 						<th>Id</th>
 						<th>Nombre</th>
 						<th>Cantidad</th>
-						<th>Total</th>
-						<th>Comision</th>
+						<th>Total</th>						
 						<th>Accion</th>
 					</tr>
 				</thead>
@@ -116,10 +115,59 @@ if(!empty($_SESSION['usuario_logueado'])){
 			</div>
 		</div>
 		<!---->
-	</div>
+	</div>	
 </div>
-
+<button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i> - Ver productos</button> 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/sweetalert.js"></script>
 <script src="../js/manejar_factura.js"></script>
+<?php
+	$productos = productos();		
+	$html="";
+	if(empty($productos)){
+		$html.="<strong>No hay registros</strong>";
+	}else{
+		$html.="<table class='table table-bordered'>";
+			$html.="<thead>";
+				$html.="<tr>";
+					$html.="<th>Codigo</th>";									
+					$html.="<th>Producto</th>";				
+					$html.="<th>Familia</th>";				
+					$html.="<th>Precio</th>";				
+					$html.="<th>Stock</th>";													
+				$html.="<tr>";
+			$html.="</thead>";
+			$html.="<tbody>";
+			foreach($productos as $producto){									
+				$html.="<tr>";
+					$html.="<td>".$producto['id']."</td>";					
+					$html.="<td>".$producto['Nombre del producto']."</td>";
+					$html.="<td>".$producto['Nombre de familia']."</td>";
+					$html.="<td>".$producto['precio']."</td>";
+					$html.="<td>".$producto['stock']."</td>";					
+				$html.="<tr>";
+			}			
+			$html.="</tbody>";
+		$html.="</table>";
+	}
+?>
+<script>
+	function productos(){
+		Swal.fire({
+			title:'Productos',
+			width:'1000px',
+			showConfirmButton: false,
+			html:"<?=$html?>",
+			showClass:{
+				popup: 'animate_animated animate__fadeInDown'
+			},
+			hideClass:{
+				popup: 'animate_animated animate__fadeOutUp'
+			},
+			footer: 'Aqui estan todos los productos'
+		})
+	}
+</script>
 
 <?php 
 	require_once '../contenidoHtml/pie_pagina.php';

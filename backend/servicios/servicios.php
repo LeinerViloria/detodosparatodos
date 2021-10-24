@@ -683,9 +683,11 @@
 
             }while($terminado==false);                    
 
-            if(is_null($proveedor)||is_null($codigoCompra)){
+            if(is_null($proveedor)||is_null($codigoCompra)||is_null($registro)||is_null($imagenes)){
                 $errores['vacio']="No pueden haber datos vacios";
-            }         
+            }else if($proveedor=="Seleccione un proveedor"){
+                $errores['proveedor']="Seleccione un proveedor";
+            }
             
             if(count($errores)==0){
                 $id_empleado = $_SESSION['usuario_logueado'][0]['id'];

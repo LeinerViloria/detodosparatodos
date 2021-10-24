@@ -12,23 +12,23 @@ if(!empty($_SESSION['usuario_logueado'])){
     }
     require_once '../backend/servicios/listando.php';
 
-    $porcentaje = !empty(obtener_porcentaje_anual()) ? obtener_porcentaje_anual()[0]['valor']."%" : "No hay registro";    
+    $comisiones = !empty(infoComisiones()) ? infoComisiones()[0] : null;    
     
 ?>
 
 <table id="infoComision" class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Porcentaje de la comision</th>
-      <th scope="col">Total de ventas</th>
-      <th scope="col">Total de comisiones pagadas</th>      
+      <th scope="col">Porcentaje de la comision</th>      
+      <th scope="col">Volumen minimo de ventas</th>      
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><?=$porcentaje?></td>
-      <td>$680000</td>
-      <td>$68600</td>      
+        <?php if(!empty($comisiones)): ?>
+            <td><?=$comisiones['Porcentajes']?>%</td>      
+            <td><?=$comisiones['Volumen_Ventas']?></td> 
+        <?php endif ?>
     </tr>    
   </tbody>
 </table>

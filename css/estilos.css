@@ -95,9 +95,7 @@ body{
 	text-align: center;
 	justify-content: center;
 }
-#menu{
-	margin-bottom: 40px;
-}
+	
 #menu ul a {	
 	display: inline-block;
 	justify-content: center;

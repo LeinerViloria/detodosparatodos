@@ -239,11 +239,19 @@ function productos(){
 
     $sql="SELECT p.id id, p.nombre 'Nombre del producto', f.nombre 'Nombre de familia', Precio_ventas precio, stock, descripcion, p.imagen
         FROM productos p, familias f
-        WHERE familia_id=f.id";
+        WHERE familia_id=f.id
+        ORDER BY 2, 3";
 
     $productos=buscar($conexion, $tabla, 1, $sql);
 
     return $productos;
+}
+
+function infoComisiones(){
+    $conexion = conectar();
+    $tabla="comisiones";
+    $comisiones=buscar($conexion, $tabla);
+    return $comisiones;
 }
 
 function insertandoProducto($producto){
@@ -254,8 +262,8 @@ function insertandoProducto($producto){
         
     if(!empty($resultado) && $resultado[0]['cantidad']!=0){
         $stock = "SELECT stock FROM productos WHERE id='$producto->id'";
-        $resultado=buscar($conexion, $tabla, 1, $busqueda);
-        $sql=$conexion->prepare("UPDATE productos SET familia_id='$producto->id_familia', imagen='$producto->imagen', nombre='$producto->nombre', precio_compra=$producto->precioCompra, precio_ventas=$producto->precioVenta, stock=".(intval($producto->stock)+intval($stock)).", descripcion='$producto->descripcion' WHERE id='$producto->id'");
+        $cantidad=buscar($conexion, $tabla, 1, $stock);                                
+        $sql=$conexion->prepare("UPDATE productos SET familia_id='$producto->id_familia', imagen='$producto->imagen', nombre='$producto->nombre', precio_compra=$producto->precioCompra, precio_ventas=$producto->precioVenta, stock=".(intval($producto->stock)+intval($cantidad[0]['stock'])).", descripcion='$producto->descripcion' WHERE id='$producto->id'");
     }else{
         $sql=$conexion->prepare("INSERT INTO productos VALUES(:id, :familia_id, :imagen, :nombre, :precio_Compra, :precioVentas, :stock, :descripcion)");
         $sql->bindParam(':id', $producto->id, PDO::PARAM_STR);
