@@ -651,6 +651,7 @@
 
         }else if($controlador=="detalles_compra"){            
 
+            $codigoCompra = !empty($_POST['codigoCompra']) ? trim($_POST['codigoCompra']) : null;
             $proveedor = !empty($_POST['proveedor']) ? trim($_POST['proveedor']) : null;
 
             $i=1;
@@ -682,13 +683,13 @@
 
             }while($terminado==false);                    
 
-            if(is_null($proveedor)){
-                $errores['proveedor']="El proveedor no puede quedar vacio";
+            if(is_null($proveedor)||is_null($codigoCompra)){
+                $errores['vacio']="No pueden haber datos vacios";
             }         
             
             if(count($errores)==0){
                 $id_empleado = $_SESSION['usuario_logueado'][0]['id'];
-                $fecha = date("Y-m-d H:m:s");                
+                $fecha = date('Y-m-d H:i:s');                
                 $total=0;                
                 for($i=1; $i<=count($registro); $i++){
                     
@@ -707,37 +708,75 @@
                         $total+=($cantidad*$precioCompra);
                     }
                 }                
+                //Se guarda la informacion de la compra
+                require_once '../modelos/compra.php';
 
-                die();
-
-                for($i=1; $i<=count($registro); $i++){
-
-                    $codigo = !empty($registro[$i][0]) ? trim($registro[$i][0]) : null;
-                    $familia = !empty($registro[$i][1]) ? trim($registro[$i][1]) : null;
-                    $nombre = !empty($registro[$i][2]) ? trim($registro[$i][2]) : null;
-                    $cantidad = !empty($registro[$i][3]) ? trim($registro[$i][3]) : null;
-                    $precioCompra = !empty($registro[$i][4]) ? trim($registro[$i][4]) : null;
-                    $precioVenta = !empty($registro[$i][5]) ? trim($registro[$i][5]) : null;
-                    $descripcion = !empty($registro[$i][6]) ? trim($registro[$i][6]) : null;
-                    $imagen = !empty($imagenes[$i]) ? $imagenes[$i] : null;
-
-                    
-                    if(is_null($imagen) || is_null($codigo) || is_null($familia) || is_null($nombre) || is_null($cantidad) || is_null($precioCompra) || is_null($precioVenta) || is_null($descripcion)){
-                        $errores['vacios']="No pueden haber datos vacios, no se puede guardar el registro $i";
-                    }                    
-
-                    if(!is_numeric($precioVenta)){
-                        $errores['venta']="El valor de la venta $i debe ser numerico";
-                    }
-                    
-                    if(count($errores)==0){
-                        
-
+                $compra = new compra($codigoCompra, $id_empleado, $proveedor, $fecha, $total);
+                $controlador_compra = new controlador($servidor, $nombreBd, "compras", $userBD);
+                
+                //Si entra, puede irse a la tabla compras
+                if($operacion==0){
+                    $resultado_compra = $controlador_compra->guardar("gestionar_compra", $compra);
+                    if($resultado_compra){
+                        $_SESSION['compra']="La compra se guardó";
                     }else{
-                        $errores["guardado$i"]="El registro $i no se pudo guardar";
-                    }                    
+                        $errores['compra']="La compra no se guardó";
+                    }
+                }                
 
+                if(count($errores)==0){
+                    for($i=1; $i<=count($registro); $i++){
 
+                        $codigo = !empty($registro[$i][0]) ? strtoupper(trim($registro[$i][0])) : null;
+                        $familia = !empty($registro[$i][1]) ? trim($registro[$i][1]) : null;
+                        $nombre = !empty($registro[$i][2]) ? trim($registro[$i][2]) : null;
+                        $cantidad = !empty($registro[$i][3]) ? trim($registro[$i][3]) : null;
+                        $precioCompra = !empty($registro[$i][4]) ? trim($registro[$i][4]) : null;
+                        $precioVenta = !empty($registro[$i][5]) ? trim($registro[$i][5]) : null;
+                        $descripcion = !empty($registro[$i][6]) ? ucfirst(trim($registro[$i][6])) : null;
+                        //Se carga la ruta de la imagen
+                        $cargarImagen = !empty($imagenes[$i]) ? $imagenes[$i]['tmp_name'] : null;
+                        //Se abre la imagen a traves de la ruta
+                        $imagen = fopen($cargarImagen, 'rb');
+                        
+                        if(is_null($imagen) || is_null($codigo) || is_null($familia) || is_null($nombre) || is_null($cantidad) || is_null($precioCompra) || is_null($precioVenta) || is_null($descripcion)){
+                            $errores['vacios']="No pueden haber datos vacios, no se puede guardar el registro $i";
+                        }                    
+    
+                        if(!is_numeric($precioVenta)){
+                            $errores['venta']="El valor de la venta $i debe ser numerico";
+                        }
+                        
+                        //Antes del detalle de compra, se necesita guardar la info
+                        //de los productos
+                        if(count($errores)==0){
+                            require_once '../modelos/producto.php';
+                            $producto = new producto($codigo, $familia, $imagen, $nombre, $precioCompra, $precioVenta, $cantidad, $descripcion);                           
+
+                            if($operacion==0){
+                                /*
+                                No se manda crea un controlador,
+                                porque no nos funciona para guardar 
+                                imagenes, ya que para ellas se necesita
+                                usar el PDO::PARAM_LOB
+                                */
+                                $resultado_producto = insertandoProducto($producto);
+                                
+                                if($resultado_producto){
+                                    $_SESSION['producto']="El producto $i se guardó";
+                                }else{
+                                    $errores['producto']="El producto $i no se guardó";
+                                }
+                            }                            
+
+                            die();
+
+                        }else{
+                            $errores["guardado$i"]="El registro $i no se pudo guardar";
+                        }                    
+    
+                        die();
+                    }
                 }
             }
             

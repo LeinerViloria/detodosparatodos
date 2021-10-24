@@ -231,3 +231,26 @@ function proveedores(){
 
     return $proveedores;
 }
+
+function insertandoProducto($producto){
+    $conexion = conectar(1);
+    $tabla="";
+    $busqueda = "SELECT COUNT(1) cantidad FROM productos WHERE id='$producto->id'";
+    $resultado=buscar($conexion, $tabla, 1, $busqueda);
+        
+    if(!empty($resultado) && $resultado[0]['cantidad']!=0){
+        $sql=$conexion->prepare("UPDATE productos SET familia_id='$producto->id_familia', imagen='$producto->imagen', nombre='$producto->nombre', precio_compra=$producto->precioCompra, precio_ventas=$producto->precioVenta, stock=$producto->stock, descripcion='$producto->descripcion' WHERE id='$producto->id'");
+    }else{
+        $sql=$conexion->prepare("INSERT INTO productos VALUES(:id, :familia_id, :imagen, :nombre, :precio_Compra, :precioVentas, :stock, :descripcion)");
+        $sql->bindParam(':id', $producto->id, PDO::PARAM_STR);
+        $sql->bindParam(':familia_id', $producto->id_familia, PDO::PARAM_STR);
+        $sql->bindParam(':imagen', $producto->imagen, PDO::PARAM_LOB);
+        $sql->bindParam(':nombre', $producto->nombre, PDO::PARAM_STR);
+        $sql->bindParam(':precio_Compra', $producto->precioCompra, PDO::PARAM_STR);
+        $sql->bindParam(':precioVentas', $producto->precioVenta, PDO::PARAM_STR);
+        $sql->bindParam(':stock', $producto->stock, PDO::PARAM_STR);
+        $sql->bindParam(':descripcion', $producto->descripcion, PDO::PARAM_STR);
+    }       
+
+    return $sql->execute();
+}
