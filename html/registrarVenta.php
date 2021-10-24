@@ -7,6 +7,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 	if($_SESSION['usuario_logueado']['cabecera']=="Vendedor"){
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
 	require_once '../backend/servicios/listando.php';
+	$productos = !empty(productos()) ? productos() : null;		
 ?>
 <!--Caja de cantidades-->
 <div class="container">
@@ -31,15 +32,23 @@ if(!empty($_SESSION['usuario_logueado'])){
 	<div class="row">
 		<div class="col col-md-12">
 			<div class="well well-sm">
-				<form class="form-horizontal justify-content-center" method="post">
-					<fieldset>
+				<fieldset>
+				<form class="form-horizontal justify-content-center" method="post">					
 						<legend class="text-center header">Registrar Ventas</legend>
 												
 						<div class="form-group">								
-							<div class="col-md-8">
-								<input id="codigo" name="name" type="text" placeholder="Codigo del producto" class="form-control">
+							<div class="col-md-8">								
+								<select name="name" id="codigo" class="form-select">
+									<option value="">Seleccione el producto</option>
+									<?php if(!empty($productos)):?>									
+								<?php foreach($productos as $indice => $producto):?>
+									<option value="<?=$producto['id']?>"><?=$producto['Nombre del producto']?></option>									
+								<?php endforeach; ?>
+									<?php endif; ?>
+								</select>
 							</div>
 						</div>
+						<br>
 						<div class="form-group">								
 							<div class="col-md-8">
 								<input id="cant" name="precioventa" type="text" placeholder="Cantidad de Productos" class="form-control">
@@ -50,14 +59,12 @@ if(!empty($_SESSION['usuario_logueado'])){
 							<div class="col-md-12 text-center">
 								<button type="button" class="btn btn-primary btn-lg" onclick="agregar()">Agregar</button>
 							</div>							
-						</div>
-						
-					</fieldset>
+						</div>										
 				</form>
+				</fieldset>
 			</div>
 		</div>
 		
-		<!--Esta columna puede generalizar en un archivo php-->
 		<div class="col col-md-12">
 			<div class="well well-sm">
 				<table class="table table-borderless factura">
@@ -121,11 +128,10 @@ if(!empty($_SESSION['usuario_logueado'])){
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/sweetalert.js"></script>
 <script src="../js/manejar_factura.js"></script>
-<?php
-	$productos = productos();		
+<?php			
 	$html="";
 	if(empty($productos)){
-		$html.="<strong>No hay registros</strong>";
+		$html.="<strong>No hay productos</strong>";
 	}else{
 		$html.="<table class='table table-bordered'>";
 			$html.="<thead>";
