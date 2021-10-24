@@ -215,11 +215,50 @@ if(!empty($_SESSION['usuario_logueado'])){
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/sweetalert.js"></script>
 
-
+<?php
+	$productos = productos();	
+	$html="";
+	if(empty($productos)){
+		$html.="<strong>No hay registros</strong>";
+	}else{
+		$html.="<table class='table table-bordered'>";
+			$html.="<thead>";
+				$html.="<tr>";
+					$html.="<th>Codigo</th>";				
+					$html.="<th>Producto</th>";				
+					$html.="<th>Familia</th>";				
+					$html.="<th>Precio</th>";				
+					$html.="<th>Stock</th>";													
+				$html.="<tr>";
+			$html.="</thead>";
+			$html.="<tbody>";
+			foreach($productos as $producto){
+				$html.="<tr>";
+					$html.="<td>".$producto['id']."</td>";
+					$html.="<td>".$producto['Nombre del producto']."</td>";
+					$html.="<td>".$producto['Nombre de familia']."</td>";
+					$html.="<td>".$producto['precio']."</td>";
+					$html.="<td>".$producto['stock']."</td>";					
+				$html.="<tr>";
+			}			
+			$html.="</tbody>";
+		$html.="</table>";
+	}
+?>
 <script>
 	function productos(){
 		Swal.fire({
-			icon:"success"
+			title:'Productos',
+			width:'1000px',
+			showConfirmButton: false,
+			html:"<?=$html?>",
+			showClass:{
+				popup: 'animate_animated animate__fadeInDown'
+			},
+			hideClass:{
+				popup: 'animate_animated animate__fadeOutUp'
+			},
+			footer: 'Si ingresa un producto existente, por favor escriba el codigo, nombre y elija la respectiva familia'
 		})
 	}
 </script>
