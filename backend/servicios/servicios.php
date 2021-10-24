@@ -729,7 +729,7 @@
 
                         $codigo = !empty($registro[$i][0]) ? strtoupper(trim($registro[$i][0])) : null;
                         $familia = !empty($registro[$i][1]) ? trim($registro[$i][1]) : null;
-                        $nombre = !empty($registro[$i][2]) ? trim($registro[$i][2]) : null;
+                        $nombre = !empty($registro[$i][2]) ? ucfirst(trim($registro[$i][2])) : null;
                         $cantidad = !empty($registro[$i][3]) ? trim($registro[$i][3]) : null;
                         $precioCompra = !empty($registro[$i][4]) ? trim($registro[$i][4]) : null;
                         $precioVenta = !empty($registro[$i][5]) ? trim($registro[$i][5]) : null;
@@ -755,31 +755,41 @@
 
                             if($operacion==0){
                                 /*
-                                No se manda crea un controlador,
-                                porque no nos funciona para guardar 
-                                imagenes, ya que para ellas se necesita
-                                usar el PDO::PARAM_LOB
+                                    No se manda crea un controlador,
+                                    porque no nos funciona para guardar 
+                                    imagenes, ya que para ellas se necesita
+                                    usar el PDO::PARAM_LOB
                                 */
                                 $resultado_producto = insertandoProducto($producto);
                                 
                                 if($resultado_producto){
-                                    $_SESSION['producto']="El producto $i se guardó";
-                                }else{
-                                    $errores['producto']="El producto $i no se guardó";
-                                }
-                            }                            
+                                    $_SESSION["producto$i"]="El producto $i se guardó";
 
-                            die();
+                                    //Si se guardó, se va a guardar el detalle de la compra
+
+                                    require_once '../modelos/detalle_compra.php';
+                                    $detalle = new detalle_compra($codigoCompra, $codigo, $cantidad);
+                                    $controlador_detalle = new controlador($servidor, $nombreBd, "detalles_compras", $userBD);
+                                    
+                                    $resultado_detalle = $controlador_detalle->guardar("gestionar_detalles_compras", $detalle);
+
+                                    if(!$resultado_detalle){
+                                        $errores['detalle']="Hubo algun error en el guardado";
+                                    }
+                                }else{
+                                    $errores["producto$i"]="El producto $i no se guardó";
+                                }
+                            }                                                        
 
                         }else{
                             $errores["guardado$i"]="El registro $i no se pudo guardar";
                         }                    
-    
-                        die();
+                            
                     }
                 }
             }
-            
+            $_SESSION['errores']=$errores;
+            header("location:../../html/compras.php");
 
         }        
 

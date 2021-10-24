@@ -39,6 +39,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 			}
 			return strtoupper($codigo);
 		}
+		
+		var_dump($_SESSION);
 ?>
 <h1>Comprar productos</h1>
 <div class="container p-4" id="contenedorCompras">
