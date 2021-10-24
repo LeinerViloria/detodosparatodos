@@ -7,7 +7,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 	if($_SESSION['usuario_logueado']['cabecera']=="Vendedor"){
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
 	require_once '../backend/servicios/listando.php';
-	$productos = !empty(productos()) ? productos() : null;		
+	$productos = !empty(productos(0)) ? productos(0) : null;		
 ?>
 <!--Caja de cantidades-->
 <div class="container">

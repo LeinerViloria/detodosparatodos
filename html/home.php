@@ -17,7 +17,7 @@
 		//Se crean los enlaces
 		require_once '../contenidoHtml/cabecera_'.$nombreCabecera.'.php';				
 		require_once '../contenidoHtml/contenido_productos.php';		
-		contenido(0, "../","../images/");
+		contenido(0, "../");
 		
 		require_once '../contenidoHtml/pie_pagina.php';
 		

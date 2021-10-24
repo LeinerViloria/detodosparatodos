@@ -232,8 +232,8 @@ function proveedores(){
     return $proveedores;
 }
 
-function productos(){
-    $conexion= conectar();
+function productos($ruta){
+    $conexion= conectar($ruta);
 
     $tabla = "";
 
@@ -262,8 +262,19 @@ function insertandoProducto($producto){
         
     if(!empty($resultado) && $resultado[0]['cantidad']!=0){
         $stock = "SELECT stock FROM productos WHERE id='$producto->id'";
-        $cantidad=buscar($conexion, $tabla, 1, $stock);                                
-        $sql=$conexion->prepare("UPDATE productos SET familia_id='$producto->id_familia', imagen='$producto->imagen', nombre='$producto->nombre', precio_compra=$producto->precioCompra, precio_ventas=$producto->precioVenta, stock=".(intval($producto->stock)+intval($cantidad[0]['stock'])).", descripcion='$producto->descripcion' WHERE id='$producto->id'");
+        $cantidad=buscar($conexion, $tabla, 1, $stock);  
+        $nuevaCantidad = (intval($producto->stock)+intval($cantidad[0]['stock']));                              
+        //$sql=$conexion->prepare("UPDATE productos SET familia_id='$producto->id_familia', imagen='$producto->imagen', nombre='$producto->nombre', precio_compra=$producto->precioCompra, precio_ventas=$producto->precioVenta, stock=".(intval($producto->stock)+intval($cantidad[0]['stock'])).", descripcion='$producto->descripcion' WHERE id='$producto->id'");
+        $sql=$conexion->prepare("UPDATE productos SET familia_id=:familia_id, imagen=:imagen, nombre=:nombre, precio_compra=:precio_Compra, precio_ventas=:precioVentas, stock=:stock, descripcion=:descripcion WHERE id=:id");
+        
+        $sql->bindParam(':familia_id', $producto->id_familia, PDO::PARAM_STR);
+        $sql->bindParam(':imagen', $producto->imagen, PDO::PARAM_LOB);
+        $sql->bindParam(':nombre', $producto->nombre, PDO::PARAM_STR);
+        $sql->bindParam(':precio_Compra', $producto->precioCompra, PDO::PARAM_STR);
+        $sql->bindParam(':precioVentas', $producto->precioVenta, PDO::PARAM_STR);
+        $sql->bindParam(':stock', $nuevaCantidad, PDO::PARAM_STR);
+        $sql->bindParam(':descripcion', $producto->descripcion, PDO::PARAM_STR);
+        $sql->bindParam(':id', $producto->id, PDO::PARAM_STR);
     }else{
         $sql=$conexion->prepare("INSERT INTO productos VALUES(:id, :familia_id, :imagen, :nombre, :precio_Compra, :precioVentas, :stock, :descripcion)");
         $sql->bindParam(':id', $producto->id, PDO::PARAM_STR);

@@ -216,7 +216,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 <script src="../js/sweetalert.js"></script>
 
 <?php
-	$productos = productos();	
+	$productos = productos(0);	
 	$html="";
 	if(empty($productos)){
 		$html.="<strong>No hay registros</strong>";

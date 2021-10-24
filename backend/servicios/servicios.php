@@ -675,7 +675,10 @@
             $terminado=false;
             do{
                 if(!empty($_FILES["imagen$i"])){
-                    $imagenes[$i]=$_FILES["imagen$i"];
+                    $imagenes[$i]= $imagenes[$i]['tmp_name']!="" ?  $_FILES["imagen$i"] : null;
+                    if(is_null($imagenes[$i])){
+                        $errores['imagenVacia']="La imagen del producto $i no puede quedar vacio";
+                    }
                     $i++;
                 }else{
                     $terminado=true;
@@ -683,12 +686,12 @@
 
             }while($terminado==false);                    
 
-            if(is_null($proveedor)||is_null($codigoCompra)||is_null($registro)||is_null($imagenes)){
+            if(is_null($proveedor)||is_null($codigoCompra)||count($registro)==0||count($imagenes)==0){
                 $errores['vacio']="No pueden haber datos vacios";
             }else if($proveedor=="Seleccione un proveedor"){
                 $errores['proveedor']="Seleccione un proveedor";
-            }
-            
+            }                   
+
             if(count($errores)==0){
                 $id_empleado = $_SESSION['usuario_logueado'][0]['id'];
                 $fecha = date('Y-m-d H:i:s');                
@@ -727,7 +730,7 @@
                 }                
 
                 if(count($errores)==0){
-                    for($i=1; $i<=count($registro); $i++){
+                    for($i=1; $i<=count($registro); $i++){                        
 
                         $codigo = !empty($registro[$i][0]) ? strtoupper(trim($registro[$i][0])) : null;
                         $familia = !empty($registro[$i][1]) ? trim($registro[$i][1]) : null;
@@ -737,16 +740,22 @@
                         $precioVenta = !empty($registro[$i][5]) ? trim($registro[$i][5]) : null;
                         $descripcion = !empty($registro[$i][6]) ? ucfirst(trim($registro[$i][6])) : null;
                         //Se carga la ruta de la imagen
-                        $cargarImagen = !empty($imagenes[$i]) ? $imagenes[$i]['tmp_name'] : null;
-                        //Se abre la imagen a traves de la ruta
-                        $imagen = fopen($cargarImagen, 'rb');
+                        $cargarImagen = !empty($imagenes[$i]) && $imagenes[$i]['tmp_name']!=""  ? $imagenes[$i]['tmp_name'] : null;                                          
                         
-                        if(is_null($imagen) || is_null($codigo) || is_null($familia) || is_null($nombre) || is_null($cantidad) || is_null($precioCompra) || is_null($precioVenta) || is_null($descripcion)){
+                        if(is_null($cargarImagen) || is_null($codigo) || is_null($familia) || is_null($nombre) || is_null($cantidad) || is_null($precioCompra) || is_null($precioVenta) || is_null($descripcion)){
                             $errores['vacios']="No pueden haber datos vacios, no se puede guardar el registro $i";
-                        }                    
+                        }else{
+                            //Se abre la imagen a traves de la ruta     
+                            //si cargarImagen no es nulo
+                            $imagen = fopen($cargarImagen, 'r');
+                        }                                            
     
                         if(!is_numeric($precioVenta)){
                             $errores['venta']="El valor de la venta $i debe ser numerico";
+                        }
+
+                        if(strlen($descripcion)>120){
+                            $errores['descripcion']="Error en el producto $i, la descripcion no puede tener mas de 120 caracteres";
                         }
                         
                         //Antes del detalle de compra, se necesita guardar la info
