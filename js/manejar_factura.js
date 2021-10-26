@@ -7,7 +7,6 @@ var cuerpo = document.getElementById("contenedor_factura");
 var listando = new Array();
 
 var totalCompra = new Array();
-var suma = 0;
 var flag=false;
 
 function agregar(){        
@@ -26,8 +25,8 @@ function agregar(){
         codigo=informacion[0];
         precio=informacion[1];
         total=precio*cantidad;  
-        //totalCompra[totalCompra.length]=total;
-        //console.log(totalCompra);
+        totalCompra.push(total);
+        
         producto=document.getElementById(codigo).innerHTML;                
 
         //Se crea la fila
@@ -67,13 +66,16 @@ function agregar(){
                     padre.removeChild(eliminando_fila);
                 }
                 
-                listando.pop();  
+                listando.pop(); 
+                totalCompra.pop()
                 
                 if(listando.length==0){                    
                     flag=false;
                     padre = apartado.parentNode;
                     padre.removeChild(apartado);
                 }
+
+                document.getElementById("totalCompra").value=sumar();
                     
             }        
                       
@@ -94,13 +96,11 @@ function agregar(){
         valores = [codigo, cantidad];
         add_to_form(valores);
 
-        cuerpo.appendChild(fila);
-
-        suma+=total;
+        cuerpo.appendChild(fila);        
 
         document.getElementById("codigo").value="Seleccione el producto";
         document.getElementById("cant").value="";
-        document.getElementById("totalCompra").value=suma;
+        document.getElementById("totalCompra").value=sumar();
     }else{
         alert("Ingrese correctamente los datos");
     }
@@ -111,4 +111,16 @@ function add_to_form(valores){
     var inputs="<input type='hidden' name='articulo"+listando.length+"' value='"+valores+"'>";
 
     document.getElementById("input_adicionales").innerHTML+=inputs;
+}
+
+function sumar(){
+    var suma = 0;
+
+    for (const key in totalCompra) {
+        suma+=totalCompra[key];
+    }
+
+    return suma;
+
+    
 }
