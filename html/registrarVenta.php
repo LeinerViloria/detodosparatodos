@@ -25,8 +25,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 	}
 
 	function creandoCodigo(){
-		$codigo="";
-		for($i=0; $i<12; $i++){
+		$codigo=date("Ym");
+		for($i=0; $i<6; $i++){
 			$codigo.=generandoCodigo(rand(1,2));
 		}
 		return strtoupper($codigo);
