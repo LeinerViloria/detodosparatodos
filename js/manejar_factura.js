@@ -6,19 +6,29 @@ var cuerpo = document.getElementById("contenedor_factura");
 
 var listando = new Array();
 
+var totalCompra = new Array();
+var suma = 0;
+var flag=false;
+
 function agregar(){        
     info=document.getElementById("codigo").value;
     cantidad=document.getElementById("cant").value;
     
     if(codigo!=="" && codigo!="Seleccione un producto" && cantidad!=="" && cantidad>0){
+        var apartado=document.getElementById("btn-quitar");        
+
         listando.push(listando.length);
         
-        var informacion = info.split(",");
+        var informacion = info.split(",");  
+
+        //var index = listando.indexOf(listando[listando.length-1]);            
 
         codigo=informacion[0];
         precio=informacion[1];
-        total=precio*cantidad;        
-        producto=document.getElementById(codigo).innerHTML;        
+        total=precio*cantidad;  
+        //totalCompra[totalCompra.length]=total;
+        //console.log(totalCompra);
+        producto=document.getElementById(codigo).innerHTML;                
 
         //Se crea la fila
         const fila = document.createElement("tr");
@@ -37,39 +47,60 @@ function agregar(){
         const col_total = document.createElement("td");
         col_total.textContent=total;
 
-        const col_quitar = document.createElement("td");
-
         const boton = document.createElement("button");
-        boton.type="button";
-        boton.className="btn btn-warning";
-        boton.textContent="Quitar";
-        boton.onclick = function (){
-            eliminando_fila = document.getElementById(listando.length);
+       if(flag==false){                       
+            //<button type="button" onclick="" id="quitar" class="btn-flotante"><i class="far fa-trash-alt"></i> - Quitar ultimo</button> 
+            const icono = document.createElement("i");
+            icono.className="far fa-trash-alt";            
+                        
+            boton.type="button";
+            boton.id="quitar";
+            boton.className="btn btn-flotante"; 
+            boton.textContent="Quitar ultimo - ";
+            boton.appendChild(icono);
+            boton.onclick = function (){                            
+                eliminando_fila = document.getElementById(listando.length);
                 if(!eliminando_fila){
                     alert("Esta fila no existe");
                 }else{
                     padre = eliminando_fila.parentNode;
                     padre.removeChild(eliminando_fila);
                 }
+                
                 listando.pop();  
-        }
-
-        col_quitar.appendChild(boton);
-
+                
+                if(listando.length==0){                    
+                    flag=false;
+                    padre = apartado.parentNode;
+                    padre.removeChild(apartado);
+                }
+                    
+            }        
+                      
+       }
+       
         //Se agregan las columas a la fila
         fila.appendChild(col_codigo);
         fila.appendChild(col_producto);
         fila.appendChild(col_cantidad);
         fila.appendChild(col_total);
-        fila.appendChild(col_quitar);
+        if(flag==false){
+            console.log("Entro al boton");
+            apartado.appendChild(boton);
+            flag=true;
+        }
 
+        //Datos para la bd        
         valores = [codigo, cantidad];
         add_to_form(valores);
 
         cuerpo.appendChild(fila);
 
+        suma+=total;
+
         document.getElementById("codigo").value="Seleccione el producto";
         document.getElementById("cant").value="";
+        document.getElementById("totalCompra").value=suma;
     }else{
         alert("Ingrese correctamente los datos");
     }

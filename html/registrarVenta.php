@@ -90,21 +90,19 @@ if(!empty($_SESSION['usuario_logueado'])){
 		
 		<div class="col col-md-12">
 			<div class="well well-sm">
-				<table class="table table-borderless factura">
+				<table class="table table-borderless factura text-center">
 				<thead>
 					<tr>
 						<th>Id</th>
 						<th>Nombre</th>
 						<th>Cantidad</th>
-						<th>Total</th>						
-						<th>Accion</th>
-					</tr>
-				</thead>
+						<th>Total</th>												
+					</tr>					
+				</thead>				
 				<tbody id="contenedor_factura">						
 				</tbody>
 
-				</table>
-
+				</table>				
 				<form action="../controladores/controlador_factura.php" method="post">				
 					<div id="input_adicionales"></div>	
 
@@ -129,15 +127,18 @@ if(!empty($_SESSION['usuario_logueado'])){
 								<?php
 									endif;
 								?>														
-						</div>					
-					</div>		
-					<div class="col-md-4">
-						<input type="text" style="text-align:center;" name="codigoCompra" value="<?=creandoCodigo()?>" class="form-control" readonly>
-					</div>
+						</div> 
+						<div class="col-md-4">
+							<input type="text" style="text-align:center;" name="codigoCompra" value="<?=creandoCodigo()?>" class="form-control" readonly>
+						</div>	
+						<div class="col-md-4">							
+							<input type="text" style="text-align:center;" name="totalCompra" id="totalCompra" placeholder="Total de venta" class="form-control" readonly>
+						</div>			
+					</div>							
 					<div class="form-group" id="btnregistro">
 						<div class="col text-center">
-							<button type="submit" class="btn btn-primary btn-lg">Guardar</button>
-						</div>							
+							<button type="submit" class="btn btn-primary btn-lg">Guardar</button>																					
+						</div>													
 					</div>					
 				</form>
 			</div>
@@ -145,6 +146,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 		<!---->
 	</div>	
 </div>
+<div id="btn-quitar"></div>
 <button type="button" onclick="productos()" class="btn-flotante"><i class="fas fa-table"></i> - Ver productos</button> 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/sweetalert.js"></script>
