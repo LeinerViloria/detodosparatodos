@@ -21,7 +21,9 @@ function contenido($ruta, $ruta_origen="./"){
 				<?php if(!empty($productos)): ?>
 				<?php foreach($productos as $producto):?>					
 					<div class="product-item" category="<?=$producto['Nombre de familia']?>">
-						<img src="data:image/*; base64, <?php echo base64_encode($producto['imagen'])?>" alt="Producto" >
+						<div class="imagen">
+							<img src="data:image/*; base64, <?php echo base64_encode($producto['imagen'])?>" alt="<?=$producto['Nombre del producto']?>" >						
+						</div>
 						<a href="#"><?=$producto['Nombre del producto']?></a>
 						<table class="table">
 							<tbody>

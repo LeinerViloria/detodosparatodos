@@ -196,15 +196,14 @@ color:crimson;
 	margin-left: 3%;
 	margin-bottom: 25px;
 	box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.22);
-
 	display: flex;
 	flex-direction: column;
 	align-self: flex-start;
-
 	transition: all .4s;
 }
 
-.products-list .product-item img{
+.products-list .product-item .imagen img{
+	vertical-align: middle;
 	width: 100%;
 }
 
@@ -213,7 +212,6 @@ color:crimson;
 	width: 100%;
 	padding: 8px 0;
 	background: #2D3E50;
-
 	color: #fff;
 	text-align: center;
 	text-decoration: none;

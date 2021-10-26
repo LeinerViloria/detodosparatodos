@@ -7,7 +7,30 @@ if(!empty($_SESSION['usuario_logueado'])){
 	if($_SESSION['usuario_logueado']['cabecera']=="Vendedor"){
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
 	require_once '../backend/servicios/listando.php';
-	$productos = !empty(productos(0)) ? productos(0) : null;		
+	$productos = !empty(productos(0)) ? productos(0) : null;	
+
+	function generandoCodigo($devolver){
+		$DesdeLetra = "a";
+		$HastaLetra = "z";
+		$DesdeNumero = 0;
+		$HastaNumero = 9;
+
+		$letraAleatoria = chr(rand(ord($DesdeLetra), ord($HastaLetra)));
+		$numeroAleatorio = rand($DesdeNumero, $HastaNumero);
+		if($devolver==1){
+			return $letraAleatoria;
+		}else if($devolver==2){
+			return $numeroAleatorio;
+		}
+	}
+
+	function creandoCodigo(){
+		$codigo="";
+		for($i=0; $i<12; $i++){
+			$codigo.=generandoCodigo(rand(1,2));
+		}
+		return strtoupper($codigo);
+	}
 ?>
 <!--Caja de cantidades-->
 <div class="container">
@@ -23,7 +46,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 			}
 		?>
 		<p>Manejas <span class="numero"><?=$numero_clientes?></span> de <span class="numero"><?=$total[0]['total']?></span> clientes, sabiendo que el anonimo es para todos</p>
-    </div>
+    </div>	
   </div>
 </div>
 <br>
@@ -39,10 +62,10 @@ if(!empty($_SESSION['usuario_logueado'])){
 						<div class="form-group">								
 							<div class="col-md-8">								
 								<select name="name" id="codigo" class="form-select">
-									<option value="">Seleccione el producto</option>
-									<?php if(!empty($productos)):?>									
+									<option>Seleccione el producto</option>
+									<?php if(!empty($productos)): ?>									
 								<?php foreach($productos as $indice => $producto):?>
-									<option value="<?=$producto['id']?>"><?=$producto['Nombre del producto']?></option>									
+									<option id="<?=$producto['id']?>" value="<?=$producto['id']?>,<?=$producto['precio']?>"><?=$producto['Nombre del producto']?></option>									
 								<?php endforeach; ?>
 									<?php endif; ?>
 								</select>
@@ -82,15 +105,11 @@ if(!empty($_SESSION['usuario_logueado'])){
 
 				</table>
 
-				<form action="../controladores/controlador_factura.php" method="post">
+				<form action="../controladores/controlador_factura.php" method="post">				
 					<div id="input_adicionales"></div>	
 
 					<div class="input-group mb-3">						
 						<div class="custom-prepend">
-							<!--
-							<input type="text" name="id" id="id" placeholder="Ingrese el id del cliente" class="form-control" required="required">
-							<span class="input-group-text">Nombre encontrado</span>
-							-->					
 							<?php 
 								$clientes = obtener_clientes($_SESSION['usuario_logueado'][0]['id']);								
 							?>																	
@@ -112,7 +131,9 @@ if(!empty($_SESSION['usuario_logueado'])){
 								?>														
 						</div>					
 					</div>		
-						
+					<div class="col-md-4">
+						<input type="text" style="text-align:center;" name="codigoCompra" value="<?=creandoCodigo()?>" class="form-control" readonly>
+					</div>
 					<div class="form-group" id="btnregistro">
 						<div class="col text-center">
 							<button type="submit" class="btn btn-primary btn-lg">Guardar</button>
