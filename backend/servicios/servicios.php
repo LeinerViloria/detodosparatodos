@@ -655,11 +655,11 @@
             $proveedor = !empty($_POST['proveedor']) ? trim($_POST['proveedor']) : null;
 
             $i=1;
-            $terminado=false;
+            $terminado=false; 
 
             $errores = array();
             $registro = array();   
-            $imagenes = array();
+            $imagenes = array();            
 
             do{
                 if(!empty($_POST["registro$i"])){
@@ -675,7 +675,8 @@
             $terminado=false;
             do{
                 if(!empty($_FILES["imagen$i"])){
-                    $imagenes[$i]= $imagenes[$i]['tmp_name']!="" ?  $_FILES["imagen$i"] : null;
+                    $imagenes[$i]= $_FILES["imagen$i"]['tmp_name']!="" ?  $_FILES["imagen$i"] : null;
+
                     if(is_null($imagenes[$i])){
                         $errores['imagenVacia']="La imagen del producto $i no puede quedar vacio";
                     }
@@ -684,7 +685,8 @@
                     $terminado=true;
                 }
 
-            }while($terminado==false);                    
+            }while($terminado==false); 
+                    
 
             if(is_null($proveedor)||is_null($codigoCompra)||count($registro)==0||count($imagenes)==0){
                 $errores['vacio']="No pueden haber datos vacios";

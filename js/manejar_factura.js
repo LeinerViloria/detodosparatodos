@@ -69,13 +69,15 @@ function agregar(){
                 listando.pop(); 
                 totalCompra.pop()
                 
-                if(listando.length==0){                    
+                if(listando.length==0){                                        
                     flag=false;
-                    padre = apartado.parentNode;
-                    padre.removeChild(apartado);
-                }
-
-                document.getElementById("totalCompra").value=sumar();
+                    var btn = document.getElementById("quitar");
+                    padre = btn.parentNode;
+                    padre.removeChild(btn);
+                    document.getElementById("totalCompra").value="";
+                }else{
+                    document.getElementById("totalCompra").value=sumar();
+                }                
                     
             }        
                       
