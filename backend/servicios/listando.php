@@ -254,6 +254,7 @@ function infoComisiones(){
     return $comisiones;
 }
 
+//Esta funcion permite insertar productos con su respectiva imagen
 function insertandoProducto($producto){
     $conexion = conectar(1);
     $tabla="";
@@ -298,4 +299,26 @@ function total($id){
    
     return $total;
 
+}
+
+function comisionVendedor(){
+    $conexion = conectar();
+    $tabla="";
+    $sentencia="SELECT COUNT(1) cantidad, SUM(v.total) 'Precio total vendido', YEAR(V.fecha) Año, MONTH(v.fecha) Mes
+        FROM ventas v
+        WHERE v.empleado_id='".$_SESSION['usuario_logueado'][0]['id']."'
+        GROUP BY YEAR(V.fecha), MONTH(v.fecha)
+        ORDER BY YEAR(V.fecha), MONTH(v.fecha)";
+    $ventas = buscar($conexion,$tabla,1,$sentencia);
+    return $ventas;
+}
+
+function years(){
+    $conexion = conectar();
+    $tabla="";
+    $sentencia="SELECT YEAR(fecha) year
+        FROM ventas
+        GROUP BY YEAR(fecha)";
+    $years = buscar($conexion,$tabla,1,$sentencia);
+    return $years;
 }

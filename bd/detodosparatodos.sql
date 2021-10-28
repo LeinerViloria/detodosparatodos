@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2021 a las 18:57:35
+-- Tiempo de generación: 29-10-2021 a las 00:59:10
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -462,8 +462,13 @@ CREATE TABLE `detalles_ventas` (
 --
 
 INSERT INTO `detalles_ventas` (`id_venta`, `producto_id`, `cantidad`) VALUES
+('20211035', '089U', 5),
+('20211043', '23BG', 3),
+('20211043', '56P', 12),
+('20211043', '90C', 8),
 ('202110S8', '089U', 9),
 ('202110S8', '90A', 2),
+('202110XU', '90C', 6),
 ('202110Y5', '089U', 2),
 ('202110Y5', '56P', 5),
 ('202110Y5', '90A', 8);
@@ -778,7 +783,10 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `empleado_id`, `cliente_id`, `fecha`, `total`) VALUES
-('202110S8', '10', '45', '2021-10-28', 123702),
+('20211035', '10', '1', '2021-10-29', 67310),
+('20211043', '17', '9', '2021-10-28', 302043),
+('202110S8', '10', '45', '2020-10-28', 123702),
+('202110XU', '10', '1', '2021-09-27', 28620),
 ('202110Y5', '10', '12', '2021-10-28', 101935);
 
 --
