@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
             $_SESSION['usuario_logueado']=$usuario;
 
-            header("location: ../../html/home.php");
+            header("location: ../../vistas/home.php");
             
 
         }else{
@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     if(!empty($_SESSION['errores'])){
         if(count($_SESSION['errores'])>0){        
-            header("location: ../../html/login.php");
+            header("location: ../../vistas/login.php");
         }
     }        
 }
