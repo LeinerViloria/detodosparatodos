@@ -23,7 +23,7 @@
 		<div id="logo">
 			<a href="index.php"><img src="images/logo.PNG" alt="aqui va  el logo" > </a>
 			<!--para el inicio de sesion-->
-			<i class="fa fa-user-o" id="inicio"><a href="html/login.php">Iniciar</a></i>			
+			<i class="fa fa-user-o" id="inicio"><a href="vistas/login.php">Iniciar</a></i>			
 		</div>				
 	  </nav>
 	

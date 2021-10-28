@@ -1,11 +1,15 @@
 <?php
 include '../componentes/conectar.php';
 class controlador{
+    private $servidor="localhost";
+    private $nombreBD="detodosparatodos";
+    private $usuarioBD="root";
+    private $passwordBD="";
     private $tabla;
     private $conexion;
 
-    public function __construct($server, $nombreBd, $tabla, $user, $password=""){                    
-        $conexionMySQL = new conectar($server, $nombreBd, $user, $password);   
+    public function __construct($tabla){                    
+        $conexionMySQL = new conectar($this->servidor, $this->nombreBD, $this->usuarioBD, $this->passwordBD);   
         $this->tabla=$tabla;         
         $this->conexion= $conexionMySQL->getConexion();                           
     }

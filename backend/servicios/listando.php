@@ -289,3 +289,13 @@ function insertandoProducto($producto){
 
     return $sql->execute();
 }
+
+function total($id){
+    $conexion = conectar(1);    
+    $tabla = "";
+    $sql = "SELECT Precio_ventas FROM productos WHERE id = '$id'";
+    $total = buscar($conexion,$tabla,1,$sql);
+   
+    return $total;
+
+}

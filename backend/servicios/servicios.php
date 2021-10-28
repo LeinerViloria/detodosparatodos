@@ -2,11 +2,7 @@
     
     if($_SERVER['REQUEST_METHOD']=='POST'){        
         require_once '../controladores/controlador.php';  
-        require_once './listando.php';
-        //Se crean las variables generales de la base de datos
-        $servidor="localhost";
-        $nombreBd="detodosparatodos";
-        $userBD="root";        
+        require_once './listando.php';                
         
         $controlador = trim($_POST['controlador']);
         $operacion = trim($_POST['operacion']);
@@ -121,9 +117,9 @@
                 $usuario = new usuario($id, $email, $password);
                 
                 //Para controlar la tabla empleados
-                $controlador_empleado=new controlador($servidor, $nombreBd, "empleados", $userBD);
+                $controlador_empleado=new controlador("empleados");
                 //Para controlar la tabla usuarios
-                $controlador_usuario=new controlador($servidor, $nombreBd, "usuarios", $userBD);            
+                $controlador_usuario=new controlador("usuarios");            
                                 
                 if(is_numeric($operacion) && $operacion==0){  
                     //Se manda al empleado              
@@ -150,7 +146,7 @@
                 Sé que regresa a manejar_empleado.php porque estoy en
                 el condicional de empleado
             */
-            header('location: ../../html/manejar_empleados.php');
+            header('location: ../../vistas/manejar_empleados.php');
             
         }else if($controlador=="cliente"){
             //Entra aqui si la solicitud viene de manejar_cliente
@@ -204,7 +200,7 @@
                 //Creo a mi cliente
                 $cliente = new cliente($id, $id_empleado, $nombres, $apellidos);
                 
-                $controlador_cliente=new controlador($servidor, $nombreBd, "clientes", $userBD);
+                $controlador_cliente=new controlador("clientes");
 
                 if(is_numeric($operacion) && $operacion==0){
                     $resultado_cliente = $controlador_cliente->guardar("gestionar_cliente",$cliente);
@@ -223,7 +219,7 @@
 
                             //Cada numero guardado en la variable numeros 
                             //debe ser guardado en la base de datos
-                            $controlador_telefono=new controlador($servidor, $nombreBd, "telefonos", $userBD);
+                            $controlador_telefono=new controlador("telefonos");
                             $_SESSION['numeros']="";
                             $j=1;
                             foreach($numeros as $numero){                                
@@ -248,7 +244,7 @@
                         
                         if(!empty($whatsapp)||!empty($instagram)||!empty($telegram)||!empty($twitter)){
                             require_once '../modelos/redes_cliente.php';
-                            $controlador_red_cliente=new controlador($servidor, $nombreBd, "redes_usuarios", $userBD);                                
+                            $controlador_red_cliente=new controlador("redes_usuarios");                                
                         }                            
                         if(!empty($whatsapp)){
                             $codigo = obtener_redes("Whatsapp");
@@ -313,7 +309,7 @@
                 }
             }
             //Al estar en controlador clientes, sé que regreso a manejar_clientes.php
-            header('location:../../html/manejar_clientes.php');            
+            header('location:../../vistas/manejar_clientes.php');            
 
         }else if($controlador=="porcentaje_alerta"){
             $year = !empty($_POST['year']) ? $_POST['year'] : false;
@@ -350,7 +346,7 @@
                 
                 if(is_numeric($operacion) && $operacion=="0"){
 
-                    $controlador_porcentaje = new controlador($servidor, $nombreBd, "porcentaje_anual", $userBD);                      
+                    $controlador_porcentaje = new controlador("porcentaje_anual");                      
                     $fecha = date('Y');
                     //$hora= "SELECT CURRENT_TIME()";
                     $hora = date('Y-m-d H:i:s');
@@ -494,7 +490,7 @@
             
             $_SESSION['errores']=$errores;
 
-            header("location:../../html/porcentaje.php");
+            header("location:../../vistas/porcentaje.php");
         }else if($controlador=="familia"){
 
             $id = !empty($_POST['id']) ? trim($_POST['id']) : null;
@@ -527,7 +523,7 @@
 
                 $familia = new familia($id, $nombre);
 
-                $controlador_familia = new controlador($servidor, $nombreBd, "familias", $userBD);                
+                $controlador_familia = new controlador("familias");                
 
                 if(is_numeric($operacion) && $operacion=="0"){
                     $resultado_familia = $controlador_familia->guardar("gestionar_familia", $familia);
@@ -544,7 +540,7 @@
 
             $_SESSION['errores']=$errores;
 
-            header("location: ../../html/compras.php");
+            header("location: ../../vistas/compras.php");
             
         }else if($controlador=="proveedor"){
             
@@ -580,7 +576,7 @@
 
                 $proveedor = new proveedor($codigo, $nombre, $telefono);
 
-                $controlador_proveedor = new controlador($servidor, $nombreBd, "provedores", $userBD);
+                $controlador_proveedor = new controlador("provedores");
 
                 if(is_numeric($operacion) && $operacion==0){
                     $resultado_proveedor = $controlador_proveedor->guardar("gestionar_proveedor", $proveedor);
@@ -606,7 +602,7 @@
 
             $_SESSION['errores']=$errores;
 
-            header("location: ../../html/proveedores.php");
+            header("location: ../../vistas/proveedores.php");
         }else if($controlador=="comision"){
             
             $volumen = !empty($_POST['importe']) ? trim($_POST['importe']) : null;
@@ -630,7 +626,7 @@
                 require_once '../modelos/comision.php';
                 $fecha = date("Y-m-d");
                 $comision = new comision(null, $volumen, $porcentaje, $fecha);
-                $controlador_comision = new controlador($servidor, $nombreBd, "comisiones", $userBD);
+                $controlador_comision = new controlador("comisiones");
 
                 if(is_numeric($operacion) && $operacion=="0"){
                     $resultado_comision = $controlador_comision->guardar("gestionar_comision", $comision);
@@ -647,7 +643,7 @@
 
             $_SESSION['errores']=$errores;
 
-            header("location: ../../html/manejar_comisiones.php");
+            header("location: ../../vistas/manejar_comisiones.php");
 
         }else if($controlador=="detalles_compra"){            
 
@@ -655,11 +651,11 @@
             $proveedor = !empty($_POST['proveedor']) ? trim($_POST['proveedor']) : null;
 
             $i=1;
-            $terminado=false; 
+            $terminado=false;
 
             $errores = array();
             $registro = array();   
-            $imagenes = array();            
+            $imagenes = array();
 
             do{
                 if(!empty($_POST["registro$i"])){
@@ -676,7 +672,6 @@
             do{
                 if(!empty($_FILES["imagen$i"])){
                     $imagenes[$i]= $_FILES["imagen$i"]['tmp_name']!="" ?  $_FILES["imagen$i"] : null;
-
                     if(is_null($imagenes[$i])){
                         $errores['imagenVacia']="La imagen del producto $i no puede quedar vacio";
                     }
@@ -685,8 +680,7 @@
                     $terminado=true;
                 }
 
-            }while($terminado==false); 
-                    
+            }while($terminado==false);                    
 
             if(is_null($proveedor)||is_null($codigoCompra)||count($registro)==0||count($imagenes)==0){
                 $errores['vacio']="No pueden haber datos vacios";
@@ -719,7 +713,7 @@
                 require_once '../modelos/compra.php';
 
                 $compra = new compra($codigoCompra, $id_empleado, $proveedor, $fecha, $total);
-                $controlador_compra = new controlador($servidor, $nombreBd, "compras", $userBD);
+                $controlador_compra = new controlador("compras");
                 
                 //Si entra, puede irse a la tabla compras
                 if($operacion==0){
@@ -730,6 +724,8 @@
                         $errores['compra']="La compra no se guardó";
                     }
                 }                
+
+
 
                 if(count($errores)==0){
                     for($i=1; $i<=count($registro); $i++){                        
@@ -782,7 +778,7 @@
 
                                     require_once '../modelos/detalle_compra.php';
                                     $detalle = new detalle_compra($codigoCompra, $codigo, $cantidad);
-                                    $controlador_detalle = new controlador($servidor, $nombreBd, "detalles_compras", $userBD);
+                                    $controlador_detalle = new controlador("detalles_compras");
                                     
                                     $resultado_detalle = $controlador_detalle->guardar("gestionar_detalles_compras", $detalle);
 
@@ -802,9 +798,102 @@
                 }
             }
             $_SESSION['errores']=$errores;
-            header("location:../../html/compras.php");
+            header("location:../../vistas/compras.php");
 
+        }else if($controlador=="detalles_venta"){
+            //var_dump($_POST);            
+            //echo '<br><br><br>';
+           //var_dump($_SESSION);
+           //variables  que necesito
+            $codigo = !empty($_POST['codigoVenta']) ? trim($_POST['codigoVenta']) : null;                                  
+            $idvendedor = $_SESSION ["usuario_logueado"]['0']['id'];
+            $idcliente = !empty($_POST["cliente"]) ? trim($_POST['cliente']) : null; 
+            $fecha = date("Y-m-d");
+            $totalventa=0;
+            
+            //total();            
+            $i=1;
+            $terminado=false;
+            $articulo = array();
+            $errores = array();
+
+            do{
+                if(!empty($_POST["articulo$i"])){
+                    //$articulos[$i]= $_POST["articulo$i"];
+                    $articulo[$i] = explode(',',$_POST["articulo$i"]);
+                    $idproducto = $articulo[$i][0];
+                    $cantidad = is_numeric($articulo[$i][1]) ? $articulo[$i][1] : null;
+                    $consulta = total($idproducto);           
+                            
+                    if(is_null($cantidad)){
+                        $errores['cantidad'] ='La cantidad debe ser numerica';
+                        $terminado = true;                                            
+                    }else if(!empty($consulta)){
+                        $precio = $consulta[0]["Precio_ventas"];
+                        $total = $cantidad * $precio;                
+                        $totalventa += $total;     //estaba en plural pero sigue saliendo solo '|'            
+                    }            
+                        $i++;
+                }else{
+                    $terminado=true;
+                }
+            }while($terminado==false);         
+            
+            if(empty($idcliente)){
+                $errores['idcliente'] = 'Debe elegir un Cliente';
+            }
+            
+            if(empty($articulo)){
+                $errores['articulo'] = 'Debe añadir un Articulo';
+            }
+
+            if(empty($errores)){
+                
+                require_once('../modelos/venta.php');
+                $datos = new venta( $codigo,$idvendedor,$idcliente,$fecha,$totalventa);
+                $control = new controlador('ventas');
+                //$guard = array();
+                //procedimiento = procrdimiento
+                if($operacion == 0){
+                    
+                    $guard = $control->guardar('gestionar_ventas',$datos);
+
+                    if($guard){
+                        $_SESSION['venta']="La venta se guardó";
+                    }else{
+                        $errores['venta']="La venta no se guardó";                                              
+                    }
+                    
+                    if(empty($errores)){
+                       
+                        /////////// DETALLES VENTAS   //////////////
+                        require_once('../modelos/detalles_ventas.php');
+                        $control_detalles = new controlador('detalles_ventas');
+                        $i = 1;
+
+                        do{
+                            $idproducto = $articulo[$i][0];
+                            $cantidad = is_numeric($articulo[$i][1]) ? $articulo[$i][1] : null;
+
+                            $detalle_venta = new detalles_ventas($codigo,$idproducto,$cantidad); 
+                            $guardar = $control_detalles->guardar('gestionar_detalles_ventas',$detalle_venta);
+
+                            if($guardar){
+                                $_SESSION['detalle_venta'][$i]="El producto $i se guardó en la venta";
+                            }else{
+                                $errores['detalle_venta'][$i]="El producto $i no se guardó en la venta";                                              
+                            }                                                    
+                            $i++;
+                        }while($i <= count($articulo));      
+
+                    }else{
+                        $errores['detalles_ventas'] = ' No se pueden guardar los productos';
+                    }
+                }                                                        
+            }                                                                                                  
+            $_SESSION['errores'] = $errores;
+            header('location:../../vistas/registrarVenta.php');              
         }        
-
+        
     }    
 ?>

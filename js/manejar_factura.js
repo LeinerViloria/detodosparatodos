@@ -12,7 +12,10 @@ var flag=false;
 function agregar(){        
     info=document.getElementById("codigo").value;
     cantidad=document.getElementById("cant").value;
-    
+    console.log(info);
+    console.log(cantidad);
+    console.log(totalCompra);
+    console.log(flag);
     if(codigo!=="" && codigo!="Seleccione un producto" && cantidad!=="" && cantidad>0){
         var apartado=document.getElementById("btn-quitar");        
 
@@ -69,15 +72,17 @@ function agregar(){
                 listando.pop(); 
                 totalCompra.pop()
                 
-                if(listando.length==0){                                        
+                if(listando.length==0){         
+                    var btn = document.getElementById("quitar"); 
                     flag=false;
-                    var btn = document.getElementById("quitar");
                     padre = btn.parentNode;
                     padre.removeChild(btn);
                     document.getElementById("totalCompra").value="";
+
                 }else{
                     document.getElementById("totalCompra").value=sumar();
-                }                
+                }
+
                     
             }        
                       

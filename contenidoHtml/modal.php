@@ -136,7 +136,7 @@ function modal_cliente(){
     <div class="w3-modal-content w3-card-4 w3-animate-zoom">
         <!--Cabecera del modal-->
         <header class="w3-container w3-teal" style="background-color:#0d6efd!important"> 
-            <a href="../html/home.php"><span class="w3-button w3-display-topright">&times;</span></a>
+            <a href="../vistas/home.php"><span class="w3-button w3-display-topright">&times;</span></a>
             <h2 class="modal-title" id="exampleModalLabel">Nuevo cliente</h2>
         </header>
 
