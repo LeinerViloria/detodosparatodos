@@ -32,8 +32,7 @@
 		</div>		
 		<!-- Enlaces -->
 		<div class="justify-content-center" id="enlaces">
-			<ul>
-				<a href="./ventas.php">Detalle de ventas</a>
+			<ul>				
 				<a href="./registrarVenta.php">Registrar ventas</a>
 				<a href="./manejar_clientes.php">Registrar clientes</a>
 				<a href="./comisiones.php">Tus comisiones</a>	

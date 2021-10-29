@@ -326,3 +326,14 @@ function years(){
     $years = buscar($conexion,$tabla,1,$sentencia);
     return $years;
 }
+
+function detallesVentas(){
+    $conexion = conectar();
+    $tabla="";
+    $sentencia="SELECT v.fecha 'Fecha de venta', p.nombre 'Nombre del producto', p.Precio_ventas 'Precio de venta', dv.cantidad Cantidad, CONCAT(e.nombres, ' ', e.apellidos) 'Nombre del empleado', CONCAT(c.nombres,' ',c.apellidos) 'Nombres del cliente'
+        FROM detalles_ventas dv, ventas v, empleados e, clientes c, productos p
+        WHERE dv.id_venta=v.id AND dv.producto_id=p.id AND v.empleado_id=e.id AND v.cliente_id=c.id
+        ORDER BY 1";
+    $detalles = buscar($conexion,$tabla,1,$sentencia);
+    return $detalles;
+}
