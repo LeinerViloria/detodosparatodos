@@ -31,9 +31,10 @@ class controlador{
             }
             
         }
-        $sql.=");";
+        $sql.=");";        
 
         $sentencia = $this->conexion->prepare($sql);
+        
         $resultado = $sentencia->execute();        
         
         if($resultado){

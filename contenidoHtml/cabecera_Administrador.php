@@ -29,16 +29,17 @@
 				<?=$_SESSION['usuario_logueado'][0]['nombres']?> <?=$_SESSION['usuario_logueado'][0]['apellidos']?>
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href='../backend/controladores/cerrarSesion.php'">Cerrar sesion</button>
 			</i>						
-		</div>		
+		</div>			
 		<!-- Enlaces -->
 		<div class="justify-content-center" id="enlaces">			
 				<ul>					
 					<a href="./ventas.php">Detalle de ventas</a>
 					<a href="./proveedores.php">Proveedores</a>					
-					<a href="./compras.php">Comprar productos</a>
+					<a href="./compras.php">Comprar</a>
 					<a href="./manejar_empleados.php">Empleados</a>					
-					<a href="./porcentaje.php">Porcentaje anual</a>	
+					<a href="./porcentaje.php">Porcentaje</a>	
 					<a href="./manejar_comisiones.php">Comisiones</a>				
 				</ul>			
-		</div>			  
+		</div>		
+		<hr>	  
 	</nav>		

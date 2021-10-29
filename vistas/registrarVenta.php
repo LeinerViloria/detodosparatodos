@@ -8,8 +8,8 @@ if(!empty($_SESSION['usuario_logueado'])){
 		$_SESSION['titulo']="Registrar venta";
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
 	require_once '../backend/servicios/listando.php';
-	$productos = !empty(productos(0)) ? productos(0) : null;	
-
+	$productos = !empty(productos(0)) ? productos(0) : null;		
+	
 	function generandoCodigo($devolver){
 		$DesdeLetra = "a";
 		$HastaLetra = "z";
@@ -73,7 +73,9 @@ if(!empty($_SESSION['usuario_logueado'])){
 									<option>Seleccione el producto</option>
 									<?php if(!empty($productos)): ?>									
 								<?php foreach($productos as $indice => $producto):?>
+									<?php if($producto['stock']>0):?>
 									<option id="<?=$producto['id']?>" value="<?=$producto['id']?>,<?=$producto['precio']?>"><?=$producto['Nombre del producto']?></option>									
+									<?php endif; ?>
 								<?php endforeach; ?>
 									<?php endif; ?>
 								</select>

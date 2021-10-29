@@ -26,7 +26,8 @@
 			<!--para el inicio de sesion-->
 			<i class="fa fa-user-o" id="inicio"><a href="vistas/login.php">Iniciar</a></i>			
 		</div>				
-	  </nav>	
+	  </nav>
+	  <hr>
 	<?php 		
 		require_once 'contenidoHtml/contenido_productos.php';		
 		contenido(2);

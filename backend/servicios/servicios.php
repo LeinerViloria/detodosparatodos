@@ -824,15 +824,22 @@
                     $idproducto = $articulo[$i][0];
                     $cantidad = is_numeric($articulo[$i][1]) ? $articulo[$i][1] : null;
                     $consulta = total($idproducto);           
-                            
-                    if(is_null($cantidad)){
-                        $errores['cantidad'] ='La cantidad debe ser numerica';
+                    $cantidadDisponible = !empty(cantidad_disponible($idproducto)) ? cantidad_disponible($idproducto)[0]['stock'] : null;
+
+
+                    if(is_null($cantidad) || is_null($cantidadDisponible)){
+                        $errores['cantidad'][$i] ='Hubo un problema con la cantidad del producto '.$i;
                         $terminado = true;                                            
                     }else if(!empty($consulta)){
                         $precio = $consulta[0]["Precio_ventas"];
                         $total = $cantidad * $precio;                
-                        $totalventa += $total;     //estaba en plural pero sigue saliendo solo '|'            
-                    }            
+                        $totalventa += $total;     
+                    }
+                    //Para ver si hay disponible la cantidad solicitada
+                    if(!empty($cantidadDisponible) && $cantidad>$cantidadDisponible){
+                        $errores['disponible'][$i]="No está disponible la cantidad solicitada del producto $i";
+                    }
+
                         $i++;
                 }else{
                     $terminado=true;
@@ -845,15 +852,14 @@
             
             if(empty($articulo)){
                 $errores['articulo'] = 'Debe añadir un Articulo';
-            }
-
+            }            
+                    
             if(empty($errores)){
                 
                 require_once('../modelos/venta.php');
                 $datos = new venta( $codigo,$idvendedor,$idcliente,$fecha,$totalventa);
                 $control = new controlador('ventas');
-                //$guard = array();
-                //procedimiento = procrdimiento
+               
                 if($operacion == 0){
                     
                     $guard = $control->guardar('gestionar_ventas',$datos);
@@ -874,12 +880,15 @@
                         do{
                             $idproducto = $articulo[$i][0];
                             $cantidad = is_numeric($articulo[$i][1]) ? $articulo[$i][1] : null;
-
-                            $detalle_venta = new detalles_ventas($codigo,$idproducto,$cantidad); 
+                            $detalle_venta = new detalles_ventas($codigo,$idproducto,intval($cantidad)); 
                             $guardar = $control_detalles->guardar('gestionar_detalles_ventas',$detalle_venta);
 
                             if($guardar){
                                 $_SESSION['detalle_venta'][$i]="El producto $i se guardó en la venta";
+                                $actualizacion = actualizandoCantidad($detalle_venta->id_producto, $detalle_venta->cantidad);
+                                if(!$actualizacion){
+                                    $errores['actualizarCantidad'][$i]="No se pudo actualizar la cantidad del producto $i";
+                                }
                             }else{
                                 $errores['detalle_venta'][$i]="El producto $i no se guardó en la venta";                                              
                             }                                                    
@@ -889,8 +898,10 @@
                     }else{
                         $errores['detalles_ventas'] = ' No se pueden guardar los productos';
                     }
-                }                                                        
-            }                                                                                                  
+                }                                                       
+            }else{
+                $errores['venta']="La venta no se guardó";
+            }                                                                                                   
             $_SESSION['errores'] = $errores;
             header('location:../../vistas/registrarVenta.php');              
         }        

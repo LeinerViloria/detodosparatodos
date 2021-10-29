@@ -268,8 +268,7 @@ function insertandoProducto($producto){
     if(!empty($resultado) && $resultado[0]['cantidad']!=0){
         $stock = "SELECT stock FROM productos WHERE id='$producto->id'";
         $cantidad=buscar($conexion, $tabla, 1, $stock);  
-        $nuevaCantidad = (intval($producto->stock)+intval($cantidad[0]['stock']));                              
-        //$sql=$conexion->prepare("UPDATE productos SET familia_id='$producto->id_familia', imagen='$producto->imagen', nombre='$producto->nombre', precio_compra=$producto->precioCompra, precio_ventas=$producto->precioVenta, stock=".(intval($producto->stock)+intval($cantidad[0]['stock'])).", descripcion='$producto->descripcion' WHERE id='$producto->id'");
+        $nuevaCantidad = (intval($producto->stock)+intval($cantidad[0]['stock']));                                      
         $sql=$conexion->prepare("UPDATE productos SET familia_id=:familia_id, imagen=:imagen, nombre=:nombre, precio_compra=:precio_Compra, precio_ventas=:precioVentas, stock=:stock, descripcion=:descripcion WHERE id=:id");
         
         $sql->bindParam(':familia_id', $producto->id_familia, PDO::PARAM_STR);
@@ -336,4 +335,24 @@ function detallesVentas(){
         ORDER BY 1";
     $detalles = buscar($conexion,$tabla,1,$sentencia);
     return $detalles;
+}
+
+function cantidad_disponible($idProducto){
+    $conexion = conectar(1);
+    $tabla="";
+    $sentencia="SELECT stock
+        FROM productos
+        WHERE id='$idProducto'";
+    $cantidad = buscar($conexion,$tabla,1,$sentencia);
+    return $cantidad;
+}
+
+function actualizandoCantidad($idProducto, $cantidad){
+    $conexion = conectar(1);
+    $tabla="";
+    $sentencia="UPDATE productos SET stock=(stock-$cantidad)        
+        WHERE id='$idProducto'";
+    
+    $sentencia = $conexion->prepare($sentencia);
+    return $sentencia->execute();
 }

@@ -37,5 +37,6 @@
 				<a href="./manejar_clientes.php">Registrar clientes</a>
 				<a href="./comisiones.php">Tus comisiones</a>	
 			</ul>
-		</div>			  
+		</div>	
+		<hr>		  
 	  </nav>

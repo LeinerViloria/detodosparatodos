@@ -6,8 +6,6 @@ function contenido($ruta, $ruta_origen="./"){
 	$productos = productos($ruta);
 	
 ?>
-<br>
-<hr>
 <div class="wrap">		
 		<div class="store-wrapper">
 			<div class="category_list">
@@ -20,7 +18,12 @@ function contenido($ruta, $ruta_origen="./"){
 			</div>
 			<section class="products-list">
 				<?php if(!empty($productos)): ?>
-				<?php foreach($productos as $producto):?>					
+				<?php					
+					$productosMostrados=0;
+					 foreach($productos as $producto):
+						if($producto['stock']>0):
+							$productosMostrados++;
+				?>					
 					<div class="product-item" category="<?=$producto['Nombre de familia']?>">
 						
 						<div class="imagen">
@@ -48,7 +51,15 @@ function contenido($ruta, $ruta_origen="./"){
 						</table>
 						
 					</div>
-				<?php endforeach;?>	
+				<?php 
+						endif;
+					endforeach;
+						if($productosMostrados==0):
+							echo "<h2>Se acabaron los productos</h2>";
+						endif;
+					else:
+						echo "<h2><strong>No hay productos</strong></h2>";
+				?>	
 				<?php endif; ?>						
 		</section>
 	</div>

@@ -49,7 +49,7 @@ if(!empty($_SESSION['usuario_logueado'])){
             ?>
 
             <!--Tarjeta-->
-            <h2>Registrar Proveedores</h2>
+            <h2>Manejar proveedores</h2>
             <div class="card card-body">
                 <form action="../backend/servicios/servicios.php" method="POST">
                     <!--Inputs formulario-->
