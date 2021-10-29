@@ -6,6 +6,7 @@
 	 
 if(!empty($_SESSION['usuario_logueado'])){	
     if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){
+    $_SESSION['titulo']="Manejar comisiones";
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';    
     require_once '../backend/servicios/listando.php';  
     require_once '../backend/controladores/alertas.php';      

@@ -13,7 +13,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 				</script>";					
 			die();
 		}
-		
+		$_SESSION['titulo']="Comprar productos";
 		require_once '../contenidoHtml/cabecera_Administrador.php';
 		$familias = !empty(familias()) ? familias() : null;
 		
@@ -41,7 +41,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 		}
 			
 ?>
-<h1>Comprar productos</h1>
+
 <div class="container p-4" id="contenedorCompras">
 	<div class="row">
 		<!--Contenedor del formulario-->

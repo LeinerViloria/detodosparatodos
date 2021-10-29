@@ -5,6 +5,7 @@
 	
 if(!empty($_SESSION['usuario_logueado'])){	
     if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){
+        $_SESSION['titulo']="Manejar empleados";
         require_once '../contenidoHtml/cabecera_Administrador.php';
         require_once '../backend/servicios/listando.php';         
 ?>

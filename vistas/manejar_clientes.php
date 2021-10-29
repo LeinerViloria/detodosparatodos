@@ -2,6 +2,7 @@
     require_once '../backend/controladores/destruirSesion.php';
 	if(!empty($_SESSION['usuario_logueado'])){	
         if($_SESSION['usuario_logueado']['cabecera']=="Vendedor"){
+        $_SESSION['titulo']="Manejar cliente";
         require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
 ?>
 

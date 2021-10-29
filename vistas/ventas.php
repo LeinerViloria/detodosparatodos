@@ -4,17 +4,15 @@
 	require_once '../backend/controladores/destruirSesion.php';
 	
 if(!empty($_SESSION['usuario_logueado'])){
-	if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){			
+	if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){	
+		$_SESSION['titulo']="Registrar ventas";		
 	require_once '../contenidoHtml/cabecera_Administrador.php';
 	require_once '../backend/servicios/listando.php';
 	$informacion = !empty(detallesVentas()) ? detallesVentas() : null;
 	
 	if(!is_null($informacion)){
 		setlocale(LC_ALL, 'es_Es');      
-?>
-
-	<h1>Registro de todas las ventas</h1>
-
+?>	
 
 	<table class="tftable" style="border:'1'">
 		<tr>

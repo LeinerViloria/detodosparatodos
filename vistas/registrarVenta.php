@@ -5,6 +5,7 @@
 require_once '../backend/controladores/destruirSesion.php';
 if(!empty($_SESSION['usuario_logueado'])){	
 	if($_SESSION['usuario_logueado']['cabecera']=="Vendedor"){
+		$_SESSION['titulo']="Registrar venta";
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
 	require_once '../backend/servicios/listando.php';
 	$productos = !empty(productos(0)) ? productos(0) : null;	

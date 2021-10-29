@@ -114,10 +114,15 @@ color:crimson;
 
 }
 #menu #logo{
-	display: inline-block;
+	display: flex;
 	width: 100%;
 	margin: 20px;
+	max-width: 95%;
+}
 
+#menu #logo h2{
+	width: 30%;
+	margin: 0px auto;
 }
 
 #menu #logo a{

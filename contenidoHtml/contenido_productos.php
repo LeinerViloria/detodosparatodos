@@ -6,8 +6,9 @@ function contenido($ruta, $ruta_origen="./"){
 	$productos = productos($ruta);
 	
 ?>
-<div class="wrap">
-		<h1>Catalogo de productos</h1>
+<br>
+<hr>
+<div class="wrap">		
 		<div class="store-wrapper">
 			<div class="category_list">
 				<a href="#" class="category_item" category="all">Todo</a>

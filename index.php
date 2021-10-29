@@ -22,11 +22,11 @@
 		<!--Poner aqui un logo para la tienda-->
 		<div id="logo">
 			<a href="index.php"><img src="images/logo.PNG" alt="aqui va  el logo" > </a>
+			<h2>Catalogo de productos</h2>			
 			<!--para el inicio de sesion-->
 			<i class="fa fa-user-o" id="inicio"><a href="vistas/login.php">Iniciar</a></i>			
 		</div>				
-	  </nav>
-	
+	  </nav>	
 	<?php 		
 		require_once 'contenidoHtml/contenido_productos.php';		
 		contenido(2);

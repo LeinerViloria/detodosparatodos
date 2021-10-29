@@ -24,7 +24,7 @@
 		<!--Poner aqui un logo para la tienda-->
 		<div id="logo">
 			<a href="./home.php"><img src="../images/logo.PNG" alt="de todos para todos" > </a>
-			
+			<h2><?=$_SESSION['titulo']?></h2>
 			<i class="fa fa-user-o" id="inicio">
 				<?=$_SESSION['usuario_logueado'][0]['nombres']?> <?=$_SESSION['usuario_logueado'][0]['apellidos']?>
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href='../backend/controladores/cerrarSesion.php'">Cerrar sesion</button>

@@ -3,6 +3,7 @@
 
 if(!empty($_SESSION['usuario_logueado'])){	
     if($_SESSION['usuario_logueado']['cabecera']=="Administrador"){
+        $_SESSION['titulo']="Porcentaje anual";
 		require_once '../contenidoHtml/cabecera_Administrador.php';
     require_once '../backend/controladores/alertas.php';    
     require_once '../backend/servicios/listando.php';  

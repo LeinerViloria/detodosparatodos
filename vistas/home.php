@@ -13,7 +13,7 @@
 				$_SESSION['usuario_logueado']['cabecera']=$nombreCabecera;
 			}
 		}
-
+		$_SESSION['titulo']="Catalogo de productos";
 		//Se crean los enlaces
 		require_once '../contenidoHtml/cabecera_'.$nombreCabecera.'.php';				
 		require_once '../contenidoHtml/contenido_productos.php';		
