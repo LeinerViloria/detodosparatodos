@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="../css/estilos.css">
 	<link rel="stylesheet" href="../css/registroVentas.css">
 	<link rel="stylesheet" href="../css/estilosCompraNueva.css">
-	<link rel="shortcut icon" href="../images/logo.PNG" type="image/x-icon">
+	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 	<script src="../js/jquery-3.2.1.js"></script>
 	<script src="../js/script.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
@@ -23,7 +23,7 @@
 	<nav id="menu">
 		<!--Poner aqui un logo para la tienda-->
 		<div id="logo">
-			<a href="./home.php"><img src="../images/logo.PNG" alt="aqui va  el logo" > </a>
+			<a href="./home.php"><img src="../images/logo.PNG" alt="de todos para todos" > </a>
 			
 			<i class="fa fa-user-o" id="inicio">
 				<?=$_SESSION['usuario_logueado'][0]['nombres']?> <?=$_SESSION['usuario_logueado'][0]['apellidos']?>

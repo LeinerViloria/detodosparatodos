@@ -14,7 +14,7 @@
     <title>Acceso</title>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/estilos.css">   
-    <link rel="shortcut icon" href="../images/logo.PNG" type="image/x-icon"> 
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon"> 
 </head>
 <body>
     <!--Queda a preferencia usar o no usar el main, es para estructura semántica-->

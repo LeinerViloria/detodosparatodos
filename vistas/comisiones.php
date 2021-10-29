@@ -7,14 +7,12 @@
 if(!empty($_SESSION['usuario_logueado'])){	
     if($_SESSION['usuario_logueado']['cabecera']=="Vendedor"){
 	require_once '../contenidoHtml/cabecera_'.$_SESSION['usuario_logueado']['cabecera'].'.php';
-    function aleatorio($min=1000, $max=30000){
-        return rand($min, $max);
-    }
     require_once '../backend/servicios/listando.php';
     
     $comisiones = !empty(infoComisiones()) ? infoComisiones()[0] : null;    
     $detalles = !empty(comisionVendedor()) ? comisionVendedor() : null;
     if(!empty($detalles)):
+        //Esto sirve para controlar las celdas que se combinan con más de una fila
         $years = !empty(years()) ? years() : null;
 
         $cantidadYears = array();
@@ -26,9 +24,8 @@ if(!empty($_SESSION['usuario_logueado'])){
             $cantidadYears[$detalles[$i]['Año']]+=1;                     
         }
 
-        $fecha = $detalles[0]['Mes'];
         setlocale(LC_ALL, 'es_Es');        
-        //var_dump(ucfirst($nombreMes));               
+        
 ?>
 
 <table id="infoComision" class="table table-striped">
@@ -53,6 +50,7 @@ if(!empty($_SESSION['usuario_logueado'])){
         <tr>
             <th scope="col">Años</th>
             <th scope="col">Meses</th>
+            <th scope="col">Cantidad de ventas</th>
             <th scope="col">Importe total de ventas</th>
             <th scope="col">Comision</th>    
         </tr>
@@ -61,8 +59,15 @@ if(!empty($_SESSION['usuario_logueado'])){
         <?php 
             $combinandoCelda = false;
             $iterador=0;
-            foreach($detalles as $detalle): var_dump($detalle);echo "<br><br>";
+            $cantidadTotal=0;
+            $importeTotal=0;
+            $comisionTotal=0;
+            foreach($detalles as $detalle): 
                 $iterador++; 
+                $comision = $detalle['cantidad']>=$comisiones['Volumen_Ventas'] ? $detalle['Precio total vendido']*$comisiones['Porcentajes']/100  : 0;                                
+                $cantidadTotal+=$detalle['cantidad'];
+                $importeTotal+=$detalle['Precio total vendido'];
+                $comisionTotal+=$comision;
         ?>
         <tr>
             <?php                 
@@ -80,16 +85,18 @@ if(!empty($_SESSION['usuario_logueado'])){
                 $nombreMes = strftime('%B', $dateObj->getTimestamp());
             ?>
             <th scope="row"><?=ucfirst($nombreMes)?></th>
+            <td><?=$detalle["cantidad"]?></td>
             <td>$<?=$detalle["Precio total vendido"]?></td>
-            <td><?php echo "$".aleatorio(); ?></td>    
+            <td>$<?=$comision?></td>    
         </tr>
         <?php endforeach; ?>
     <tfoot>
         <tr>    
             <td></td>        
             <td>Total</td>
-            <td><?php echo "$".aleatorio();?></td>
-            <td><?php echo "$".aleatorio();?></td>
+            <td><?=$cantidadTotal?></td>
+            <td>$<?=$importeTotal?></td>
+            <td>$<?=$comisionTotal?></td>  
         </tr>
     </tfoot>
 </table>

@@ -249,8 +249,12 @@ function productos($ruta){
 
 function infoComisiones(){
     $conexion = conectar();
-    $tabla="comisiones";
-    $comisiones=buscar($conexion, $tabla);
+    $tabla="";
+    $sql="SELECT Volumen_Ventas, Porcentajes
+        FROM comisiones
+        ORDER BY codigo DESC
+        LIMIT 1";
+    $comisiones=buscar($conexion, $tabla, 1, $sql);
     return $comisiones;
 }
 

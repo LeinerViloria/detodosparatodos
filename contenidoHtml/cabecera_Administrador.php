@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="../css/estilos.css">
 	<link rel="stylesheet" href="../css/registroVentas.css">
 	<link rel="stylesheet" href="../css/estilosCompraNueva.css">	
-	<link rel="shortcut icon" href="../images/logo.PNG" type="image/x-icon">
+	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
 	<script src="../js/jquery-3.2.1.js"></script>
 	<script src="../js/script.js"></script>
 	 <!-- debajo esta el codigo que me permite poner iconos de font awesome (recuerda buscar otra api para eso) -->
