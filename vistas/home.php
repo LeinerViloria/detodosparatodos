@@ -17,8 +17,23 @@
 		//Se crean los enlaces
 		require_once '../contenidoHtml/cabecera_'.$nombreCabecera.'.php';				
 		require_once '../contenidoHtml/contenido_productos.php';		
-		contenido(0, "../");
-		
+		contenido(0, "../");		
+	//Lo siguiente es para notificarle al administrador que hay productos que se acabaron
+	if($_SESSION['usuario_logueado']['cabecera']=="Administrador" && !empty($_SESSION['notificacion']))	:
+?>
+<script src="../js/push.min.js"></script>
+<script>
+	Push.create("Hola! Buen dia", {
+    body: "Hay productos que se acabaron! Una cantidad de <?=$_SESSION['notificacion']['total']?>. Por favor, compre mas",
+    icon: '../images/imagen.png',	
+	timeout: 7000,	
+    onClick: function () {  		
+        this.close();
+    }
+});
+</script>
+<?php	
+	endif;	
 		require_once '../contenidoHtml/pie_pagina.php';
 		
 	}else{

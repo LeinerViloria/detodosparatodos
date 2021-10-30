@@ -20,7 +20,9 @@ function contenido($ruta, $ruta_origen="./"){
 				<?php if(!empty($productos)): ?>
 				<?php					
 					$productosMostrados=0;
+					$productosTotales=0;
 					 foreach($productos as $producto):
+						$productosTotales++;
 						if($producto['stock']>0):
 							$productosMostrados++;
 				?>					
@@ -59,8 +61,13 @@ function contenido($ruta, $ruta_origen="./"){
 						endif;
 					else:
 						echo "<h2><strong>No hay productos</strong></h2>";
-				?>	
-				<?php endif; ?>						
+					endif;					
+					if($productosMostrados<$productosTotales): 						
+						$_SESSION['notificacion']['total']=$productosTotales-$productosMostrados;
+					else:
+						unset($_SESSION['notificacion']);
+					endif;					
+				?>					
 		</section>
 	</div>
 </div>
