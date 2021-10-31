@@ -22,7 +22,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 
                 if(!empty($informacion)){                    
                     $valor=$informacion[0]['valor']."%";
-                    $year=$informacion[0]['año'];
+                    $year=$informacion[0]['year'];
                     if($year<=(date('Y')-1)){
                         $placeholder="Porcentaje ".date('Y');
                     }else{

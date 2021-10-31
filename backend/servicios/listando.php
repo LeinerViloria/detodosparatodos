@@ -154,9 +154,9 @@ function obteniendo_porcentaje_actual(){
 
     $tabla="";    
 
-    $sql="SELECT valor, año
+    $sql="SELECT valor, year
         FROM porcentaje_anual
-        WHERE año=YEAR(CURDATE())";
+        WHERE year=YEAR(CURDATE())";
 
     $porcentaje = buscar($conexion, $tabla, 1, $sql);        
 
@@ -164,9 +164,9 @@ function obteniendo_porcentaje_actual(){
         //Al entrar aqui es porque en el año actual no hay registro
         //Entonces se busca a ver si hay registro del año pasado
         
-        $sql="SELECT valor, año
+        $sql="SELECT valor, year
         FROM porcentaje_anual
-        WHERE año<YEAR(CURDATE())
+        WHERE year<YEAR(CURDATE())
         ORDER BY 2 DESC
         LIMIT 1";
 
@@ -185,7 +185,7 @@ function obtener_ultima_hora(){
 
     $sql="SELECT momento_registro
         FROM porcentaje_anual
-        WHERE año=CURRENT_DATE()";
+        WHERE year=CURRENT_DATE()";
 
     $hora = buscar($conexion, $tabla, 1, $sql);            
 
@@ -199,7 +199,7 @@ function obtener_porcentaje_anual(){
 
     $sql = "SELECT valor
     FROM porcentaje_anual
-    WHERE año=CURRENT_DATE();";
+    WHERE year=CURRENT_DATE();";
 
     $valor = buscar($conexion, $tabla, 1, $sql);
 
