@@ -340,7 +340,7 @@
             }else if($valor>100){
                 $errores['valor']="El valor parece estar fuera del rango [1-100]";
             }
-            
+             
             if(count($errores)==0){
                 require_once '../modelos/porcentaje_anual.php';
                 

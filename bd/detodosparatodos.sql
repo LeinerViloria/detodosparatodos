@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2021 a las 18:16:07
+-- Tiempo de generación: 31-10-2021 a las 19:29:52
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -197,7 +197,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `gestionar_porcentaje_anual` (IN `p_
             
     IF(p_operacion=0) THEN
     	
-    	SELECT COUNT(1) INTO numeroregistros FROM porcentaje_anual WHERE año = p_anno;
+    	SELECT COUNT(1) INTO numeroregistros FROM porcentaje_anual WHERE year = p_anno;
         IF(numeroregistros = 0) THEN
             INSERT INTO porcentaje_anual VALUES(p_valor, p_anno, p_time);
         ELSE 
@@ -332,8 +332,6 @@ DELIMITER ;
 --
 -- Estructura de tabla para la tabla `clientes`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE `clientes` (
@@ -342,12 +340,6 @@ CREATE TABLE `clientes` (
   `nombres` varchar(35) COLLATE latin1_spanish_ci NOT NULL,
   `apellidos` varchar(35) COLLATE latin1_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `clientes`:
---   `id_Empleado`
---       `empleados` -> `id`
---
 
 --
 -- Volcado de datos para la tabla `clientes`
@@ -366,8 +358,6 @@ INSERT INTO `clientes` (`id`, `id_Empleado`, `nombres`, `apellidos`) VALUES
 --
 -- Estructura de tabla para la tabla `comisiones`
 --
--- Creación: 31-10-2021 a las 17:14:06
---
 
 DROP TABLE IF EXISTS `comisiones`;
 CREATE TABLE `comisiones` (
@@ -378,24 +368,22 @@ CREATE TABLE `comisiones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- RELACIONES PARA LA TABLA `comisiones`:
---
-
---
 -- Volcado de datos para la tabla `comisiones`
 --
 
 INSERT INTO `comisiones` (`codigo`, `Volumen_Ventas`, `Porcentajes`, `year`) VALUES
 (1, 1000, 16, '2021-10-22'),
 (2, 2, 16, '2021-10-29'),
-(3, 2, 16, '2021-10-29');
+(3, 2, 16, '2021-10-29'),
+(4, 25, 14, '2021-10-31'),
+(5, 54, 23, '2021-10-31'),
+(6, 6, 34, '2021-10-31'),
+(7, 45, 34, '2021-10-31');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `compras`
---
--- Creación: 22-10-2021 a las 00:14:21
 --
 
 DROP TABLE IF EXISTS `compras`;
@@ -406,14 +394,6 @@ CREATE TABLE `compras` (
   `fecha` datetime NOT NULL,
   `total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `compras`:
---   `id_Empleado`
---       `empleados` -> `id`
---   `codigo_provedor`
---       `provedores` -> `codigo`
---
 
 --
 -- Volcado de datos para la tabla `compras`
@@ -442,8 +422,6 @@ INSERT INTO `compras` (`id`, `id_Empleado`, `codigo_provedor`, `fecha`, `total`)
 --
 -- Estructura de tabla para la tabla `detalles_compras`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `detalles_compras`;
 CREATE TABLE `detalles_compras` (
@@ -451,14 +429,6 @@ CREATE TABLE `detalles_compras` (
   `id_producto` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `detalles_compras`:
---   `id_compras`
---       `compras` -> `id`
---   `id_producto`
---       `productos` -> `id`
---
 
 --
 -- Volcado de datos para la tabla `detalles_compras`
@@ -488,8 +458,6 @@ INSERT INTO `detalles_compras` (`id_compras`, `id_producto`, `cantidad`) VALUES
 --
 -- Estructura de tabla para la tabla `detalles_ventas`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `detalles_ventas`;
 CREATE TABLE `detalles_ventas` (
@@ -497,14 +465,6 @@ CREATE TABLE `detalles_ventas` (
   `producto_id` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `detalles_ventas`:
---   `producto_id`
---       `productos` -> `id`
---   `id_venta`
---       `ventas` -> `id`
---
 
 --
 -- Volcado de datos para la tabla `detalles_ventas`
@@ -539,8 +499,6 @@ INSERT INTO `detalles_ventas` (`id_venta`, `producto_id`, `cantidad`) VALUES
 --
 -- Estructura de tabla para la tabla `empleados`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `empleados`;
 CREATE TABLE `empleados` (
@@ -550,12 +508,6 @@ CREATE TABLE `empleados` (
   `apellidos` varchar(35) COLLATE latin1_spanish_ci NOT NULL,
   `telefono` varchar(12) COLLATE latin1_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `empleados`:
---   `perfil_id`
---       `perfiles` -> `id`
---
 
 --
 -- Volcado de datos para la tabla `empleados`
@@ -568,7 +520,7 @@ INSERT INTO `empleados` (`id`, `perfil_id`, `nombres`, `apellidos`, `telefono`) 
 ('24', 'A2', 'Cristiano', 'Ronaldo', NULL),
 ('28', 'A2', 'Merlys', 'Perez', '34566897'),
 ('34', 'A1', 'Leiner', 'Viloria', NULL),
-('6', 'A1', 'Jaiver', 'Rodriguez', NULL),
+('6', 'A1', 'Jaiver', 'Uribe', NULL),
 ('78', 'A2', 'Yjuyt', 'Ytuyg', NULL);
 
 -- --------------------------------------------------------
@@ -576,18 +528,12 @@ INSERT INTO `empleados` (`id`, `perfil_id`, `nombres`, `apellidos`, `telefono`) 
 --
 -- Estructura de tabla para la tabla `familias`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `familias`;
 CREATE TABLE `familias` (
   `id` varchar(6) COLLATE latin1_spanish_ci NOT NULL,
   `nombre` varchar(30) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `familias`:
---
 
 --
 -- Volcado de datos para la tabla `familias`
@@ -604,18 +550,12 @@ INSERT INTO `familias` (`id`, `nombre`) VALUES
 --
 -- Estructura de tabla para la tabla `perfiles`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `perfiles`;
 CREATE TABLE `perfiles` (
   `id` varchar(12) COLLATE latin1_spanish_ci NOT NULL,
   `nombre` varchar(30) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `perfiles`:
---
 
 --
 -- Volcado de datos para la tabla `perfiles`
@@ -630,9 +570,6 @@ INSERT INTO `perfiles` (`id`, `nombre`) VALUES
 --
 -- Estructura de tabla para la tabla `porcentaje_anual`
 --
--- Creación: 31-10-2021 a las 17:10:24
--- Última actualización: 31-10-2021 a las 16:37:47
---
 
 DROP TABLE IF EXISTS `porcentaje_anual`;
 CREATE TABLE `porcentaje_anual` (
@@ -642,24 +579,19 @@ CREATE TABLE `porcentaje_anual` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- RELACIONES PARA LA TABLA `porcentaje_anual`:
---
-
---
 -- Volcado de datos para la tabla `porcentaje_anual`
 --
 
 INSERT INTO `porcentaje_anual` (`valor`, `year`, `momento_registro`) VALUES
+(12, 2018, '2018-10-31 17:37:47'),
 (6, 2019, '2019-10-20 23:22:40'),
 (3, 2020, '2020-10-30 19:02:44'),
-(12, 2021, '2021-10-31 17:37:47');
+(23, 2021, '2021-10-31 19:25:51');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `productos`
---
--- Creación: 22-10-2021 a las 00:14:21
 --
 
 DROP TABLE IF EXISTS `productos`;
@@ -673,12 +605,6 @@ CREATE TABLE `productos` (
   `stock` int(11) NOT NULL,
   `descripcion` varchar(120) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `productos`:
---   `familia_id`
---       `familias` -> `id`
---
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -704,8 +630,6 @@ INSERT INTO `productos` (`id`, `familia_id`, `imagen`, `nombre`, `precio_compra`
 --
 -- Estructura de tabla para la tabla `provedores`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `provedores`;
 CREATE TABLE `provedores` (
@@ -713,10 +637,6 @@ CREATE TABLE `provedores` (
   `nombre` varchar(40) COLLATE latin1_spanish_ci NOT NULL,
   `telefono` varchar(12) COLLATE latin1_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `provedores`:
---
 
 --
 -- Volcado de datos para la tabla `provedores`
@@ -733,18 +653,12 @@ INSERT INTO `provedores` (`codigo`, `nombre`, `telefono`) VALUES
 --
 -- Estructura de tabla para la tabla `redes_sociales`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `redes_sociales`;
 CREATE TABLE `redes_sociales` (
   `codigo` varchar(8) COLLATE latin1_spanish_ci NOT NULL,
   `nombre` varchar(40) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `redes_sociales`:
---
 
 --
 -- Volcado de datos para la tabla `redes_sociales`
@@ -761,8 +675,6 @@ INSERT INTO `redes_sociales` (`codigo`, `nombre`) VALUES
 --
 -- Estructura de tabla para la tabla `redes_usuarios`
 --
--- Creación: 22-10-2021 a las 00:14:21
---
 
 DROP TABLE IF EXISTS `redes_usuarios`;
 CREATE TABLE `redes_usuarios` (
@@ -770,14 +682,6 @@ CREATE TABLE `redes_usuarios` (
   `id_Cliente` varchar(12) COLLATE latin1_spanish_ci NOT NULL,
   `Nombre_Usuario` varchar(40) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `redes_usuarios`:
---   `id_Cliente`
---       `clientes` -> `id`
---   `codigo_Red`
---       `redes_sociales` -> `codigo`
---
 
 --
 -- Volcado de datos para la tabla `redes_usuarios`
@@ -802,8 +706,6 @@ INSERT INTO `redes_usuarios` (`codigo_Red`, `id_Cliente`, `Nombre_Usuario`) VALU
 --
 -- Estructura de tabla para la tabla `telefonos`
 --
--- Creación: 22-10-2021 a las 00:20:11
---
 
 DROP TABLE IF EXISTS `telefonos`;
 CREATE TABLE `telefonos` (
@@ -811,18 +713,10 @@ CREATE TABLE `telefonos` (
   `numero` varchar(12) COLLATE latin1_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
---
--- RELACIONES PARA LA TABLA `telefonos`:
---   `id_Cliente`
---       `clientes` -> `id`
---
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuarios`
---
--- Creación: 22-10-2021 a las 00:14:21
 --
 
 DROP TABLE IF EXISTS `usuarios`;
@@ -833,19 +727,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
--- RELACIONES PARA LA TABLA `usuarios`:
---   `id_Empleado`
---       `empleados` -> `id`
---
-
---
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_Empleado`, `Correo`, `password`) VALUES
 ('24', 'cr7@gmail.com', '$2y$04$u/9iQapZjTNjefSby8nnc.ElIfQY9P7IYTIB3yQwNX2pUz9r0.a/K'),
 ('12', 'f@gmail.com', '$2y$04$RriFsbUbFH8G571I0K9qhu42hZE9RVfh49z68kNxfDSXbo6iQj2Bq'),
-('6', 'j@gmail.com', '$2y$04$nUSTTYzdo4Z7aTeEpzr01.PglNw.wy3LX5JKpHJMUP7L2bUq4wi.m'),
+('6', 'j@gmail.com', '$2y$04$ovZcHj5u2ZPrhcb0TqG..eSr/.Rfqtn8YUfsN01QeXSRIiDCEW9O.'),
 ('17', 'jd@gmail.com', '$2y$04$etDb2Y8PjcIXw505qZci6.r79mM3Qj6P9g/T5T8v2ojXgUGuLX5Si'),
 ('78', 'k@h.com', '$2y$04$n805/aszmR.IMjVbE/kvTeYBC1xxG0EzxQA0dPN7YaBi/zPJScr5y'),
 ('34', 'lv@gmail.com', '$2y$04$FzwuHzGeUQoUYP.IA3/cKemgw4W3XZ7TmzgATgetUPw89vantxTRG'),
@@ -857,8 +745,6 @@ INSERT INTO `usuarios` (`id_Empleado`, `Correo`, `password`) VALUES
 --
 -- Estructura de tabla para la tabla `ventas`
 --
--- Creación: 29-10-2021 a las 16:10:55
---
 
 DROP TABLE IF EXISTS `ventas`;
 CREATE TABLE `ventas` (
@@ -868,14 +754,6 @@ CREATE TABLE `ventas` (
   `fecha` date NOT NULL,
   `total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
-
---
--- RELACIONES PARA LA TABLA `ventas`:
---   `cliente_id`
---       `clientes` -> `id`
---   `empleado_id`
---       `empleados` -> `id`
---
 
 --
 -- Volcado de datos para la tabla `ventas`
@@ -1017,7 +895,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `comisiones`
 --
 ALTER TABLE `comisiones`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
