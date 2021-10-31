@@ -59,14 +59,14 @@ function contenido($ruta, $ruta_origen="./"){
 						if($productosMostrados==0):
 							echo "<h2>Se acabaron los productos</h2>";
 						endif;
+						if($productosMostrados<$productosTotales): 						
+							$_SESSION['notificacion']['total']=$productosTotales-$productosMostrados;
+						else:
+							unset($_SESSION['notificacion']);
+						endif;
 					else:
 						echo "<h2><strong>No hay productos</strong></h2>";
-					endif;					
-					if($productosMostrados<$productosTotales): 						
-						$_SESSION['notificacion']['total']=$productosTotales-$productosMostrados;
-					else:
-						unset($_SESSION['notificacion']);
-					endif;					
+					endif;															
 				?>					
 		</section>
 	</div>
