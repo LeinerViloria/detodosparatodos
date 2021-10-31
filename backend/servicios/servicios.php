@@ -796,7 +796,7 @@
                             
                     }
                 }
-            }
+            }            
             $_SESSION['errores']=$errores;
             header("location:../../vistas/compras.php");
 
