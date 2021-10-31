@@ -150,11 +150,11 @@ function modal_cliente(){
             </div>
             <div class="form-group">
                 <label for="nombres" class="col-form-label">Nombres: </label>
-                <input type="text" name="nombres" id="nombres" class="form-control" required="required" pattern="[a-z ]+">
+                <input type="text" name="nombres" id="nombres" class="form-control" required="required" pattern="[a-zA-Z ]+">
             </div>
             <div class="form-group">
                 <label for="apellidos" class="col-form-label">Apellidos: </label>
-                <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-z ]+">
+                <input type="text" name="apellidos" id="apellidos" class="form-control" required="required" pattern="[a-zA-Z ]+">
             </div>                 
             <input type="hidden" name="trabajador" id="trabajador" value="<?=$_SESSION['usuario_logueado'][0]['id'];?>">
             <!--Este div es para los telefonos que el usuario quiera agregar-->
