@@ -60,46 +60,46 @@
                 }
             }
 
-            if(is_null($perfil)){
+            if(is_null($perfil)&&$operacion==0){
                 $errores['perfil']="El perfil no puede quedar vacio";
             }
 
-            if(is_numeric($nombres) || preg_match("/[0-9]/", $nombres)){                
+            if((is_numeric($nombres) || preg_match("/[0-9]/", $nombres))&&$operacion==0){                
                 $errores['nombre']="El nombre no admite numeros";
             }  
             
-            if(!ctype_alpha($nombres)){                
+            if(!ctype_alpha($nombres)&&$operacion==0){                
                 $errores['nombreerror2']="El nombre solo debe contener letras";
             } 
             
-            if(is_numeric($apellidos) || preg_match("/[0-9]/", $apellidos)){                
+            if((is_numeric($apellidos) || preg_match("/[0-9]/", $apellidos))&&$operacion==0){                
                 $errores['apellidos']="El apellido no admite numeros";
             } 
             
-            if(!ctype_alpha($apellidos)){                
+            if(!ctype_alpha($apellidos)&&$operacion==0){                
                 $errores['apellidoserror2']="El apellido solo debe contener letras";
             }
 
-            if(!is_numeric($telefono) && !is_null($telefono)){                
+            if(!is_numeric($telefono) && !is_null($telefono) && $operacion==0){                
                 $errores['tel']="El telefono es solo numerico";
             } 
 
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)&&$operacion==0){
                 $errores['email']="Ingrese un email correcto";
             }
 
-            if(is_null($password)){
+            if(is_null($password)&&$operacion==0){
                 $errores['password']="La contraseña no puede quedar vacia";
-            }else if(strlen($password)<6){                
+            }else if(strlen($password)<6&&$operacion==0){                
                 $errores['password']="La longitud minima de la contraseña es de 6";
-            }else if(strlen($password)>16){                
+            }else if(strlen($password)>16&&$operacion==0){                
                 $errores['password']="La longitud maxima de la contraseña es de 16";
             }else{
                 //Se encripta la contraseña si no hay problemas con la original
                 $password = password_hash($password, PASSWORD_BCRYPT, ['cost'=>4]) ; 
             }  
             
-            if(is_null($perfil)){
+            if(is_null($perfil)&&$operacion==0){
                 $errores['perfil']="El perfil no puede quedar vacio";
             }
 
@@ -109,7 +109,7 @@
             if($pase==false){
                 $errores['pase']="El correo ingresado es usado por otro usuario";
             }            
-                        
+            
             //Si no hay errores
             if(count($errores)==0 && $verificacion==true){                
                 
@@ -134,6 +134,20 @@
                         }
                     }else{
                         $errores['errores']['general']="No se guardó el empleado";
+                    }
+                }else if(is_numeric($operacion) && $operacion==1){                    
+                    //Primero se borra su usuario
+                    $cuenta_borrada=$controlador_usuario->eliminar("gestionar_usuario",$usuario);
+                    if($cuenta_borrada){
+                        //Si se borró la cuenta, se borra a su usuario
+                        $usuario_borrado = $controlador_empleado->eliminar("gestionar_empleado",$empleado);
+                        if($usuario_borrado){
+                            $_SESSION['completado']="Se ha eliminado exitosamente";                             
+                        }else{
+                            $errores["errores"]["borrado"]="El empleado no se eliminó";   
+                        }
+                    }else{
+                        $errores["errores"]["borrado"]="La cuenta no se eliminó";
                     }
                 }
                 
@@ -719,7 +733,7 @@
                 if($operacion==0){
                     $resultado_compra = $controlador_compra->guardar("gestionar_compra", $compra);
                     if($resultado_compra){
-                        $_SESSION['compra']="La compra se guardó";
+                        $_SESSION['completado']="La compra se guardó";
                     }else{
                         $errores['compra']="La compra no se guardó";
                     }

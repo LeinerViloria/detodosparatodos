@@ -50,7 +50,19 @@ if(!empty($_SESSION['usuario_logueado'])){
                                     <div class="text-center">
                                         <div class="btn-group">
                                             <button type="button" onclick="agregar('id<?=$empleado['id']?>','nombre<?=$empleado['id']?>','ape<?=$empleado['id']?>','tel<?=$empleado['id']?>', 'correo<?=$empleado['id']?>')" class="btn btn-primary btnEditar">Actualizar</button>
-                                            <button type="button" class="btn btn-danger btnBorrar">Eliminar</button>
+                                            <?php                                                  
+                                                $cantidad = cantidadCompra_O_Venta($empleado['id'], $empleado['perfil']);                                                
+                                                if(empty($cantidad)):
+                                            ?>
+                                            <form action="../backend/servicios/servicios.php" method="post">
+                                                <input type="hidden" name="id" value="<?=$empleado['id']?>">
+                                                <input type="hidden" name="controlador" value="empleado">
+                                                <input type="hidden" name="operacion" value="1">
+                                                <button type="submit" class="btn btn-danger btnBorrar">Eliminar</button>
+                                            </form>                                            
+                                            <?php                                                
+                                                endif; 
+                                            ?>
                                         </div>
                                     </div>
                                 </td>

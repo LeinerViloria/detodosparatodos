@@ -356,3 +356,34 @@ function actualizandoCantidad($idProducto, $cantidad){
     $sentencia = $conexion->prepare($sentencia);
     return $sentencia->execute();
 }
+
+function cantidadCompra_O_Venta($id, $perfil){
+    $conexion = conectar();
+    $tabla="";
+
+    switch ($perfil) {        
+        case 'Administrador':
+            $sql = "SELECT  COUNT(1) cantidad
+                    FROM compras
+                    GROUP BY id_Empleado
+                    HAVING id_Empleado='$id'";
+            break; 
+        case 'Vendedor':
+            $sql = "SELECT  COUNT(1) cantidad
+                    FROM ventas
+                    GROUP BY empleado_id
+                    HAVING empleado_id='$id'";
+            break; 
+        case 'Proveedor':
+            $sql = "SELECT COUNT(1) 
+                    FROM compras
+                    GROUP BY codigo_provedor
+                    HAVING codigo_provedor='$id'";
+            break;
+        default:
+            # code...
+            break;        
+    }
+    $cantidad = buscar($conexion,$tabla,1,$sql);
+    return $cantidad;
+}

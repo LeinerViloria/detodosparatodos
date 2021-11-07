@@ -264,7 +264,7 @@ if(!empty($_SESSION['usuario_logueado'])){
 </script>
 
 <?php 
-        if(!empty($_SESSION['compra'])):
+        if(!empty($_SESSION['completado'])):
 			$texto="";
 			if(!empty($_SESSION['producto'])){
 				foreach($_SESSION['producto'] as $producto){
@@ -275,12 +275,12 @@ if(!empty($_SESSION['usuario_logueado'])){
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: '<?=$_SESSION['compra']?>',
+                    title: '<?=$_SESSION['completado']?>',
 					html: '<?=$texto?>'
                 });
             </script>
 <?php        
-            borrar_errores("compra");
+            borrar_errores("completado");
 			borrar_errores("producto");	
 			borrar_errores();
         endif;

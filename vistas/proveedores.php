@@ -89,20 +89,29 @@ if(!empty($_SESSION['usuario_logueado'])){
                         $resultado_proveedor = proveedores();
                         if(!empty($resultado_proveedor)):                            
                     ?>
-                        <?php foreach($resultado_proveedor as $proveedor): ?>
-                                <form action="../backend/servicios/servicios.php" method="post">
+                        <?php foreach($resultado_proveedor as $proveedor): ?>                                
                                     <tr>
                                         <td>  <?=$proveedor['codigo']?> </td>
                                         <td>  <?=$proveedor['nombre']?> </td>
                                         <td>  <?=$proveedor['telefono']?> </td>
-                                        <td>                                        
+                                        <td>  
+                                        <?php                                                  
+                                            $cantidad = cantidadCompra_O_Venta($proveedor['codigo'], "Proveedor");                                                                                            
+                                            if(empty($cantidad)):                                            
+                                        ?>                     
+                                        <form action="../backend/servicios/servicios.php" method="post">                 
                                             <input type="hidden" name="codigo" value="<?=$proveedor['codigo']?>">
                                             <input type="hidden" name="controlador" value="proveedor">
                                             <input type="hidden" name="operacion" value="1">
                                             <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                        <?php
+                                                else:
+                                                    echo '<p style="color:#dd1212;">No se puede</p>';
+                                                endif; 
+                                            ?>
                                         </td>
-                                    </tr>
-                                </form>
+                                    </tr>                                
                                 
                     <?php 
                             endforeach; 

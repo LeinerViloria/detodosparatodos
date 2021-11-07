@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2021 a las 19:29:52
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.9
+-- Tiempo de generación: 07-11-2021 a las 23:44:34
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -332,6 +332,8 @@ DELIMITER ;
 --
 -- Estructura de tabla para la tabla `clientes`
 --
+-- Creación: 07-11-2021 a las 20:29:07
+--
 
 DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE `clientes` (
@@ -357,6 +359,8 @@ INSERT INTO `clientes` (`id`, `id_Empleado`, `nombres`, `apellidos`) VALUES
 
 --
 -- Estructura de tabla para la tabla `comisiones`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `comisiones`;
@@ -384,6 +388,8 @@ INSERT INTO `comisiones` (`codigo`, `Volumen_Ventas`, `Porcentajes`, `year`) VAL
 
 --
 -- Estructura de tabla para la tabla `compras`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `compras`;
@@ -422,6 +428,8 @@ INSERT INTO `compras` (`id`, `id_Empleado`, `codigo_provedor`, `fecha`, `total`)
 --
 -- Estructura de tabla para la tabla `detalles_compras`
 --
+-- Creación: 07-11-2021 a las 20:29:07
+--
 
 DROP TABLE IF EXISTS `detalles_compras`;
 CREATE TABLE `detalles_compras` (
@@ -457,6 +465,8 @@ INSERT INTO `detalles_compras` (`id_compras`, `id_producto`, `cantidad`) VALUES
 
 --
 -- Estructura de tabla para la tabla `detalles_ventas`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `detalles_ventas`;
@@ -499,6 +509,9 @@ INSERT INTO `detalles_ventas` (`id_venta`, `producto_id`, `cantidad`) VALUES
 --
 -- Estructura de tabla para la tabla `empleados`
 --
+-- Creación: 07-11-2021 a las 20:29:07
+-- Última actualización: 07-11-2021 a las 22:10:43
+--
 
 DROP TABLE IF EXISTS `empleados`;
 CREATE TABLE `empleados` (
@@ -517,7 +530,6 @@ INSERT INTO `empleados` (`id`, `perfil_id`, `nombres`, `apellidos`, `telefono`) 
 ('10', 'A2', 'Mario', 'Paternina', '23435'),
 ('12', 'A1', 'Farid', 'Mendoza', NULL),
 ('17', 'A2', 'John', 'Doe', '3198780980'),
-('24', 'A2', 'Cristiano', 'Ronaldo', NULL),
 ('28', 'A2', 'Merlys', 'Perez', '34566897'),
 ('34', 'A1', 'Leiner', 'Viloria', NULL),
 ('6', 'A1', 'Jaiver', 'Uribe', NULL),
@@ -527,6 +539,9 @@ INSERT INTO `empleados` (`id`, `perfil_id`, `nombres`, `apellidos`, `telefono`) 
 
 --
 -- Estructura de tabla para la tabla `familias`
+--
+-- Creación: 07-11-2021 a las 20:29:07
+-- Última actualización: 07-11-2021 a las 22:16:36
 --
 
 DROP TABLE IF EXISTS `familias`;
@@ -542,13 +557,17 @@ CREATE TABLE `familias` (
 INSERT INTO `familias` (`id`, `nombre`) VALUES
 ('1', 'Ordenadores'),
 ('2', 'Laptops'),
+('300', 'Entretenimiento'),
 ('39', 'Calzado'),
+('546', 'Accesorios'),
 ('78', 'Smartphones');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `perfiles`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `perfiles`;
@@ -569,6 +588,8 @@ INSERT INTO `perfiles` (`id`, `nombre`) VALUES
 
 --
 -- Estructura de tabla para la tabla `porcentaje_anual`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `porcentaje_anual`;
@@ -592,6 +613,8 @@ INSERT INTO `porcentaje_anual` (`valor`, `year`, `momento_registro`) VALUES
 
 --
 -- Estructura de tabla para la tabla `productos`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `productos`;
@@ -630,6 +653,9 @@ INSERT INTO `productos` (`id`, `familia_id`, `imagen`, `nombre`, `precio_compra`
 --
 -- Estructura de tabla para la tabla `provedores`
 --
+-- Creación: 07-11-2021 a las 20:29:07
+-- Última actualización: 07-11-2021 a las 22:38:02
+--
 
 DROP TABLE IF EXISTS `provedores`;
 CREATE TABLE `provedores` (
@@ -653,6 +679,8 @@ INSERT INTO `provedores` (`codigo`, `nombre`, `telefono`) VALUES
 --
 -- Estructura de tabla para la tabla `redes_sociales`
 --
+-- Creación: 07-11-2021 a las 20:29:07
+--
 
 DROP TABLE IF EXISTS `redes_sociales`;
 CREATE TABLE `redes_sociales` (
@@ -674,6 +702,8 @@ INSERT INTO `redes_sociales` (`codigo`, `nombre`) VALUES
 
 --
 -- Estructura de tabla para la tabla `redes_usuarios`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `redes_usuarios`;
@@ -706,6 +736,8 @@ INSERT INTO `redes_usuarios` (`codigo_Red`, `id_Cliente`, `Nombre_Usuario`) VALU
 --
 -- Estructura de tabla para la tabla `telefonos`
 --
+-- Creación: 07-11-2021 a las 20:29:07
+--
 
 DROP TABLE IF EXISTS `telefonos`;
 CREATE TABLE `telefonos` (
@@ -717,6 +749,9 @@ CREATE TABLE `telefonos` (
 
 --
 -- Estructura de tabla para la tabla `usuarios`
+--
+-- Creación: 07-11-2021 a las 22:10:22
+-- Última actualización: 07-11-2021 a las 22:10:43
 --
 
 DROP TABLE IF EXISTS `usuarios`;
@@ -731,19 +766,20 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_Empleado`, `Correo`, `password`) VALUES
-('24', 'cr7@gmail.com', '$2y$04$u/9iQapZjTNjefSby8nnc.ElIfQY9P7IYTIB3yQwNX2pUz9r0.a/K'),
 ('12', 'f@gmail.com', '$2y$04$RriFsbUbFH8G571I0K9qhu42hZE9RVfh49z68kNxfDSXbo6iQj2Bq'),
 ('6', 'j@gmail.com', '$2y$04$ovZcHj5u2ZPrhcb0TqG..eSr/.Rfqtn8YUfsN01QeXSRIiDCEW9O.'),
 ('17', 'jd@gmail.com', '$2y$04$etDb2Y8PjcIXw505qZci6.r79mM3Qj6P9g/T5T8v2ojXgUGuLX5Si'),
 ('78', 'k@h.com', '$2y$04$n805/aszmR.IMjVbE/kvTeYBC1xxG0EzxQA0dPN7YaBi/zPJScr5y'),
 ('34', 'lv@gmail.com', '$2y$04$FzwuHzGeUQoUYP.IA3/cKemgw4W3XZ7TmzgATgetUPw89vantxTRG'),
 ('10', 'mario@gmail.com', '$2y$04$dIyaqfuWzx4pVqIWPJlDxu5NdinsfLZz/bnZW/MYKuegO0jvaQf0C'),
-('28', 'mp@gmail.com', '$2y$04$.ANspBwOtxtnz74wK.Xy1O0LEWaUdDS.C7tF0C7wsXKPqlibimMOS');
+('28', 'mp@gmail.com', '$2y$04$KlNMq3M5dnFyPmUMq/HkB.4IJVC.UGyuG.PSmzF92Fz3y3vVAdipi');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ventas`
+--
+-- Creación: 07-11-2021 a las 20:29:07
 --
 
 DROP TABLE IF EXISTS `ventas`;
@@ -957,7 +993,7 @@ ALTER TABLE `telefonos`
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuario_empleado_fk` FOREIGN KEY (`id_Empleado`) REFERENCES `empleados` (`id`);
+  ADD CONSTRAINT `usuario_empleado_fk` FOREIGN KEY (`id_Empleado`) REFERENCES `empleados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `ventas`
