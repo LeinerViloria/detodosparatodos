@@ -35,9 +35,9 @@ if(!empty($_SESSION['usuario_logueado'])){
 	//Esto se quita de aqui cuando los mensajes queden listos
 	//De aqui
 	//var_dump($_SESSION);
-	unset($_SESSION['venta']);
+	/*unset($_SESSION['venta']);
 	unset($_SESSION['detalle_venta']);
-	unset($_SESSION['errores']);
+	unset($_SESSION['errores']);*/
 	//Hasta aqui
 ?>
 <!--Caja de cantidades-->
@@ -209,8 +209,58 @@ if(!empty($_SESSION['usuario_logueado'])){
 		})
 	}
 </script>
+<!-- Mostrar Notificaciones -->
+
 
 <?php 
+	require_once '../backend/controladores/alertas.php';		
+    if(!empty($_SESSION['venta'])):
+		$texto="";
+		if(!empty($_SESSION['detalle_venta'])){
+			foreach($_SESSION['detalle_venta'] as $producto){
+				$texto.="<p>".$producto."</p>";
+			}
+		}
+		var_dump($texto)
+?>            
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: '<?=$_SESSION['venta']?>',
+					html: '<?=$texto?>'
+                });
+            </script>
+<?php        
+            borrar_errores("venta");
+			borrar_errores("detalle_venta");
+
+        endif;
+        if(!empty($_SESSION['errores'])):
+            $texto="";
+            foreach($_SESSION['errores'] as $errores => $error){
+                
+				if(is_array($error)){
+					foreach($error as $indice){
+						$texto.="<p>".$indice.".</p>";
+					}
+				}else{
+					$texto.="<p>".$error.".</p>";
+				}
+				
+            }
+?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Errores',
+                    html:'<?=$texto?>',
+                    footer:'<strong>Por favor, ingrese los datos correctamente</strong>'
+                });
+            </script>
+<?php   
+			borrar_errores();
+		endif; 					
+
 	require_once '../contenidoHtml/pie_pagina.php';
 	}else{
 		header("location: ./home.php");
@@ -219,3 +269,4 @@ if(!empty($_SESSION['usuario_logueado'])){
 	destruir();
 }
 ?>
+
