@@ -128,6 +128,14 @@
                         //Se manda al usuario de ese empleado
                         $resultado_usuario = $controlador_usuario->guardar("gestionar_usuario",$usuario);                        
                         if($resultado_empleado==true){
+
+                            //En caso de que se actualize aquel con la sesion activa
+
+                            if($empleado->id==$_SESSION['usuario_logueado'][0]['id']){
+                                $_SESSION['usuario_logueado'][0]['nombres']=$empleado->nombres;
+                                $_SESSION['usuario_logueado'][0]['apellidos']=$empleado->apellidos;
+                            }
+
                             $_SESSION['completado']="Se ha registrado exitosamente";                             
                         }else{
                             $errores['errores']['general']="No se guardó el usuario del empleado";    
@@ -141,7 +149,7 @@
                     if($cuenta_borrada){
                         //Si se borró la cuenta, se borra a su usuario
                         $usuario_borrado = $controlador_empleado->eliminar("gestionar_empleado",$empleado);
-                        if($usuario_borrado){
+                        if($usuario_borrado){                            
                             $_SESSION['completado']="Se ha eliminado exitosamente";                             
                         }else{
                             $errores["errores"]["borrado"]="El empleado no se eliminó";   
