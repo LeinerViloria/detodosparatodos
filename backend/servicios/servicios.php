@@ -67,18 +67,49 @@
             if((is_numeric($nombres) || preg_match("/[0-9]/", $nombres))&&$operacion==0){                
                 $errores['nombre']="El nombre no admite numeros";
             }  
-            
-            if(!ctype_alpha($nombres)&&$operacion==0){                
-                $errores['nombreerror2']="El nombre solo debe contener letras";
-            } 
+
+            /*
+                ctype_alpha es una funcion que sólo admite letras, no admite numeros,
+                ni espacios, ni caracteres especiales, está aqui para que no se rompa
+                la sentencia SQL si pasa por ejemplo una comilla doble o una comilla simple,
+                con mysqli seria algo similar a la funcion mysqli_real_escape()
+            */
+
+            /*
+                Como los nombres vendran separados por espacio, entonces se convertira un momento
+                en un array para verificar que cada cadena de caracter esté conformada solo por letras
+            */
+
+            //Se convierte $nombres en un array
+            $array_nombres = explode(" ", $nombres);
+
+            for($i=0; $i<count($array_nombres); $i++){
+                
+                if(!ctype_alpha($array_nombres[$i])&&$operacion==0){                
+                    $errores['nombreerror2']="El nombre solo debe contener letras";
+                }
+                
+            }                         
             
             if((is_numeric($apellidos) || preg_match("/[0-9]/", $apellidos))&&$operacion==0){                
                 $errores['apellidos']="El apellido no admite numeros";
             } 
+
+            /**
+             * El mismo principio que se aplicó para nombres, se aplicaria
+             * para apellidos
+             */
             
-            if(!ctype_alpha($apellidos)&&$operacion==0){                
-                $errores['apellidoserror2']="El apellido solo debe contener letras";
-            }
+             //Se convierte $nombres en un array
+            $array_apellidos = explode(" ", $apellidos);
+
+            for($i=0; $i<count($array_apellidos); $i++){
+                
+                if(!ctype_alpha($array_apellidos[$i])&&$operacion==0){                
+                    $errores['apellidoserror2']="El apellido solo debe contener letras";
+                }
+                
+            }             
 
             if(!is_numeric($telefono) && !is_null($telefono) && $operacion==0){                
                 $errores['tel']="El telefono es solo numerico";
@@ -108,7 +139,7 @@
             
             if($pase==false){
                 $errores['pase']="El correo ingresado es usado por otro usuario";
-            }            
+            }   
             
             //Si no hay errores
             if(count($errores)==0 && $verificacion==true){                
@@ -202,10 +233,29 @@
             //Capturar errores en el nombre
             if(is_numeric($nombres) || preg_match("/[0-9]/", $nombres)){                
                 $errores['nombre']="El nombre no admite numeros";
-            }  
-            
-            if(!ctype_alpha($nombres)){                
-                $errores['nombreerror2']="El nombre solo debe contener letras";
+            } 
+
+            /*
+                ctype_alpha es una funcion que sólo admite letras, no admite numeros,
+                ni espacios, ni caracteres especiales, está aqui para que no se rompa
+                la sentencia SQL si pasa por ejemplo una comilla doble o una comilla simple,
+                con mysqli seria algo similar a la funcion mysqli_real_escape()
+            */
+
+            /*
+                Como los nombres vendran separados por espacio, entonces se convertira un momento
+                en un array para verificar que cada cadena de caracter esté conformada solo por letras
+            */
+
+            //Se convierte $nombres en un array
+            $array_nombres = explode(" ", $nombres);
+
+            for($i=0; $i<count($array_nombres); $i++){
+                
+                if(!ctype_alpha($array_nombres[$i])&&$operacion==0){                
+                    $errores['nombreerror2']="El nombre solo debe contener letras";
+                }
+                
             } 
 
             //Capturar errores en el apellido
@@ -213,9 +263,16 @@
                 $errores['apellidos']="El apellido no admite numeros";
             } 
             
-            if(!ctype_alpha($apellidos)){                
-                $errores['apellidoserror2']="El apellido solo debe contener letras";
-            }
+            //Se aplica el mismo principio que en $nombres
+            $array_apellidos = explode(" ", $apellidos);
+
+            for($i=0; $i<count($array_apellidos); $i++){
+                
+                if(!ctype_alpha($array_apellidos[$i])&&$operacion==0){                
+                    $errores['apellidoserror2']="El apellido solo debe contener letras";
+                }
+                
+            } 
 
             if(count($errores)==0){
                 require_once '../modelos/cliente.php';
@@ -536,8 +593,28 @@
                 $errores['nombre']="El nombre no admite numeros";
             }  
             
-            if(!ctype_alpha($nombre)){                
-                $errores['nombreerror2']="El nombre solo debe contener letras";
+            
+            /*
+                ctype_alpha es una funcion que sólo admite letras, no admite numeros,
+                ni espacios, ni caracteres especiales, está aqui para que no se rompa
+                la sentencia SQL si pasa por ejemplo una comilla doble o una comilla simple,
+                con mysqli seria algo similar a la funcion mysqli_real_escape()
+            */
+
+            /*
+                Como los nombres vendran separados por espacio, entonces se convertira un momento
+                en un array para verificar que cada cadena de caracter esté conformada solo por letras
+            */
+
+            //Se convierte $nombres en un array
+            $array_nombres = explode(" ", $nombres);
+
+            for($i=0; $i<count($array_nombres); $i++){
+                
+                if(!ctype_alpha($array_nombres[$i])&&$operacion==0){                
+                    $errores['nombreerror2']="El nombre solo debe contener letras";
+                }
+                
             } 
 
             if(count($errores)==0){

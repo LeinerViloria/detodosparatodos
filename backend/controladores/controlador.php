@@ -1,5 +1,5 @@
 <?php
-include '../componentes/conectar.php';
+require_once '../componentes/conectar.php';
 class controlador{
     private $servidor="localhost";
     private $nombreBD="detodosparatodos";
