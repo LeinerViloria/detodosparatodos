@@ -35,11 +35,11 @@ if(!empty($_SESSION['usuario_logueado'])){
                 }
             ?>
             <form action="../backend/servicios/servicios.php" method="post">
-                <label for="valorActual">El porcentaje actual es: </label>
+                <label for="valorActual">Porcentaje actual: </label>
                 <input type="text" id="valorActual" class="form-control" value="<?=$valor?>" readonly>
-                <label for="valorActual">El porcentaje pertenece al año: </label>
+                <label for="valorActual">Año al que pertenece el porcentaje: </label>
                 <input type="text" name="year" id="yearCargado" class="form-control" value="<?=$year?>" readonly>
-                <label for="valorActual">Ingrese el porcentaje de este año: </label>
+                <label for="valorActual">Ingrese el porcentaje: </label>
                 <input type="text" name="valorNuevo" id="valorNuevo" class="form-control" placeholder="<?=$placeholder?>" autofocus required>
                 <input type="hidden" name="controlador" value="porcentaje_alerta">
                 <input type="hidden" name="operacion" value="0">   

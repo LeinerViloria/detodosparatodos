@@ -469,8 +469,8 @@
                             $limite_mes=0;
                             $limite_dia=0;
                             $limite_hora=0;
-                            $limite_min=5;
-                            $limite_seg=0;                                                          
+                            $limite_min=4;
+                            $limite_seg=60;                                                          
                             
                             $pase_mes=false;
 
@@ -607,16 +607,17 @@
             */
 
             //Se convierte $nombres en un array
-            $array_nombres = explode(" ", $nombres);
+            $array_nombres = explode(" ", $nombre);
 
             for($i=0; $i<count($array_nombres); $i++){
                 
                 if(!ctype_alpha($array_nombres[$i])&&$operacion==0){                
-                    $errores['nombreerror2']="El nombre solo debe contener letras";
+                   $errores['nombreerror2']="El nombre solo debe contener letras";
                 }
                 
             } 
 
+            
             if(count($errores)==0){
                 require '../modelos/familia.php';
 
