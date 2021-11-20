@@ -244,7 +244,7 @@ function productos($ruta){
 
     $productos=buscar($conexion, $tabla, 1, $sql);
 
-    return $productos;
+    return $productos; 
 }
 
 function infoComisiones(){

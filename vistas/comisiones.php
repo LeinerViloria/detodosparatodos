@@ -65,7 +65,7 @@ if(!empty($_SESSION['usuario_logueado'])){
             $comisionTotal=0;
             foreach($detalles as $detalle): 
                 $iterador++; 
-                $comision = $detalle['cantidad']>=$comisiones['Volumen_Ventas'] ? $detalle['Precio total vendido']*$comisiones['Porcentajes']/100  : 0;                                
+                $comision = $detalle['Precio total vendido']>=$comisiones['Volumen_Ventas'] ? $detalle['Precio total vendido']*$comisiones['Porcentajes']/100  : 0;                                
                 $cantidadTotal+=$detalle['cantidad'];
                 $importeTotal+=$detalle['Precio total vendido'];
                 $comisionTotal+=$comision;

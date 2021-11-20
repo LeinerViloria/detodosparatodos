@@ -872,7 +872,7 @@
                                 $resultado_producto = insertandoProducto($producto);
                                 
                                 if($resultado_producto){
-                                    $_SESSION["producto"]["producto$i"]="El producto $i se guardó";
+                                    $_SESSION["producto"]="Los productos se guardaron";
 
                                     //Si se guardó, se va a guardar el detalle de la compra
 
@@ -886,12 +886,12 @@
                                         $errores['detalle']="Hubo algun error en el guardado";
                                     }
                                 }else{
-                                    $errores["producto$i"]="El producto $i no se guardó";
+                                    $errores["producto$i"]="El producto '$producto->nombre' no se guardó";
                                 }
                             }                                                        
 
                         }else{
-                            $errores["guardado$i"]="El registro $i no se pudo guardar";
+                            $errores["guardado$i"]="El registro '$producto->id' no se pudo guardar";
                         }                    
                             
                     }
@@ -984,13 +984,13 @@
                             $guardar = $control_detalles->guardar('gestionar_detalles_ventas',$detalle_venta);
 
                             if($guardar){
-                                $_SESSION['detalle_venta'][$i]="El producto $i se guardó en la venta";
+                                $_SESSION['detalle_venta'][$i]="El producto '$idproducto' se guardó en la venta";
                                 $actualizacion = actualizandoCantidad($detalle_venta->id_producto, $detalle_venta->cantidad);
                                 if(!$actualizacion){
                                     $errores['actualizarCantidad'][$i]="No se pudo actualizar la cantidad del producto $i";
                                 }
                             }else{
-                                $errores['detalle_venta'][$i]="El producto $i no se guardó en la venta";                                              
+                                $errores['detalle_venta'][$i]="El producto '$idproducto' no se guardó en la venta";                                              
                             }                                                    
                             $i++;
                         }while($i <= count($articulo));      
